@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7FAAC843-6AA9-4B5B-8678-937137A61E47}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Dopamine.Core</RootNamespace>
+    <AssemblyName>Dopamine.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSCore">
+      <HintPath>..\Dopamine\Libraries\CSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="CSCore.Ffmpeg">
+      <HintPath>..\Dopamine\Libraries\CSCore.Ffmpeg.dll</HintPath>
+    </Reference>
+    <Reference Include="Digimezzo.Foundation.Core">
+      <HintPath>..\Dopamine\Libraries\Digimezzo.Foundation.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Digimezzo.Foundation.WPF">
+      <HintPath>..\Dopamine\Libraries\Digimezzo.Foundation.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="DiscordRPC, Version=1.0.175.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DiscordRichPresence.1.0.175\lib\net35\DiscordRPC.dll</HintPath>
+    </Reference>
+    <Reference Include="GongSolutions.WPF.DragDrop">
+      <HintPath>..\Dopamine\Libraries\GongSolutions.WPF.DragDrop.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis">
+      <HintPath>..\Dopamine\Libraries\NVorbis.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Dopamine\SharedAssemblyInfo.cs">
+      <Link>SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Api\Fanart\FanartApi.cs" />
+    <Compile Include="Api\Lastfm\LastFmAlbum.cs" />
+    <Compile Include="Api\Lastfm\LastFmArtist.cs" />
+    <Compile Include="Api\Lastfm\LastFmBiography.cs" />
+    <Compile Include="Api\Lastfm\LastfmApi.cs" />
+    <Compile Include="Api\Lyrics\ChartLyricsApi.cs" />
+    <Compile Include="Api\Lyrics\ILyricsApi.cs" />
+    <Compile Include="Api\Lyrics\LololyricsApi.cs" />
+    <Compile Include="Api\Lyrics\Lyrics.cs" />
+    <Compile Include="Api\Lyrics\LyricsFactory.cs" />
+    <Compile Include="Api\Lyrics\MetroLyricsApi.cs" />
+    <Compile Include="Api\Lyrics\NeteaseLyricsApi.cs" />
+    <Compile Include="Api\Lyrics\XiamiLyricsApi.cs" />
+    <Compile Include="Audio\CSCorePlayer.cs" />
+    <Compile Include="Audio\EqualizerPreset.cs" />
+    <Compile Include="Audio\IPlayer.cs" />
+    <Compile Include="Audio\IPlayerFactory.cs" />
+    <Compile Include="Audio\ISpectrumPlayer.cs" />
+    <Compile Include="Audio\AudioDevice.cs" />
+    <Compile Include="Audio\NVorbisSource.cs" />
+    <Compile Include="Audio\PlaybackInterruptedEventArgs.cs" />
+    <Compile Include="Audio\PlayerFactory.cs" />
+    <Compile Include="Base\Constants.cs" />
+    <Compile Include="Base\ContactInformation.cs" />
+    <Compile Include="Base\Defaults.cs" />
+    <Compile Include="Base\Enums.cs" />
+    <Compile Include="Base\FileFormats.cs" />
+    <Compile Include="Base\SensitiveInformation.cs" />
+    <Compile Include="Base\UpdateInformation.cs" />
+    <Compile Include="Enums\PageEnums.cs" />
+    <Compile Include="Enums\PlayerEnums.cs" />
+    <Compile Include="Enums\SpectrumEnums.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\IDropInfoExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\LongExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Base\ProductInformation.cs" />
+    <Compile Include="Extensions\WindowExtensions.cs" />
+    <Compile Include="Helpers\GentleFolderWatcher.cs" />
+    <Compile Include="Helpers\ILocalizationInfo.cs" />
+    <Compile Include="Helpers\LocalizationInfo.cs" />
+    <Compile Include="Helpers\MediaFoundationHelper.cs" />
+    <Compile Include="Helpers\OrderedDictionary.cs" />
+    <Compile Include="Helpers\PeekStringReader.cs" />
+    <Compile Include="IO\ApplicationPaths.cs" />
+    <Compile Include="IO\FileOperations.cs" />
+    <Compile Include="IO\FolderPathInfo.cs" />
+    <Compile Include="IO\PlaylistDecoder.cs" />
+    <Compile Include="IO\SmartPlaylistDecoder.cs" />
+    <Compile Include="IO\StrongNetNamedPipeBinding.cs" />
+    <Compile Include="Prism\ApplicationCommands.cs" />
+    <Compile Include="Prism\Events.cs" />
+    <Compile Include="Prism\RegionNames.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Utils\ArrayUtils.cs" />
+    <Compile Include="Utils\ColorUtils.cs" />
+    <Compile Include="Utils\FormatUtils.cs" />
+    <Compile Include="Utils\NumberUtils.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
