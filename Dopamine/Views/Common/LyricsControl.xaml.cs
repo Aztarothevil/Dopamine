@@ -220,7 +220,7 @@ namespace Dopamine.Views.Common
                     {
                         return;
                     }
-                    int timeToReduce = 100;
+                    int timeToReduce = 500;
                     int minutes = int.Parse(timeString.Split(':')[0]);
                     int seconds = (int)float.Parse(timeString.Split(':')[1]);
                     int milliseconds = int.Parse(timeString.Split(':')[1].Split('.')[1]);
@@ -259,8 +259,10 @@ namespace Dopamine.Views.Common
                     {
                         strippedLine = line;
                     }
-
-                    strippedLine = char.ToUpper(strippedLine[0]) + strippedLine.Substring(1);
+                    if (strippedLine != string.Empty)
+                    {
+                        strippedLine = char.ToUpper(strippedLine[0]) + strippedLine.Substring(1);
+                    }
 
                     string format = string.Format("[{0:00}:{1:00}.{2:000}]", minutes, seconds, milliseconds);
                     string newLine = string.Format("{0}{1}", new DateTime(currentPlaybackTime.Ticks).ToString(format), strippedLine);
