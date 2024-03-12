@@ -74,19 +74,19 @@ namespace Dopamine.Services.Utils
 
             contador++;
 
-            int modulo = (int)((item.Duration * 78) / 9200);
+            int modulo = (int)((item.Duration * 75) / 9200);
 
             if (contador % modulo == 0)
             {
                 if (position <= lastPosition)
                 {
                     position += 1;
-
-                    //System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + modulo + "  -  " + position);
+                    scrollViewer.ScrollToVerticalOffset(position);
                 }
             }
 
-            scrollViewer.ScrollToVerticalOffset(position);
+            System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + position + "  -  " + modulo);
+
 
             //box.ScrollIntoView(box.Items[item.Index+25]);
             //box.UpdateLayout(); // This seems required to get correct positioning.
