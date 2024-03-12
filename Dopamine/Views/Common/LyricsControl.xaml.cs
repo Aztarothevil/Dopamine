@@ -79,6 +79,8 @@ namespace Dopamine.Views.Common
         {
             if (this.lyricsListBox == null) return;
 
+            if (this.playbackService.IsPlaying == false) return;
+
             try
             {
                 // When shutting down, Application.Current is null
