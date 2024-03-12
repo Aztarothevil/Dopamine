@@ -21,6 +21,7 @@ using System.Timers;
 using Prism.Ioc;
 using Dopamine.Services.Entities;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Dopamine.ViewModels.Common
 {
@@ -269,12 +270,28 @@ namespace Dopamine.ViewModels.Common
                         {
                             lyrics.SourceType = SourceTypeEnum.Online;
 
+                            string[] arrText = lyrics.Text.Split('\n');
+
+                            for (int i = 0; i < arrText.Length; i++)
+                            {
+                                if (arrText[i].Length > 8 && arrText[i].Substring(9,1) == "]")
+                                {
+                                    arrText[i] = arrText[i].Replace("]", "0]");
+                                }
+                            }
+
+                            lyrics.Text = "";
+                            foreach (string line in arrText)
+                            {
+                                lyrics.Text += line + '\n';
+                            }
+
+
                             if (lyrics.Text.Contains(" 作词 "))
                             {
-                                string[] arrText = lyrics.Text.Split('\n');
+
                                 lyrics.Text = lyrics.Text.Replace(arrText[0], "[00:00.000]Artist: " + fmd.Artists.Values[0]);
                                 lyrics.Text = lyrics.Text.Replace(arrText[1], "[00:00.000]Title: " + fmd.Title.Value);
-
                             }
                             else
                             {
