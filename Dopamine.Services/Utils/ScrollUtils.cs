@@ -85,7 +85,7 @@ namespace Dopamine.Services.Utils
                 }
             }
 
-            System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + position + "  -  " + modulo);
+            //System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + position + "  -  " + modulo);
 
 
             //box.ScrollIntoView(box.Items[item.Index+25]);
