@@ -438,5 +438,48 @@ namespace Dopamine.Services.Appearance
         {
             return this.colorSchemes.ToList();
         }
+
+        public async void UpdateMusicColor(int bitRate)
+        {
+            if (bitRate > 2000)
+            {
+                await Task.Run(async () =>
+                {
+                    Color brushPrimaryText = (Color)ColorConverter.ConvertFromString("#FFED8A");
+                    Application.Current.Resources["Color_MusicSoftWhite"] = brushPrimaryText;
+
+                    Color brushSecondaryText = (Color)ColorConverter.ConvertFromString("#DAA520");
+                    Application.Current.Resources["Color_MusicDarkGrey8"] = brushSecondaryText;
+                });
+
+            }
+            else if (bitRate > 510)
+            {
+                await Task.Run(async () =>
+                {
+                    Color brushPrimaryText = (Color)ColorConverter.ConvertFromString("#33FFEE");
+                    Application.Current.Resources["Color_MusicSoftWhite"] = brushPrimaryText;
+
+                    Color brushSecondaryText = (Color)ColorConverter.ConvertFromString("#1D7DD4");
+                    Application.Current.Resources["Color_MusicDarkGrey8"] = brushSecondaryText;
+                });
+            }
+            else
+            {
+                await Task.Run(async () =>
+                {
+                    Color brushPrimaryText = (Color)ColorConverter.ConvertFromString("#E2E2E2");
+                    Application.Current.Resources["Color_MusicSoftWhite"] = brushPrimaryText;
+
+                    Color brushSecondaryText = (Color)ColorConverter.ConvertFromString("#5E5E5E");
+                    Application.Current.Resources["Color_MusicDarkGrey8"] = brushSecondaryText;
+                });
+            }
+
+
+            // Re-apply theme to ensure brushes referencing AccentColor are updated
+            this.ReApplyTheme();
+            this.OnColorSchemeChanged(new EventArgs());
+        }
     }
 }

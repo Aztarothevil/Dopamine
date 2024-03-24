@@ -26,6 +26,8 @@
     <Color x:Key="Color_DarkGrey7">#333333</Color>
     <Color x:Key="Color_DarkGrey8">#5E5E5E</Color>
     <Color x:Key="Color_DarkGrey9">#666666</Color>
+    <Color x:Key="Color_MusicSoftWhite">#E2E2E2</Color>
+    <Color x:Key="Color_MusicDarkGrey8">#5E5E5E</Color>
     
     <!-- Brushes -->
     <SolidColorBrush x:Key="Brush_PrimaryText" Color="{DynamicResource Color_SoftWhite}"/>
@@ -55,6 +57,8 @@
     <SolidColorBrush x:Key="Brush_RegularButtonText" Color="{DynamicResource Color_White}"/>
     <SolidColorBrush x:Key="Brush_ComboBoxText" Color="{DynamicResource Color_White}"/>
     <SolidColorBrush x:Key="Brush_MiniPlayerPlaylistBackground" Color="{DynamicResource Color_DarkGrey2}"/>
+    <SolidColorBrush x:Key="Brush_MusicPrimaryText" Color="{DynamicResource Color_MusicSoftWhite}"/>
+    <SolidColorBrush x:Key="Brush_MusicSecondaryText" Color="{DynamicResource Color_MusicDarkGrey8}"/>
     
     <!-- Colors -->
     <Color x:Key="Color_ItemHovered">#666666</Color>

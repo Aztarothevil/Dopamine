@@ -357,13 +357,16 @@ namespace Dopamine.Core.Audio
         {
             try
             {
-                this.soundOut.WaveSource.SetPosition(new TimeSpan(0, 0, gotoSeconds));
-
-                if (this.isStoppedBecausePaused)
+                if (this.soundOut != null)
                 {
-                    this.currentTimeBeforePause = this.soundOut.WaveSource.GetPosition();
-                    this.totalTimeBeforePause = this.soundOut.WaveSource.GetLength();
+                    this.soundOut.WaveSource.SetPosition(new TimeSpan(0, 0, gotoSeconds));
 
+                    if (this.isStoppedBecausePaused)
+                    {
+                        this.currentTimeBeforePause = this.soundOut.WaveSource.GetPosition();
+                        this.totalTimeBeforePause = this.soundOut.WaveSource.GetLength();
+
+                    }
                 }
             }
             catch (Exception)

@@ -31,7 +31,7 @@ namespace Dopamine.Services.Utils
             ScrollViewer scrollViewer = (ScrollViewer)VisualTreeUtils.GetDescendantByType(box, typeof(ScrollViewer));
             // Verify that the item is not visible. Only scroll if it is not visible.
             // ----------------------------------------------------------------------
-            if (scrollOnlyIfNotInView && (item.Index == 0 || item.Index < 18))
+            if (scrollOnlyIfNotInView && (item.Index == 0 || item.Index < 10))
             {
                 FrameworkElement listBoxItem = (FrameworkElement)box.ItemContainerGenerator.ContainerFromItem(itemObject);
 
@@ -68,7 +68,7 @@ namespace Dopamine.Services.Utils
             {
                 currentIndex = item.Index;
                 contador = 0;
-                position = ((item.Index - 18) * 28);
+                position = ((item.Index - 10) * 28);
                 lastPosition = position + 28;
             }
 

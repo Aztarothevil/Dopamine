@@ -10,6 +10,11 @@ namespace Dopamine.ViewModels
         private string year;
         private string currentTime;
         private string totalTime;
+        private string location;
+        private string type;
+        private string bitrate;
+        private string size;
+        private string duration;
 
         public string Title
         {
@@ -45,6 +50,36 @@ namespace Dopamine.ViewModels
         {
             get { return this.totalTime; }
             set { SetProperty<string>(ref this.totalTime, value); }
+        }
+
+        public string Location
+        {
+            get { return this.location; }
+            set { SetProperty<string>(ref this.location, value); }
+        }
+
+        public string Type
+        {
+            get { return this.type; }
+            set { SetProperty<string>(ref this.type, value); }
+        }
+
+        public string Bitrate
+        {
+            get { return this.bitrate; }
+            set { SetProperty<string>(ref this.bitrate, value); }
+        }
+
+        public string Size
+        {
+            get { return this.size; }
+            set { SetProperty<string>(ref this.size, value); }
+        }
+
+        public string Duration
+        {
+            get { return this.duration; }
+            set { SetProperty<string>(ref this.duration, value); }
         }
     }
 }
