@@ -28,7 +28,7 @@ namespace Dopamine.Services.Appearance
         private IMetadataService metadataService;
         private const int WM_DWMCOLORIZATIONCOLORCHANGED = 0x320;
         private bool followAlbumCoverColor;
-        private GentleFolderWatcher watcher;
+        //private GentleFolderWatcher watcher;
         private string colorSchemesSubDirectory;
         private bool followWindowsColor = false;
         private List<ColorScheme> colorSchemes = new List<ColorScheme>();
@@ -110,9 +110,9 @@ namespace Dopamine.Services.Appearance
 
             // Watcher
             // -------
-            this.watcher = new GentleFolderWatcher(this.colorSchemesSubDirectory, false);
-            this.watcher.FolderChanged += Watcher_FolderChanged;
-            this.watcher.Resume();
+            //this.watcher = new GentleFolderWatcher(this.colorSchemesSubDirectory, false);
+            //this.watcher.FolderChanged += Watcher_FolderChanged;
+            //this.watcher.Resume();
 
             // Get the available ColorSchemes
             // ------------------------------

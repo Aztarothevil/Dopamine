@@ -167,7 +167,6 @@
     <Compile Include="I18n\Language.cs" />
     <Compile Include="Indexing\AlbumArtworkAddedEventArgs.cs" />
     <Compile Include="Indexing\Enums.cs" />
-    <Compile Include="Indexing\FolderWatcherManager.cs" />
     <Compile Include="Indexing\IIndexingService.cs" />
     <Compile Include="Indexing\IndexerCache.cs" />
     <Compile Include="Indexing\IndexerUtils.cs" />
@@ -236,9 +235,7 @@
     <Compile Include="Statistics\StatisticsService.cs" />
     <Compile Include="Taskbar\ITaskbarService.cs" />
     <Compile Include="Taskbar\TaskbarService.cs" />
-    <Compile Include="Update\IUpdateService.cs" />
     <Compile Include="Update\UpdateAvailableEventArgs.cs" />
-    <Compile Include="Update\UpdateService.cs" />
     <Compile Include="Utils\EntityUtils.cs" />
     <Compile Include="Utils\ScrollUtils.cs" />
     <Compile Include="Utils\SemanticZoomUtils.cs" />

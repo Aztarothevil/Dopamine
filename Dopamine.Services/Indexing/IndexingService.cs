@@ -35,7 +35,7 @@ namespace Dopamine.Services.Indexing
         private ISQLiteConnectionFactory factory;
 
         // Watcher
-        private FolderWatcherManager watcherManager;
+        //private FolderWatcherManager watcherManager;
 
         // Paths
         private List<FolderPathInfo> allDiskPaths;
@@ -73,39 +73,40 @@ namespace Dopamine.Services.Indexing
             this.albumArtworkRepository = albumArtworkRepository;
             this.factory = factory;
 
-            this.watcherManager = new FolderWatcherManager(this.folderRepository);
+            //this.watcherManager = new FolderWatcherManager(this.folderRepository);
             this.cache = new IndexerCache(this.factory);
 
-            SettingsClient.SettingChanged += SettingsClient_SettingChanged;
-            this.watcherManager.FoldersChanged += WatcherManager_FoldersChanged;
+            //SettingsClient.SettingChanged += SettingsClient_SettingChanged;
+            //this.watcherManager.FoldersChanged += WatcherManager_FoldersChanged;
 
             this.isIndexing = false;
+            this.CheckCollectionAsync(true);
         }
 
-        private async void SettingsClient_SettingChanged(object sender, SettingChangedEventArgs e)
-        {
-            if (SettingsClient.IsSettingChanged(e, "Indexing", "RefreshCollectionAutomatically"))
-            {
-                if ((bool)e.Entry.Value)
-                {
-                    await this.watcherManager.StartWatchingAsync();
-                }
-                else
-                {
-                    await this.watcherManager.StopWatchingAsync();
-                }
-            }
-        }
+        //private async void SettingsClient_SettingChanged(object sender, SettingChangedEventArgs e)
+        //{
+        //    if (SettingsClient.IsSettingChanged(e, "Indexing", "RefreshCollectionAutomatically"))
+        //    {
+        //        if ((bool)e.Entry.Value)
+        //        {
+        //            await this.watcherManager.StartWatchingAsync();
+        //        }
+        //        else
+        //        {
+        //            await this.watcherManager.StopWatchingAsync();
+        //        }
+        //    }
+        //}
 
-        public async void OnFoldersChanged()
-        {
-            this.isFoldersChanged = true;
+        //public async void OnFoldersChanged()
+        //{
+        //    this.isFoldersChanged = true;
 
-            if (SettingsClient.Get<bool>("Indexing", "RefreshCollectionAutomatically"))
-            {
-                await this.watcherManager.StartWatchingAsync();
-            }
-        }
+        //    if (SettingsClient.Get<bool>("Indexing", "RefreshCollectionAutomatically"))
+        //    {
+        //        await this.watcherManager.StartWatchingAsync();
+        //    }
+        //}
 
         public async Task RefreshCollectionAsync()
         {
@@ -150,7 +151,7 @@ namespace Dopamine.Services.Indexing
                 await Task.Delay(100);
             }
 
-            await this.watcherManager.StopWatchingAsync();
+            //await this.watcherManager.StopWatchingAsync();
 
             try
             {
@@ -186,7 +187,7 @@ namespace Dopamine.Services.Indexing
                         if (SettingsClient.Get<bool>("Indexing", "RefreshCollectionAutomatically"))
                         {
                             this.AddArtworkInBackgroundAsync();
-                            await this.watcherManager.StartWatchingAsync();
+                            //await this.watcherManager.StartWatchingAsync();
                         }
                     }
                 }
@@ -235,10 +236,10 @@ namespace Dopamine.Services.Indexing
 
             this.AddArtworkInBackgroundAsync();
 
-            if (SettingsClient.Get<bool>("Indexing", "RefreshCollectionAutomatically"))
-            {
-                await this.watcherManager.StartWatchingAsync();
-            }
+            //if (SettingsClient.Get<bool>("Indexing", "RefreshCollectionAutomatically"))
+            //{
+            //    await this.watcherManager.StartWatchingAsync();
+            //}
         }
 
         private async Task MigrateTrackStatisticsIfExistsAsync()

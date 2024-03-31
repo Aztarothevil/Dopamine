@@ -18,7 +18,7 @@ namespace Dopamine.Services.I18n
         private string customLanguagesDirectory = System.IO.Path.Combine(SettingsClient.ApplicationFolder(), ApplicationPaths.CustomLanguagesFolder);
         private List<Language> languages;
         private Language defaultLanguage;
-        private GentleFolderWatcher watcher;
+        //private GentleFolderWatcher watcher;
    
         public I18nService()
         {
@@ -33,9 +33,9 @@ namespace Dopamine.Services.I18n
 
             // Watcher
             // -------
-            this.watcher = new GentleFolderWatcher(this.customLanguagesDirectory, false);
-            this.watcher.FolderChanged += Watcher_FolderChanged;
-            this.watcher.Resume();
+            //this.watcher = new GentleFolderWatcher(this.customLanguagesDirectory, false);
+            //this.watcher.FolderChanged += Watcher_FolderChanged;
+            //this.watcher.Resume();
         }
 
         private void Watcher_FolderChanged(object sender, EventArgs e)
