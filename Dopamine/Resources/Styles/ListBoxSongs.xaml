@@ -139,11 +139,8 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsPlaying}" Value="true">
-                            <!--<Setter Property="Background" TargetName="SelectionBorder" Value="{DynamicResource Brush_Accent}"/>-->
                             <Setter Property="BorderBrush" TargetName="SelectionPanel" Value="{DynamicResource Brush_Accent}"/>
                             <Setter Property="BorderThickness" TargetName="SelectionPanel" Value="2"/>
-                            <!--<Setter Property="Foreground" TargetName="SelectionLabelTitle" Value="{DynamicResource Brush_Accent}"/>
-                            <Setter Property="Foreground" TargetName="SelectionLabelArtist" Value="{DynamicResource Brush_Accent}"/>-->
                         </DataTrigger>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>

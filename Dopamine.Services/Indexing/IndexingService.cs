@@ -34,9 +34,6 @@ namespace Dopamine.Services.Indexing
         // Factories
         private ISQLiteConnectionFactory factory;
 
-        // Watcher
-        //private FolderWatcherManager watcherManager;
-
         // Paths
         private List<FolderPathInfo> allDiskPaths;
         private List<FolderPathInfo> newDiskPaths;
@@ -73,40 +70,11 @@ namespace Dopamine.Services.Indexing
             this.albumArtworkRepository = albumArtworkRepository;
             this.factory = factory;
 
-            //this.watcherManager = new FolderWatcherManager(this.folderRepository);
             this.cache = new IndexerCache(this.factory);
-
-            //SettingsClient.SettingChanged += SettingsClient_SettingChanged;
-            //this.watcherManager.FoldersChanged += WatcherManager_FoldersChanged;
 
             this.isIndexing = false;
             this.CheckCollectionAsync(true);
         }
-
-        //private async void SettingsClient_SettingChanged(object sender, SettingChangedEventArgs e)
-        //{
-        //    if (SettingsClient.IsSettingChanged(e, "Indexing", "RefreshCollectionAutomatically"))
-        //    {
-        //        if ((bool)e.Entry.Value)
-        //        {
-        //            await this.watcherManager.StartWatchingAsync();
-        //        }
-        //        else
-        //        {
-        //            await this.watcherManager.StopWatchingAsync();
-        //        }
-        //    }
-        //}
-
-        //public async void OnFoldersChanged()
-        //{
-        //    this.isFoldersChanged = true;
-
-        //    if (SettingsClient.Get<bool>("Indexing", "RefreshCollectionAutomatically"))
-        //    {
-        //        await this.watcherManager.StartWatchingAsync();
-        //    }
-        //}
 
         public async Task RefreshCollectionAsync()
         {
@@ -151,8 +119,6 @@ namespace Dopamine.Services.Indexing
                 await Task.Delay(100);
             }
 
-            //await this.watcherManager.StopWatchingAsync();
-
             try
             {
                 this.allDiskPaths = await this.GetFolderPaths();
@@ -187,7 +153,6 @@ namespace Dopamine.Services.Indexing
                         if (SettingsClient.Get<bool>("Indexing", "RefreshCollectionAutomatically"))
                         {
                             this.AddArtworkInBackgroundAsync();
-                            //await this.watcherManager.StartWatchingAsync();
                         }
                     }
                 }
@@ -235,11 +200,6 @@ namespace Dopamine.Services.Indexing
             this.IndexingStopped(this, new EventArgs());
 
             this.AddArtworkInBackgroundAsync();
-
-            //if (SettingsClient.Get<bool>("Indexing", "RefreshCollectionAutomatically"))
-            //{
-            //    await this.watcherManager.StartWatchingAsync();
-            //}
         }
 
         private async Task MigrateTrackStatisticsIfExistsAsync()

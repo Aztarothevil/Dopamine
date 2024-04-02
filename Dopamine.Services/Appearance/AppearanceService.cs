@@ -107,13 +107,6 @@ namespace Dopamine.Services.Appearance
 
             System.IO.File.WriteAllLines(howToFile, lines, System.Text.Encoding.UTF8);
 
-
-            // Watcher
-            // -------
-            //this.watcher = new GentleFolderWatcher(this.colorSchemesSubDirectory, false);
-            //this.watcher.FolderChanged += Watcher_FolderChanged;
-            //this.watcher.Resume();
-
             // Get the available ColorSchemes
             // ------------------------------
             this.GetAllColorSchemes();

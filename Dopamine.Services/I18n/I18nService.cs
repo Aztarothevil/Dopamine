@@ -30,12 +30,6 @@ namespace Dopamine.Services.I18n
             }
 
             this.LoadLanguages();
-
-            // Watcher
-            // -------
-            //this.watcher = new GentleFolderWatcher(this.customLanguagesDirectory, false);
-            //this.watcher.FolderChanged += Watcher_FolderChanged;
-            //this.watcher.Resume();
         }
 
         private void Watcher_FolderChanged(object sender, EventArgs e)

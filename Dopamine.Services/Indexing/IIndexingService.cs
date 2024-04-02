@@ -7,8 +7,6 @@ namespace Dopamine.Services.Indexing
 
     public interface IIndexingService
     {
-        //void OnFoldersChanged();
-
         bool IsIndexing { get; }
 
         Task RefreshCollectionAsync();
