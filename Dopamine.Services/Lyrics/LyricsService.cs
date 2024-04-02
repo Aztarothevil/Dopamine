@@ -145,14 +145,16 @@ namespace Dopamine.Services.Lyrics
             // Order the time stamped lines
             linesWithTimestamps = new List<LyricsLineViewModel>(linesWithTimestamps.OrderBy(p => p.Time));
 
-            for (int a = 17; a < linesWithTimestamps.Count-1; a++)
+            //Necesary  for vertical scroll
+            for (int a = 9; a < linesWithTimestamps.Count-1; a++)
             {
                 linesWithTimestamps[a].Duration = linesWithTimestamps[a+1].Time.TotalMilliseconds - linesWithTimestamps[a].Time.TotalMilliseconds;
             }
 
             if (linesWithTimestamps.Count > 5)
             {
-                for (int i = 0; i < 30; i++)
+                //Necesary  for vertical scroll
+                for (int i = 0; i < 15; i++)
                 {
                     linesWithoutTimestamps.Add(new LyricsLineViewModel(""));
                 }

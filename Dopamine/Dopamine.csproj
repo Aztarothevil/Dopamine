@@ -276,6 +276,7 @@
     <Compile Include="ViewModels\Common\PlayAllControlViewModel.cs" />
     <Compile Include="ViewModels\Common\PlaybackControlsWithPlaylistNotificationViewModel.cs" />
     <Compile Include="ViewModels\Common\PlaybackInfoControlNanoViewModel.cs" />
+    <Compile Include="ViewModels\Common\PlaybackInfoMusicControlViewModel.cs" />
     <Compile Include="ViewModels\Common\PlaybackInfoControlViewModel.cs" />
     <Compile Include="ViewModels\Common\PopupVolumeControlsViewModel.cs" />
     <Compile Include="ViewModels\Common\ProgressControlsThinViewModel.cs" />
@@ -284,7 +285,6 @@
     <Compile Include="ViewModels\Common\SearchControlViewModel.cs" />
     <Compile Include="ViewModels\Common\ShuffleAllControlViewModel.cs" />
     <Compile Include="ViewModels\Common\SpectrumAnalyzerControlViewModel.cs" />
-    <Compile Include="ViewModels\Common\UpdateStatusViewModel.cs" />
     <Compile Include="ViewModels\CoverArtViewModel.cs" />
     <Compile Include="ViewModels\FullPlayer\Collection\CollectionMenuViewModel.cs" />
     <Compile Include="ViewModels\FullPlayer\Collection\CollectionMusicViewModel.cs" />
@@ -308,7 +308,6 @@
     <Compile Include="ViewModels\FullPlayer\Settings\SettingsOnlineAddEditSearchProviderViewModel.cs" />
     <Compile Include="ViewModels\FullPlayer\Settings\SettingsOnlineViewModel.cs" />
     <Compile Include="ViewModels\FullPlayer\Settings\SettingsPlaybackViewModel.cs" />
-    <Compile Include="ViewModels\FullPlayer\Settings\SettingsStartupViewModel.cs" />
     <Compile Include="ViewModels\FullPlayer\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModels\InitializeViewModel.cs" />
     <Compile Include="ViewModels\MiniPlayer\CoverPlayerViewModel.cs" />
@@ -318,7 +317,6 @@
     <Compile Include="ViewModels\OobeViewModel.cs" />
     <Compile Include="ViewModels\PlaybackControlsViewModel.cs" />
     <Compile Include="ViewModels\PlaybackInfoViewModel.cs" />
-    <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\SimilarArtistViewModel.cs" />
     <Compile Include="ViewModels\VerticalVolumeControlsViewModel.cs" />
     <Compile Include="ViewModels\VolumeControlsViewModel.cs" />
@@ -397,6 +395,9 @@
     </Compile>
     <Compile Include="Views\Common\NowPlayingControl.xaml.cs">
       <DependentUpon>NowPlayingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Common\PlaybackInfoMusicControl.xaml.cs">
+      <DependentUpon>PlaybackInfoMusicControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Common\WindowControls.xaml.cs">
       <DependentUpon>WindowControls.xaml</DependentUpon>
@@ -566,6 +567,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="app.manifest" />
@@ -1222,6 +1224,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Common\NowPlayingControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Common\PlaybackInfoMusicControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

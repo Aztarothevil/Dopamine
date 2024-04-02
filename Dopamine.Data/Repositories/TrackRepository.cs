@@ -117,7 +117,7 @@ namespace Dopamine.Data.Repositories
                             {
                                 IList<string> safePaths = paths.Select((p) => p.ToSafePath()).ToList();
 
-                                var filterQuery = $" AND ({DataUtils.CreateOrLikeClause("t.Path", safePaths, "")})";
+                                var filterQuery = $" AND ({DataUtils.CreateOrLikeClauseNoLower("t.SafePath", safePaths, "")})";
 
                                 tracks = conn.Query<Track>($"{this.SelectVisibleTracksQuery()} {filterQuery};");
                             }

@@ -3,6 +3,7 @@ using Digimezzo.Foundation.Core.Logging;
 using Digimezzo.Foundation.WPF.Controls;
 using Dopamine.Core.Base;
 using Dopamine.Services.Entities;
+using Dopamine.Services.Playback;
 using Dopamine.Services.Utils;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace Dopamine.Views.Common.Base
 {
     public abstract class TracksViewBase : CommonViewBase
     {
+        ListBox _listBox = new ListBox();
+
         protected override async Task KeyUpHandlerAsync(object sender, KeyEventArgs e)
         {
             ListBox lb = (ListBox)sender;
@@ -41,6 +44,7 @@ namespace Dopamine.Views.Common.Base
             {
                 // Check if an item is selected
                 ListBox lb = (ListBox)sender;
+                _listBox = lb;
 
                 if (lb.SelectedItem == null)
                 {
@@ -130,6 +134,19 @@ namespace Dopamine.Views.Common.Base
             catch (Exception ex)
             {
                 LogClient.Error("Could not scroll to the playing track. Exception: {0}", ex.Message);
+            }
+        }
+        
+        protected override void PlaybackService_PlaybackSuccess(object sender, PlaybackSuccessEventArgs e)
+        {
+            if (_listBox.DataContext != null)
+            {
+                var songs = ((Dopamine.ViewModels.Common.Base.SongsViewModelBase)_listBox.DataContext).Songs;
+                var currentSong = ((Dopamine.Services.Playback.PlaybackService)sender).CurrentTrack;
+                foreach (var song in songs)
+                {
+                    song.IsPlaying = song.Path == currentSong.Path;
+                }
             }
         }
 

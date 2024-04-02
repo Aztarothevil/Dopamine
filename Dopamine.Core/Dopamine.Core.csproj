@@ -125,7 +125,6 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Base\ProductInformation.cs" />
     <Compile Include="Extensions\WindowExtensions.cs" />
-    <Compile Include="Helpers\GentleFolderWatcher.cs" />
     <Compile Include="Helpers\ILocalizationInfo.cs" />
     <Compile Include="Helpers\LocalizationInfo.cs" />
     <Compile Include="Helpers\MediaFoundationHelper.cs" />
@@ -160,6 +159,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config">
       <SubType>Designer</SubType>

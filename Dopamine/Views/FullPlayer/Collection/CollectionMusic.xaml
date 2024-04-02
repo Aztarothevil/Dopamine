@@ -41,7 +41,7 @@
         LeftPaneWidthPercent="{Binding LeftPaneWidthPercent, Mode=TwoWay}" 
         RightPaneWidthPercent="{Binding RightPaneWidthPercent, Mode=TwoWay}" 
         LeftPaneMinimumWidth="150"
-        MiddlePaneMinimumWidth="250"
+        MiddlePaneMinimumWidth="850"
         RightPaneMinimumWidth="250">
         <dc:MultiPanePanel.LeftPaneContent>
             <Border Background="{DynamicResource Brush_PaneBackground}">
@@ -89,38 +89,6 @@
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </dc:MultiSelectListBox>
-                        </Border>
-                        <Border 
-                            Panel.ZIndex="1" 
-                            Visibility="{Binding IsMusicZoomVisible,Converter={StaticResource BooleanToCollapsedConverter}}" 
-                            MaxWidth="300" 
-                            MaxHeight="600">
-                            <Border 
-                                Opacity="0"
-                                Panel.ZIndex="1"
-                                Background="#00000000"
-                                HorizontalAlignment="Stretch" 
-                                VerticalAlignment="Stretch">
-                                <Border.Style>
-                                    <Style>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsMusicZoomVisible}" Value="True">
-                                                <DataTrigger.EnterActions>
-                                                    <BeginStoryboard Storyboard ="{StaticResource ShowSemanticZoom}"/>
-                                                </DataTrigger.EnterActions>
-                                                <DataTrigger.ExitActions>
-                                                    <BeginStoryboard Storyboard ="{StaticResource HideSemanticZoom}"/>
-                                                </DataTrigger.ExitActions>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                                <ListBox 
-                                         HorizontalAlignment="Stretch"
-                                         VerticalAlignment="Stretch"
-                                         Style="{StaticResource ListBoxSemanticZoom}"
-                                         ItemsSource="{Binding MusicZoomSelectors}"/>
-                            </Border>
                         </Border>
                     </Grid>
                 </DockPanel>

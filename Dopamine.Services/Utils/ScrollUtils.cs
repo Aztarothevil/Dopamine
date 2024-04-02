@@ -31,7 +31,7 @@ namespace Dopamine.Services.Utils
             ScrollViewer scrollViewer = (ScrollViewer)VisualTreeUtils.GetDescendantByType(box, typeof(ScrollViewer));
             // Verify that the item is not visible. Only scroll if it is not visible.
             // ----------------------------------------------------------------------
-            if (scrollOnlyIfNotInView && (item.Index == 0 || item.Index < 18))
+            if (scrollOnlyIfNotInView && (item.Index == 0 || item.Index < 10))
             {
                 FrameworkElement listBoxItem = (FrameworkElement)box.ItemContainerGenerator.ContainerFromItem(itemObject);
 
@@ -68,25 +68,25 @@ namespace Dopamine.Services.Utils
             {
                 currentIndex = item.Index;
                 contador = 0;
-                position = ((item.Index - 18) * 28);
+                position = ((item.Index - 10) * 28);
                 lastPosition = position + 28;
             }
 
             contador++;
 
-            int modulo = (int)((item.Duration * 78) / 9200);
+            int modulo = (int)((item.Duration * 75) / 9200);
 
             if (contador % modulo == 0)
             {
                 if (position <= lastPosition)
                 {
                     position += 1;
-
-                    //System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + modulo + "  -  " + position);
+                    scrollViewer.ScrollToVerticalOffset(position);
                 }
             }
 
-            scrollViewer.ScrollToVerticalOffset(position);
+            //System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + position + "  -  " + modulo);
+
 
             //box.ScrollIntoView(box.Items[item.Index+25]);
             //box.UpdateLayout(); // This seems required to get correct positioning.

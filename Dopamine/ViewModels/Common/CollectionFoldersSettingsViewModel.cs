@@ -154,7 +154,6 @@ namespace Dopamine.ViewModels.Common
                     switch (result)
                     {
                         case AddFolderResult.Success:
-                            this.indexingService.OnFoldersChanged();
                             this.GetFoldersAsync();
                             break;
                         case AddFolderResult.Error:
@@ -222,7 +221,6 @@ namespace Dopamine.ViewModels.Common
                 switch (result)
                 {
                     case RemoveFolderResult.Success:
-                        this.indexingService.OnFoldersChanged();
                         this.GetFoldersAsync();
                         break;
                     case RemoveFolderResult.Error:

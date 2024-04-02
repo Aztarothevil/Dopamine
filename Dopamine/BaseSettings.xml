@@ -336,7 +336,7 @@
       <Value>True</Value>
     </Setting>
     <Setting Name="CenterLyrics">
-      <Value>False</Value>
+      <Value>True</Value>
     </Setting>
     <Setting Name="FontSize">
       <Value>18</Value>

@@ -19,5 +19,6 @@ namespace Dopamine.Services.Appearance
         void OnThemeChanged(bool useLightTheme);
         void OnColorSchemeChanged(EventArgs e);
         void OnColorSchemesChanged(EventArgs e);
+        void UpdateMusicColor(int bitRate);
     }
 }

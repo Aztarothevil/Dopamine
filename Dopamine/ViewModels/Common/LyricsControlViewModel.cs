@@ -1,26 +1,26 @@
 ﻿using Digimezzo.Foundation.Core.Logging;
 using Digimezzo.Foundation.Core.Settings;
+using Digimezzo.Foundation.Core.Utils;
 using Dopamine.Core.Api.Lyrics;
 using Dopamine.Core.Base;
 using Dopamine.Core.Enums;
 using Dopamine.Core.Helpers;
 using Dopamine.Core.Prism;
-using Dopamine.Data.Entities;
 using Dopamine.Data.Metadata;
+using Dopamine.Services.Entities;
 using Dopamine.Services.I18n;
 using Dopamine.Services.Metadata;
 using Dopamine.Services.Playback;
 using Dopamine.ViewModels.Common.Base;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Ioc;
 using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
-using Prism.Ioc;
-using Dopamine.Services.Entities;
-using System.Text.RegularExpressions;
 
 namespace Dopamine.ViewModels.Common
 {
@@ -269,16 +269,32 @@ namespace Dopamine.ViewModels.Common
                         {
                             lyrics.SourceType = SourceTypeEnum.Online;
 
+                            string[] arrText = lyrics.Text.Split('\n');
+
+                            for (int i = 0; i < arrText.Length; i++)
+                            {
+                                if (arrText[i].Length > 8 && arrText[i].Substring(9,1) == "]")
+                                {
+                                    arrText[i] = arrText[i].Replace("]", "0]");
+                                }
+                            }
+
+                            lyrics.Text = "";
+                            foreach (string line in arrText)
+                            {
+                                lyrics.Text += line + '\n';
+                            }
+
+
                             if (lyrics.Text.Contains(" 作词 "))
                             {
-                                string[] arrText = lyrics.Text.Split('\n');
+
                                 lyrics.Text = lyrics.Text.Replace(arrText[0], "[00:00.000]Artist: " + fmd.Artists.Values[0]);
                                 lyrics.Text = lyrics.Text.Replace(arrText[1], "[00:00.000]Title: " + fmd.Title.Value);
-
                             }
                             else
                             {
-                                lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: " + fmd.Title.Value + "\r\n[00:04.530]\r\n" + lyrics.Text;
+                                lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: " + fmd.Title.Value + "\r\n[00:00.000]\r\n" + lyrics.Text;
                             }
                         }
                     }
@@ -296,17 +312,17 @@ namespace Dopamine.ViewModels.Common
                     {
                         if (lyrics.Text.Length < 100 || !lyrics.Text.StartsWith("[") || Regex.Matches(lyrics.Text, @"\n").Count < 5)
                         {
-                            lyrics = new Lyrics();
+                            lyrics = new Lyrics(null, ResourceUtils.GetString("Language_No_Lyrics_Found"));
                             lyrics.SourceType = SourceTypeEnum.Online;
-                            lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: " + fmd.Title.Value + "\r\n[00:04.530]";
+                            lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: " + fmd.Title.Value + "\r\n[00:00.000]";
                         }
                     }
                 }
                 else
                 {
-                    lyrics = new Lyrics();
+                    lyrics = new Lyrics(null, ResourceUtils.GetString("Language_No_Lyrics_Found"));
                     lyrics.SourceType = SourceTypeEnum.Online;
-                    lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: "+ fmd.Title.Value + "\r\n[00:04.530]";
+                    lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: "+ fmd.Title.Value + "\r\n[00:00.000]";
 
                 }
 

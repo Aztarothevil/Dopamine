@@ -46,6 +46,32 @@ namespace Dopamine.Data
             return sb.ToString();
         }
 
+        public static string CreateOrLikeClauseNoLower(string columnName, IList<string> clauseItems, string delimiter = "")
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("(");
+
+            var orClauses = new List<string>();
+
+            foreach (string clauseItem in clauseItems)
+            {
+                if (string.IsNullOrEmpty(clauseItem))
+                {
+                    orClauses.Add($@"({columnName} IS NULL OR {columnName}='')");
+                }
+                else
+                {
+                    orClauses.Add($@"({columnName} LIKE '%{delimiter}{clauseItem.Replace("'", "''")}{delimiter}%')");
+                }
+            }
+
+            sb.AppendLine(string.Join(" OR ", orClauses.ToArray()));
+            sb.AppendLine(")");
+
+            return sb.ToString();
+        }
+
         public static IEnumerable<string> SplitColumnMultiValue(string columnMultiValue)
         {
             return columnMultiValue.Split(Constants.DoubleColumnValueDelimiter);
