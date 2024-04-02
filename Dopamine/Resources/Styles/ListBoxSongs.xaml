@@ -76,7 +76,7 @@
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Grid>
                         <Border x:Name="MouseHoverHelper" Background="{DynamicResource Brush_ItemHovered}" Opacity="0"/>
-                        <Border Background="{TemplateBinding Background}">
+                        <Border x:Name="SelectionPanel" Background="{TemplateBinding Background}">
                             <!--<StackPanel Margin="{x:Static base:Constants.AlbumTileMargin}">-->
                             <StackPanel>
                                 <Grid>
@@ -117,8 +117,8 @@
                                 <StackPanel Background="{DynamicResource Brush_AlbumTileInfoBackground}" Height="{x:Static base:Constants.AlbumTileAlbumInfoHeight}">
                                     <Grid Margin="6">
                                         <StackPanel>
-                                            <TextBlock Text="{Binding MainHeader}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush_PrimaryText}"/>
-                                            <TextBlock Text="{Binding SubHeader}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush_SecondaryText}"/>
+                                            <TextBlock x:Name="SelectionLabelTitle" Text="{Binding MainHeader}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush_PrimaryText}"/>
+                                            <TextBlock x:Name="SelectionLabelArtist" Text="{Binding SubHeader}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush_SecondaryText}"/>
                                         </StackPanel>
                                     </Grid>
                                     <StackPanel.ToolTip>
@@ -133,15 +133,18 @@
                                         </ToolTip>
                                     </StackPanel.ToolTip>
                                 </StackPanel>
-                                <Border x:Name="SelectionBorder" HorizontalAlignment="Stretch" Height="{x:Static base:Constants.AlbumSelectionBorderSize}"/>
+                                <!--<Border x:Name="SelectionBorder" HorizontalAlignment="Stretch" Height="{x:Static base:Constants.AlbumSelectionBorderSize}"/>-->
                             </StackPanel>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <!--<Setter Property="Background" Value="{DynamicResource Brush_ItemSelected}"/>-->
-                            <Setter Property="Background" TargetName="SelectionBorder" Value="{DynamicResource Brush_Accent}"/>
-                        </Trigger>
+                        <DataTrigger Binding="{Binding IsPlaying}" Value="true">
+                            <!--<Setter Property="Background" TargetName="SelectionBorder" Value="{DynamicResource Brush_Accent}"/>-->
+                            <Setter Property="BorderBrush" TargetName="SelectionPanel" Value="{DynamicResource Brush_Accent}"/>
+                            <Setter Property="BorderThickness" TargetName="SelectionPanel" Value="2"/>
+                            <!--<Setter Property="Foreground" TargetName="SelectionLabelTitle" Value="{DynamicResource Brush_Accent}"/>
+                            <Setter Property="Foreground" TargetName="SelectionLabelArtist" Value="{DynamicResource Brush_Accent}"/>-->
+                        </DataTrigger>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard Storyboard.TargetName="MouseHoverHelper" TargetProperty="Opacity">

@@ -1,5 +1,5 @@
-﻿using Dopamine.Services.Playback;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
+using Dopamine.Services.Playback;
 using Prism.Commands;
 using Prism.Events;
 using System;
@@ -24,11 +24,13 @@ namespace Dopamine.Views.Common.Base
             // So for now there is no better solution than to find the EventAggregator by using the ServiceLocator.
             this.eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
             this.playbackService = ServiceLocator.Current.GetInstance<IPlaybackService>();
+            this.playbackService.PlaybackSuccess += PlaybackService_PlaybackSuccess;
         }
      
         protected abstract Task KeyUpHandlerAsync(object sender, KeyEventArgs e);
         protected abstract Task ActionHandler(Object sender, DependencyObject source, bool enqueue);
         protected abstract Task ScrollToPlayingTrackAsync(Object sender);
         protected abstract void ViewInExplorer(Object sender);
+        protected abstract void PlaybackService_PlaybackSuccess(object sender, PlaybackSuccessEventArgs e);
     }
 }

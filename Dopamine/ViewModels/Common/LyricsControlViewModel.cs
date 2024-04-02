@@ -1,28 +1,26 @@
 ﻿using Digimezzo.Foundation.Core.Logging;
 using Digimezzo.Foundation.Core.Settings;
+using Digimezzo.Foundation.Core.Utils;
 using Dopamine.Core.Api.Lyrics;
 using Dopamine.Core.Base;
 using Dopamine.Core.Enums;
 using Dopamine.Core.Helpers;
 using Dopamine.Core.Prism;
-using Dopamine.Data.Entities;
 using Dopamine.Data.Metadata;
+using Dopamine.Services.Entities;
 using Dopamine.Services.I18n;
 using Dopamine.Services.Metadata;
 using Dopamine.Services.Playback;
 using Dopamine.ViewModels.Common.Base;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Ioc;
 using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
-using Prism.Ioc;
-using Dopamine.Services.Entities;
-using System.Text.RegularExpressions;
-using System.Linq;
-using Digimezzo.Foundation.Core.Utils;
 
 namespace Dopamine.ViewModels.Common
 {
@@ -296,7 +294,7 @@ namespace Dopamine.ViewModels.Common
                             }
                             else
                             {
-                                lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: " + fmd.Title.Value + "\r\n[00:04.530]\r\n" + lyrics.Text;
+                                lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: " + fmd.Title.Value + "\r\n[00:00.000]\r\n" + lyrics.Text;
                             }
                         }
                     }
