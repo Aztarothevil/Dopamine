@@ -29,7 +29,6 @@ namespace Dopamine.Services.Playlist
         private ITrackRepository trackRepository;
         private IContainerProvider container;
         private IFileService fileService;
-        //private GentleFolderWatcher watcher;
 
         public PlaylistService(ITrackRepository trackRepository,
             IFileService fileService, IContainerProvider container)
