@@ -81,7 +81,7 @@ namespace Dopamine.Services.Utils
 
             try
             {
-                ScrollUtils.ScrollToListBoxItem(box, itemobject, false);
+                ScrollUtils.ScrollToTextListItem(box, itemobject, false);
             }
             catch (Exception)
             {

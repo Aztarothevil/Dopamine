@@ -148,6 +148,10 @@ namespace Dopamine.Views.Common.Base
                     song.IsPlaying = song.Path == currentSong.Path;
                 }
             }
+            else
+            {
+
+            }
         }
 
         protected async Task ScrollToPlayingSongAsync(Object sender)
@@ -157,9 +161,12 @@ namespace Dopamine.Views.Common.Base
                 // Cast sender to ListBox
                 ListBox lb = (ListBox)sender;
 
-                // This should provide a smoother experience because after this wait,
-                // other animations on the UI should have finished executing.
-                await Task.Delay(Convert.ToInt32(Constants.ScrollToPlayingTrackTimeoutSeconds * 1000));
+                var songs = ((Dopamine.ViewModels.Common.Base.SongsViewModelBase)lb.DataContext).Songs;
+                var currentSong = this.playbackService.CurrentTrack;
+                foreach (var song in songs)
+                {
+                    song.IsPlaying = song.Path == currentSong.Path;
+                }
 
                 await Application.Current.Dispatcher.Invoke(async () =>
                 {

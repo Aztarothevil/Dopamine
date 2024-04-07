@@ -1354,7 +1354,6 @@ namespace Dopamine.Services.Playback
             return await this.TryPlayAsync(nextTrack);
         }
 
-
         private void ProgressTimeoutHandler(object sender, ElapsedEventArgs e)
         {
             this.HandleProgress();

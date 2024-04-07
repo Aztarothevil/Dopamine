@@ -2,6 +2,7 @@
 using Dopamine.Services.Entities;
 using Dopamine.Services.Lyrics;
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,7 +26,7 @@ namespace Dopamine.Services.Utils
             return ownerRectangle.Contains(childRectangle.TopLeft) & ownerRectangle.Contains(childRectangle.BottomRight);
         }
 
-        public static void ScrollToListBoxItem(ListBox box, object itemObject, bool scrollOnlyIfNotInView)
+        public static void ScrollToTextListItem(ListBox box, object itemObject, bool scrollOnlyIfNotInView)
         {
             LyricsLineViewModel item = (LyricsLineViewModel)itemObject;
             ScrollViewer scrollViewer = (ScrollViewer)VisualTreeUtils.GetDescendantByType(box, typeof(ScrollViewer));
@@ -37,7 +38,6 @@ namespace Dopamine.Services.Utils
 
                 if (scrollViewer != null && listBoxItem != null)
                 {
-                    //scrollViewer.ScrollToVerticalOffset(0);
 
                     if (scrollViewer.VerticalOffset != 0)
                     {
@@ -46,11 +46,6 @@ namespace Dopamine.Services.Utils
                         box.UpdateLayout();
                         box.ScrollIntoView(itemObject);
                     }
-
-                    //if (IsFullyVisible(listBoxItem, scrollViewer))
-                    //{
-                    //    return;
-                    //}
                 }
                 return;
             }
@@ -86,15 +81,35 @@ namespace Dopamine.Services.Utils
             }
 
             //System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + position + "  -  " + modulo);
+        }
 
+        public static void ScrollToListBoxItem(ListBox box, object itemObject, bool scrollOnlyIfNotInView)
+        {
+            // Verify that the item is not visible. Only scroll if it is not visible.
+            // ----------------------------------------------------------------------
+            if (scrollOnlyIfNotInView)
+            {
+                ScrollViewer scrollViewer = (ScrollViewer)VisualTreeUtils.GetDescendantByType(box, typeof(ScrollViewer));
+                FrameworkElement listBoxItem = (FrameworkElement)box.ItemContainerGenerator.ContainerFromItem(itemObject);
 
-            //box.ScrollIntoView(box.Items[item.Index+25]);
-            //box.UpdateLayout(); // This seems required to get correct positioning.
+                int index = ((Dopamine.Services.Entities.SongViewModel)itemObject).Index;
+                int columnas = (int)(scrollViewer.ActualWidth / 138);
+                int filas = (index - 1) / columnas;
+                int position = filas * 178;
+                if ((scrollViewer.VerticalOffset - position) >= 10)
+                {
+                    scrollViewer.ScrollToVerticalOffset(position);
+                }
 
-            // Scroll to the desired Item
-            // --------------------------
-            //box.UpdateLayout(); // This seems required to get correct positioning.
-            //box.ScrollIntoView(itemObject);
+                if ((scrollViewer.VerticalOffset - position) < (-5 * 178))
+                {
+                    scrollViewer.ScrollToVerticalOffset(position - (5 * 178) - 100);
+                }
+
+                System.Console.WriteLine(filas + "  -  " + columnas + "  -  " + index + "  -  " + position);
+                
+            }
+
         }
 
         public static void ScrollToDataGridItem(DataGrid grid, object itemObject, bool scrollOnlyIfNotInView)
@@ -159,7 +174,7 @@ namespace Dopamine.Services.Utils
 
             try
             {
-                ScrollToListBoxItem(box, itemObject, true);
+                ScrollToTextListItem(box, itemObject, true);
             }
             catch (Exception)
             {
@@ -202,7 +217,7 @@ namespace Dopamine.Services.Utils
             {
                 ScrollToListBoxItem(box, itemObject, true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -277,7 +292,7 @@ namespace Dopamine.Services.Utils
 
             try
             {
-                ScrollToListBoxItem(box, itemObject, true);
+                ScrollToTextListItem(box, itemObject, true);
             }
             catch (Exception)
             {

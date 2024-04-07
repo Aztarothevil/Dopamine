@@ -429,9 +429,11 @@ namespace Dopamine.Services.Collection
                         orderedSongs = songs.OrderBy((a) => FormatUtils.GetSortableString(a.SongTitle)).ToList();
                         break;
                 }
-
+                int index = 1;
                 foreach (SongViewModel song in orderedSongs)
                 {
+                    song.Index = index;
+                    index++;
                     string mainHeader = song.SongTitle;
                     string subHeader = song.AlbumArtist;
 

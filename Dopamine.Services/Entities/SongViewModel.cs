@@ -219,5 +219,13 @@ namespace Dopamine.Services.Entities
             get { return this.path; }
             set { SetProperty<string>(ref this.path, value); }
         }
+
+        private int index;
+
+        public int Index
+        {
+            get { return this.index; }
+            set { SetProperty<int>(ref this.index, value); }
+        }
     }
 }
