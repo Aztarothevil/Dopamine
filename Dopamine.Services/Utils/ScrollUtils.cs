@@ -2,7 +2,6 @@
 using Dopamine.Services.Entities;
 using Dopamine.Services.Lyrics;
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +15,9 @@ namespace Dopamine.Services.Utils
         static int contador = 0;
         static double position = 0;
         static double lastPosition = 0;
+        static double lastPositionLyric = 0;
+        static double lastDuration = 0;
+        static double lastDurationLyrc = 0;
 
         public static bool IsFullyVisible(FrameworkElement child, FrameworkElement scrollViewer)
         {
@@ -34,6 +36,7 @@ namespace Dopamine.Services.Utils
             // ----------------------------------------------------------------------
             if (scrollOnlyIfNotInView && (item.Index == 0 || item.Index < 10))
             {
+                //System.Console.WriteLine("lastPosition: " + lastPosition + "  -  Duration: " + item.Duration + "  -  Position: " + position + "  -  Contador: " + contador);
                 FrameworkElement listBoxItem = (FrameworkElement)box.ItemContainerGenerator.ContainerFromItem(itemObject);
 
                 if (scrollViewer != null && listBoxItem != null)
@@ -47,6 +50,9 @@ namespace Dopamine.Services.Utils
                         box.ScrollIntoView(itemObject);
                     }
                 }
+                lastPosition = 0;
+                position = 0;
+                contador = 0;
                 return;
             }
 
@@ -61,15 +67,31 @@ namespace Dopamine.Services.Utils
 
             if (currentIndex != item.Index)
             {
+                lastPositionLyric = ((item.Index - 10) * 28) + 28;
+                lastDurationLyrc = item.Duration;
+
+                if ((currentIndex < item.Index - 1 || currentIndex > item.Index + 1) && item.Index > 11)
+                {
+                    lastPosition = lastPositionLyric;
+                    position = lastPositionLyric;
+                    scrollViewer.ScrollToVerticalOffset(position);
+                }
+
                 currentIndex = item.Index;
                 contador = 0;
-                position = ((item.Index - 10) * 28);
-                lastPosition = position + 28;
             }
+
+            if (lastPosition == position)
+            {
+                lastPosition = lastPositionLyric;
+                lastDuration = lastDurationLyrc;
+                contador = 0;
+            }
+
 
             contador++;
 
-            int modulo = (int)((item.Duration * 75) / 9200);
+            int modulo = (int)((lastDuration * 40) / 9200);
 
             if (contador % modulo == 0)
             {
@@ -80,7 +102,7 @@ namespace Dopamine.Services.Utils
                 }
             }
 
-            //System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + position + "  -  " + modulo);
+            //System.Console.WriteLine("lastPosition: " + lastPosition + "  -  Duration: " + item.Duration + "  -  Position: " + position + "  -  Modulo: " + modulo + "  -  Contador: " + contador);
         }
 
         public static void ScrollToListBoxItem(ListBox box, object itemObject, bool scrollOnlyIfNotInView)

@@ -217,6 +217,7 @@ namespace Dopamine.ViewModels.Common
             try
             {
                 Lyrics lyrics = null;
+                var lrcFile = Path.Combine(Path.GetDirectoryName(fmd.Path), Path.GetFileNameWithoutExtension(fmd.Path) + FileFormats.LRC);
                 bool mustDownloadLyrics = false;
 
                 await Task.Run(async () =>
@@ -228,8 +229,6 @@ namespace Dopamine.ViewModels.Common
                     // If the audio file has no lyrics, try to find lyrics in a local lyrics file.
                     if (!lyrics.HasText)
                     {
-                        var lrcFile = Path.Combine(Path.GetDirectoryName(fmd.Path), Path.GetFileNameWithoutExtension(fmd.Path) + FileFormats.LRC);
-
                         if (File.Exists(lrcFile))
                         {
                             using (var fs = new FileStream(lrcFile, FileMode.Open, FileAccess.Read))
@@ -253,6 +252,13 @@ namespace Dopamine.ViewModels.Common
                             string title = fmd.Title != null && fmd.Title.Value != null ? fmd.Title.Value : string.Empty;
 
                             if (!string.IsNullOrWhiteSpace(artist) & !string.IsNullOrWhiteSpace(title)) mustDownloadLyrics = true;
+                        }
+                    }
+                    else
+                    {
+                        if (File.Exists(lrcFile))
+                        {
+                            File.Delete(lrcFile);
                         }
                     }
                 });
@@ -316,6 +322,11 @@ namespace Dopamine.ViewModels.Common
                             lyrics.SourceType = SourceTypeEnum.Online;
                             lyrics.Text = "[00:00.000]Artist: " + fmd.Artists.Values[0] + "\r\n[00:00.000]Title: " + fmd.Title.Value + "\r\n[00:00.000]";
                         }
+                    }
+
+                    if (lyrics.SourceType == SourceTypeEnum.Online)
+                    {
+                        File.WriteAllText(lrcFile, lyrics.Text);
                     }
                 }
                 else
