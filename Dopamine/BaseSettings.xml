@@ -215,7 +215,7 @@
       <Value>True</Value>
     </Setting>
     <Setting Name="ShowSpectrumAnalyzer">
-      <Value>True</Value>
+      <Value>False</Value>
     </Setting>
     <Setting Name="SpectrumStyle">
       <Value>1</Value>
