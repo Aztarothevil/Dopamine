@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Dopamine.Services.Utils
@@ -115,20 +116,32 @@ namespace Dopamine.Services.Utils
                 FrameworkElement listBoxItem = (FrameworkElement)box.ItemContainerGenerator.ContainerFromItem(itemObject);
 
                 int index = ((Dopamine.Services.Entities.SongViewModel)itemObject).Index;
-                int columnas = (int)(scrollViewer.ActualWidth / 138);
-                int filas = (index - 1) / columnas;
-                int position = filas * 178;
+                int columns = (int)(scrollViewer.ActualWidth / 132);
+                int rows = (int)(scrollViewer.ActualHeight / 168);
+                int currentRow = ((index - 1) / columns) + 1;
+                int position = (currentRow-1) * 178;
+                int diference = 0;
                 if ((scrollViewer.VerticalOffset - position) >= 10)
                 {
                     scrollViewer.ScrollToVerticalOffset(position);
                 }
-
-                if ((scrollViewer.VerticalOffset - position) < (-5 * 178))
+                else if ((scrollViewer.VerticalOffset - position) <= (rows * -178))
                 {
-                    scrollViewer.ScrollToVerticalOffset(position - (5 * 178) - 100);
+                    diference = (int)(scrollViewer.ActualHeight) - ((rows-1) * 178);
+                    int remove = 0;
+                    if (diference < 180)
+                    {
+                        remove = diference + ((180 - diference) * 2);
+                    }
+                    else
+                    {
+                        remove = diference - ((diference - 180) * 2);
+                    }
+
+                    scrollViewer.ScrollToVerticalOffset(position - ((rows * 178) - remove));
                 }
 
-                System.Console.WriteLine(filas + "  -  " + columnas + "  -  " + index + "  -  " + position);
+                System.Console.WriteLine("Fila: " + currentRow + "  - Columnas: " + columns + "  - Filas " + rows + "  -  Indice: " + index + "  -  Current Position: " + position + " - VerticalOffset: " + scrollViewer.VerticalOffset + " - Diference: " + diference);
                 
             }
 
