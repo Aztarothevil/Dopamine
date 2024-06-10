@@ -119,6 +119,12 @@ namespace Dopamine.ViewModels.Common.Base
             };
 
             this.playbackService.PlaybackCountersChanged += PlaybackService_PlaybackCountersChanged;
+            this.playbackService.QueueChanged += (_, __) => PlaybackService_QueueChanged();
+        }
+
+        private async void PlaybackService_QueueChanged()
+        {
+            await GetTracksCommonAsync(this.playbackService.Queue, TrackOrder.None);
         }
 
         protected virtual async void MetadataChangedHandlerAsync(MetadataChangedEventArgs e)
@@ -206,36 +212,36 @@ namespace Dopamine.ViewModels.Common.Base
             await this.GetTracksCommonAsync(await this.container.ResolveTrackViewModelsAsync(tracks), trackOrder);
         }
 
-        protected async Task GetFolderAsync(IList<string> folders, TrackOrder trackOrder)
-        {
-            IList<Track> tracks = null;
+        //protected async Task GetFolderAsync(IList<string> folders, TrackOrder trackOrder)
+        //{
+        //    IList<Track> tracks = null;
 
-            // Tracks have lowest priority
-            tracks = await this.trackRepository.GetTracksFolderAsync(folders);
-            List<Track> trackRemove = new List<Track>() { };
-            if (folders != null)
-            {
-                foreach (var track in tracks)
-                {
-                    foreach (var folder in folders)
-                    {
-                        if (!Path.GetDirectoryName(track.Path).Contains(folder))
-                        {
-                            trackRemove.Add(track);
-                        }
-                    }
-                }
-                foreach (var track in trackRemove)
-                {
-                    tracks.Remove(track);
-                }
-                await this.GetTracksCommonAsync(await this.container.ResolveTrackViewModelsAsync(tracks), trackOrder);
-            }
-            else
-            {
-                await this.GetTracksCommonAsync(await this.container.ResolveTrackViewModelsAsync(tracks), TrackOrder.None);
-            }
-        }
+        //    // Tracks have lowest priority
+        //    tracks = await this.trackRepository.GetTracksFolderAsync(folders);
+        //    List<Track> trackRemove = new List<Track>() { };
+        //    if (folders != null)
+        //    {
+        //        foreach (var track in tracks)
+        //        {
+        //            foreach (var folder in folders)
+        //            {
+        //                if (!Path.GetDirectoryName(track.Path).Contains(folder))
+        //                {
+        //                    trackRemove.Add(track);
+        //                }
+        //            }
+        //        }
+        //        foreach (var track in trackRemove)
+        //        {
+        //            tracks.Remove(track);
+        //        }
+        //        await this.GetTracksCommonAsync(await this.container.ResolveTrackViewModelsAsync(tracks), trackOrder);
+        //    }
+        //    else
+        //    {
+        //        await this.GetTracksCommonAsync(await this.container.ResolveTrackViewModelsAsync(tracks), TrackOrder.None);
+        //    }
+        //}
 
         protected void ClearTracks()
         {
@@ -272,7 +278,11 @@ namespace Dopamine.ViewModels.Common.Base
 
                 // Unbind to improve UI performance
                 this.ClearTracks();
-
+                int index = 1;
+                foreach (var track in orderedTrackViewModels)
+                {
+                    track.SortTrackNumber = index++;
+                }
                 // Populate ObservableCollection
                 this.Tracks = new ObservableCollection<TrackViewModel>(orderedTrackViewModels);
             }
@@ -304,32 +314,17 @@ namespace Dopamine.ViewModels.Common.Base
             this.CalculateSizeInformationAsync(this.TracksCvs);
 
             // Show playing Track
-            this.ShowPlayingTrackAsync();
+            //this.ShowPlayingTrackAsync();
         }
 
         protected async Task RemoveTracksFromCollectionAsync(IList<TrackViewModel> selectedTracks)
         {
-            string title = ResourceUtils.GetString("Language_Remove");
-            string body = ResourceUtils.GetString("Language_Are_You_Sure_To_Remove_Song");
+            await this.playbackService.DequeueAsync(selectedTracks);
+        }
 
-            if (selectedTracks != null && selectedTracks.Count > 1)
-            {
-                body = ResourceUtils.GetString("Language_Are_You_Sure_To_Remove_Songs");
-            }
-
-            if (this.dialogService.ShowConfirmation(0xe11b, 16, title, body, ResourceUtils.GetString("Language_Yes"), ResourceUtils.GetString("Language_No")))
-            {
-                RemoveTracksResult result = await this.collectionService.RemoveTracksFromCollectionAsync(selectedTracks);
-
-                if (result == RemoveTracksResult.Error)
-                {
-                    this.dialogService.ShowNotification(0xe711, 16, ResourceUtils.GetString("Language_Error"), ResourceUtils.GetString("Language_Error_Removing_Songs"), ResourceUtils.GetString("Language_Ok"), true, ResourceUtils.GetString("Language_Log_File"));
-                }
-                else
-                {
-                    await this.playbackService.DequeueAsync(selectedTracks);
-                }
-            }
+        protected async Task ClearNowPlayingListAsync()
+        {
+            await this.playbackService.DequeueAllAsync();
         }
 
         protected async Task RemoveTracksFromDiskAsync(IList<TrackViewModel> selectedTracks)

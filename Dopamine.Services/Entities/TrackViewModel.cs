@@ -51,8 +51,6 @@ namespace Dopamine.Services.Entities
 
         public string SortSkipCount => this.Track.SkipCount.HasValueLargerThan(0) ? this.Track.SkipCount.Value.ToString("0000") : string.Empty;
 
-        public long SortTrackNumber => this.Track.TrackNumber.HasValue ? this.Track.TrackNumber.Value : 0;
-
         public string SortDiscNumber => this.Track.DiscNumber.HasValueLargerThan(0) ? this.Track.DiscNumber.Value.ToString("0000") : string.Empty;
 
         public long SortDateAdded => this.Track.DateAdded;
@@ -139,6 +137,11 @@ namespace Dopamine.Services.Entities
                     return "0:00";
                 }
             }
+        }
+        public long SortTrackNumber
+        {
+            get { return (long)this.Track.SortTrackNumber; }
+            set { this.Track.SortTrackNumber = value; }
         }
 
         public int Rating

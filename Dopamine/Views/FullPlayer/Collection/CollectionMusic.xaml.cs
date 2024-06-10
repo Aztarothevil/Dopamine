@@ -19,10 +19,11 @@ namespace Dopamine.Views.FullPlayer.Collection
             InitializeComponent();
 
             // Commands
-            this.ViewInExplorerCommand = new DelegateCommand(() => this.ViewInExplorer(this.ListBoxSongs));
+            this.ViewInExplorerCommand = new DelegateCommand(() => this.ViewInExplorer(this.ListBoxTracks));
             this.JumpToPlayingTrackCommand = new DelegateCommand(async () => await this.ScrollToPlayingSongAsync(this.ListBoxSongs));
 
             // PubSub Events
+            this.eventAggregator.GetEvent<ScrollToPlayingTrack>().Subscribe(async (_) => await this.ScrollToPlayingTrackAsync(this.ListBoxTracks));
             this.eventAggregator.GetEvent<ScrollToPlayingTrack>().Subscribe(async (_) => await this.ScrollToPlayingSongAsync(this.ListBoxSongs));
 
             this.eventAggregator.GetEvent<PerformSemanticJump>().Subscribe(async (data) =>

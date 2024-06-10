@@ -11,9 +11,9 @@
     <!-- ContextMenu -->
     <ContextMenu x:Key="ListBoxNowPlayingTracksContextMenu" x:Shared="False">
         <MenuItem Header="{DynamicResource Language_View_In_Explorer}" InputGestureText="{DynamicResource Language_Ctrl_E}" Command="{Binding ViewInExplorerCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
-        <MenuItem Header="{DynamicResource Language_Jump_To_Playing_Song}" InputGestureText="{DynamicResource Language_Ctrl_J}" Command="{Binding JumpToPlayingTrackCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
-        <Separator/>
-        <MenuItem
+        <!--<MenuItem Header="{DynamicResource Language_Jump_To_Playing_Song}" InputGestureText="{DynamicResource Language_Ctrl_J}" Command="{Binding JumpToPlayingTrackCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+        <Separator/>-->
+        <!--<MenuItem
             InputGestureText="" 
             Command="{Binding DataContext.EditTracksCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
             <MenuItem.Header>
@@ -22,8 +22,8 @@
                     <pc:SyncRing Width="11" Margin="15,0,0,0" VerticalAlignment="Center" Visibility="{Binding DataContext.IsIndexing, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 </StackPanel>
             </MenuItem.Header>
-        </MenuItem>
-        <Separator/>
+        </MenuItem>-->
+        <!--<Separator/>
         <MenuItem Header="{DynamicResource Language_Search_Online}" ItemsSource="{Binding DataContext.ContextMenuSearchProviders, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" DisplayMemberPath="Name" IsEnabled="{Binding DataContext.HasContextMenuSearchProviders, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">
@@ -32,10 +32,10 @@
                     <Setter Property="CommandParameter" Value="{Binding Id}"/>
                 </Style>
             </MenuItem.ItemContainerStyle>
-        </MenuItem>
+        </MenuItem>-->
         <Separator/>
         <MenuItem Header="{DynamicResource Language_Remove_From_Now_Playing}" InputGestureText="{DynamicResource Language_Key_Del}" Command="{Binding DataContext.RemoveSelectedTracksCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
-        <MenuItem>
+        <!--<MenuItem>
             <MenuItem.Command>
                 <Binding Path="DataContext.RemoveSelectedTracksFromDiskCommand" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
             </MenuItem.Command>
@@ -48,9 +48,11 @@
                     <pc:SyncRing Width="11" Margin="15,0,0,0" VerticalAlignment="Center" Visibility="{Binding DataContext.IsIndexing, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 </StackPanel>
             </MenuItem.Header>
-        </MenuItem>
+        </MenuItem>-->
+        <!--<Separator/>
+        <MenuItem Header="{DynamicResource Language_Add_To_Blacklist}" InputGestureText="" Command="{Binding DataContext.AddToBlacklistCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>-->
         <Separator/>
-        <MenuItem Header="{DynamicResource Language_Add_To_Blacklist}" InputGestureText="" Command="{Binding DataContext.AddToBlacklistCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+        <MenuItem Header="{DynamicResource Language_Clear}" InputGestureText="" Command="{Binding DataContext.ClearNowPlayingListCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
         <Separator/>
         <MenuItem Header="{DynamicResource Language_Information}" InputGestureText="" Command="{Binding DataContext.ShowSelectedTrackInformationCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
     </ContextMenu>
@@ -70,23 +72,23 @@
                         <Border Height="46" 
                                 Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}}"
                                 Background="{TemplateBinding Background}">
-                            <Border.ToolTip>
+                            <!--<Border.ToolTip>
                                 <ToolTip>
                                     <StackPanel>
                                         <TextBlock Text="{Binding TrackTitle}" FontWeight="Bold"/>
                                         <TextBlock Text="{Binding ArtistName}"/>
                                     </StackPanel>
                                 </ToolTip>
-                            </Border.ToolTip>
-                            <DockPanel Margin="10,0,10,0">
-                                <Border DockPanel.Dock="Left" MinWidth="20" Height="40">
+                            </Border.ToolTip>-->
+                            <DockPanel Margin="0,0,10,0">
+                                <!--<Border DockPanel.Dock="Left" MinWidth="20" Height="40">
                                     <TextBlock 
                                         Text="{Binding FormattedTrackNumber}" 
                                         HorizontalAlignment="Center" 
                                         VerticalAlignment="Center"
                                         Foreground="{DynamicResource Brush_SecondaryText}"
                                         FontSize="13"/>
-                                </Border>
+                                </Border>-->
                                 <StackPanel VerticalAlignment="Center" Height="40">
                                     <DockPanel Height="20">
                                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
@@ -95,14 +97,15 @@
                                                    Foreground="{DynamicResource Brush_Accent}" 
                                                    Margin="0,0,10,0" 
                                                    VerticalAlignment="Center"/>
-                                            <TextBlock
+                                            <TextBlock x:Name="PlayingDuration"
                                                 Text="{Binding Duration}" 
                                                 TextAlignment="Right"
                                                 FontSize="13" 
                                                 VerticalAlignment="Center"
                                                 Margin="0,0,2,0"/>
                                         </StackPanel>
-                                        <TextBlock Text="{Binding TrackTitle}"
+                                        <TextBlock x:Name="PlayingTrack"
+                                               Text="{Binding TrackTitle}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Stretch" 
                                                TextTrimming="CharacterEllipsis"
@@ -115,14 +118,15 @@
                                             VerticalAlignment="Center" 
                                             Visibility="{Binding DataContext.EnableRating,UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Converter={StaticResource BooleanToCollapsedConverter}}"
                                             Rating="{Binding Rating, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                                            <pc:LoveButton 
+                                            <!--<pc:LoveButton 
                                             Margin="10,0,0,0"
                                             VerticalAlignment="Center" 
                                             SelectedForeground="{DynamicResource Brush_Accent}"
                                             Visibility="{Binding DataContext.EnableLove,UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Converter={StaticResource BooleanToCollapsedConverter}}"
-                                            Love="{Binding Love, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                            Love="{Binding Love, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
                                         </StackPanel>
-                                        <TextBlock Text="{Binding ArtistName}"
+                                        <TextBlock x:Name="PlayingArtist"
+                                               Text="{Binding ArtistName}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Stretch" 
                                                TextTrimming="CharacterEllipsis"
@@ -135,6 +139,13 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsPlaying}" Value="true">
+                            <Setter Property="Foreground" TargetName="PlayingTrack" Value="{DynamicResource Brush_Accent}"/>
+                            <Setter Property="FontSize" TargetName="PlayingTrack" Value="20"/>
+                            <Setter Property="Foreground" TargetName="PlayingDuration" Value="{DynamicResource Brush_Accent}"/>
+                            <Setter Property="FontSize" TargetName="PlayingDuration" Value="20"/>
+                            <Setter Property="FontSize" TargetName="PlayingArtist" Value="18"/>
+                        </DataTrigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{DynamicResource Brush_ItemSelected}"/>
                         </Trigger>

@@ -49,6 +49,7 @@ namespace Dopamine.ViewModels.Common.Base
         public DelegateCommand RemoveSelectedTracksCommand { get; set; }
         public DelegateCommand RemoveSelectedTracksFromDiskCommand { get; set; }
         public DelegateCommand<string> AddTracksToPlaylistCommand { get; set; }
+        public DelegateCommand ClearNowPlayingListCommand { get; set; }
 
         public DelegateCommand AddToBlacklistCommand { get; set; }
         public DelegateCommand ShowSelectedTrackInformationCommand { get; set; }

@@ -942,6 +942,29 @@ namespace Dopamine.Services.Playback
             return dequeueResult;
         }
 
+        public async Task<DequeueResult> DequeueAllAsync()
+        {
+            DequeueResult dequeueResult = await this.queueManager.DequeueAllAsync();
+
+            if (dequeueResult.IsSuccess & dequeueResult.IsPlayingTrackDequeued)
+            {
+                if (dequeueResult.NextAvailableTrack != null)
+                {
+                    await this.TryPlayAsync(dequeueResult.NextAvailableTrack);
+                }
+                else
+                {
+                    this.Stop();
+                }
+            }
+
+            this.QueueChanged(this, new EventArgs());
+
+            this.ResetSaveQueuedTracksTimer(); // Save queued tracks to the database
+
+            return dequeueResult;
+        }
+
         public async Task<EnqueueResult> AddToQueueAsync(IList<TrackViewModel> tracks)
         {
             EnqueueResult result = await this.queueManager.EnqueueAsync(tracks, this.shuffle);
@@ -1002,11 +1025,12 @@ namespace Dopamine.Services.Playback
             return await this.AddToQueueAsync(orederedTracks);
         }
 
-        public async Task<EnqueueResult> AddMusicToQueueAsync(IList<SongViewModel> albumViewModels)
+        public async Task<EnqueueResult> AddMusicToQueueAsync(IList<SongViewModel> selectedTrack)
         {
-            IList<Track> tracks = await this.trackRepository.GetAlbumTracksAsync(albumViewModels.Select(x => x.AlbumKey).ToList());
-            List<TrackViewModel> orederedTracks = await EntityUtils.OrderTracksAsync(await this.container.ResolveTrackViewModelsAsync(tracks), TrackOrder.ByAlbum);
-            return await this.AddToQueueAsync(orederedTracks);
+            Track track = this.trackRepository.GetTrack(selectedTrack.Select(x => x.Path).FirstOrDefault());
+            IList<TrackViewModel> tracks = await this.container.ResolveTrackViewModelsAsync(new List<Track> { track });
+            tracks.FirstOrDefault().SortTrackNumber = this.Queue.Count + 1;
+            return await this.AddToQueueAsync(tracks);
         }
 
         private async void Initialize()

@@ -24,7 +24,7 @@
             <CollectionViewSource x:Key="PlaylistsDataSource" Source="{Binding DataContext.ContextMenuPlaylists, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
         </ContextMenu.Resources>
 
-        <MenuItem
+        <!--<MenuItem
             InputGestureText="" 
             Command="{Binding DataContext.EditAlbumCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
             <MenuItem.Header>
@@ -40,9 +40,9 @@
             <MenuItem Header="{DynamicResource Language_Medium}" InputGestureText="" Command="{Binding DataContext.SetCoverSizeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="2" IsCheckable="True" IsChecked="{Binding DataContext.IsMediumCoverSizeSelected,Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
             <MenuItem Header="{DynamicResource Language_Large}" InputGestureText="" Command="{Binding DataContext.SetCoverSizeCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="3" IsCheckable="True" IsChecked="{Binding DataContext.IsLargeCoverSizeSelected,Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
         </MenuItem>
-        <Separator/>
+        <Separator/>-->
         <MenuItem Header="{DynamicResource Language_Add_To_Now_Playing}" InputGestureText="" Command="{Binding DataContext.AddAlbumsToNowPlayingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
-        <MenuItem Header="{DynamicResource Language_Add_To_Playlist}" DisplayMemberPath="Name">
+        <!--<MenuItem Header="{DynamicResource Language_Add_To_Playlist}" DisplayMemberPath="Name">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">
                     <Setter Property="Command" Value="{Binding DataContext.AddAlbumsToPlaylistCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
@@ -56,13 +56,13 @@
                     <CollectionContainer Collection="{Binding Source={StaticResource PlaylistsDataSource}}"/>
                 </CompositeCollection>
             </MenuItem.ItemsSource>
-        </MenuItem>
-        <Separator/>
-        <MenuItem Header="{DynamicResource Language_Shuffle}" Command="{Binding DataContext.ShuffleSelectedAlbumsCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+        </MenuItem>-->
+        <!--<Separator/>-->
+        <!--<MenuItem Header="{DynamicResource Language_Shuffle}" Command="{Binding DataContext.ShuffleSelectedAlbumsCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
             <MenuItem.Icon>
                 <TextBlock Margin="0,1,0,0" Text="&#xE8B1;" Style="{StaticResource SegoeAssets}" FontSize="15"/>
             </MenuItem.Icon>
-        </MenuItem>
+        </MenuItem>-->
     </ContextMenu>
 
     <!-- ListBoxItem -->
@@ -94,24 +94,24 @@
                                     </pc:Tile>
                                     <!-- Cover -->
                                     <pc:SourceChangedImage Panel.ZIndex="1" 
-                                   Width="{Binding Path=DataContext.CoverSize,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
-                                   Height="{Binding Path=DataContext.CoverSize,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
-                                   RenderOptions.BitmapScalingMode="HighQuality">
-                                        <pc:SourceChangedImage.Source>
-                                            <MultiBinding Converter="{StaticResource PathToImageConverter}">
-                                                <Binding Path="ArtworkPath" IsAsync="True"/>
-                                                <Binding Path="DataContext.UpscaledCoverSize" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
-                                            </MultiBinding>
-                                        </pc:SourceChangedImage.Source>
-                                        <pc:SourceChangedImage.Triggers>
-                                            <EventTrigger RoutedEvent="pc:SourceChangedImage.SourceChanged">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="{x:Static base:Constants.SourceChangedImageChangedDuration}" />
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </pc:SourceChangedImage.Triggers>
+                                       Width="{Binding Path=DataContext.CoverSize,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                                       Height="{Binding Path=DataContext.CoverSize,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                                       RenderOptions.BitmapScalingMode="HighQuality">
+                                            <pc:SourceChangedImage.Source>
+                                                <MultiBinding Converter="{StaticResource PathToImageConverter}">
+                                                    <Binding Path="ArtworkPath" IsAsync="True"/>
+                                                    <Binding Path="DataContext.UpscaledCoverSize" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
+                                                </MultiBinding>
+                                            </pc:SourceChangedImage.Source>
+                                            <pc:SourceChangedImage.Triggers>
+                                                <EventTrigger RoutedEvent="pc:SourceChangedImage.SourceChanged">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="{x:Static base:Constants.SourceChangedImageChangedDuration}" />
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                            </pc:SourceChangedImage.Triggers>  
                                     </pc:SourceChangedImage>
                                 </Grid>
                                 <StackPanel Background="{DynamicResource Brush_AlbumTileInfoBackground}" Height="{x:Static base:Constants.AlbumTileAlbumInfoHeight}">
