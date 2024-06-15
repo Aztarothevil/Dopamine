@@ -18,6 +18,8 @@
 
         public long? DateFileCreated { get; set; }
 
+        public long? DateFileModified { get; set; }        
+
         public long? DateAdded { get; set; }
 
         public static AlbumData CreateDefault()
@@ -32,6 +34,7 @@
                 Path = string.Empty,
                 Year = 0,
                 DateFileCreated = 0,
+                DateFileModified = 0,
                 DateAdded = 0
             };
         }

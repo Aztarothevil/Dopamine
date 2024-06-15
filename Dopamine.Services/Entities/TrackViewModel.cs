@@ -89,7 +89,7 @@ namespace Dopamine.Services.Entities
 
         public string Genre => !string.IsNullOrEmpty(this.Track.Genres) ? DataUtils.GetCommaSeparatedColumnMultiValue(this.Track.Genres) : ResourceUtils.GetString("Language_Unknown_Genre");
 
-        public string FormattedTrackNumber => this.Track.TrackNumber.HasValueLargerThan(0) ? Track.TrackNumber.Value.ToString("00") : "--";
+        public string FormattedTrackNumber => this.Track.SortTrackNumber.HasValueLargerThan(0) ? Track.SortTrackNumber.Value.ToString("00") : "--";
 
         public string TrackNumber => this.Track.TrackNumber.HasValueLargerThan(0) ? this.Track.TrackNumber.ToString() : string.Empty;
 

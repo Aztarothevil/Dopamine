@@ -267,9 +267,15 @@ namespace Dopamine.ViewModels.Common.Base
                 case MusicOrder.ReverseByDateCreated:
                     this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Created");
                     break;
+                case MusicOrder.ByDateModified:
+                    this.musicOrderText = ResourceUtils.GetString("Language_By_Date_Modified");
+                    break;
+                case MusicOrder.ReverseByDateModified:
+                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Modified");
+                    break;
                 default:
                     // Cannot happen, but just in case.
-                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Created");
+                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Modified");
                     break;
             }
 
@@ -555,16 +561,16 @@ namespace Dopamine.ViewModels.Common.Base
             switch (this.musicOrder)
             {
                 case MusicOrder.None:
-                    this.MusicOrder = MusicOrder.ByDateCreated;
+                    this.MusicOrder = MusicOrder.ByDateModified;
                     break;
-                case MusicOrder.ByDateCreated:
-                    this.MusicOrder = MusicOrder.ReverseByDateCreated;
+                case MusicOrder.ByDateModified:
+                    this.MusicOrder = MusicOrder.ReverseByDateModified;
                     break;
-                case MusicOrder.ReverseByDateCreated:
-                    this.MusicOrder = MusicOrder.ByDateCreated;
+                case MusicOrder.ReverseByDateModified:
+                    this.MusicOrder = MusicOrder.ByDateModified;
                     break;
                 default:
-                    this.MusicOrder = MusicOrder.ByDateCreated;
+                    this.MusicOrder = MusicOrder.ByDateModified;
                     break;
             }
         }

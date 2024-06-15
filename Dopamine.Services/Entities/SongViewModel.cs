@@ -18,6 +18,7 @@ namespace Dopamine.Services.Entities
         private string subHeader;
         private long? dateAdded;
         private long? dateFileCreated;
+        private long? dateFileModified;
         private long sortYear;
 
         public SongViewModel(AlbumData albumData)
@@ -30,6 +31,7 @@ namespace Dopamine.Services.Entities
             this.AlbumKey = albumData.AlbumKey;
             this.DateAdded = albumData.DateAdded;
             this.DateFileCreated = albumData.DateFileCreated;
+            this.DateFileModified = albumData.DateFileModified;
             this.songTitle = albumData.TrackTitle;
             this.path = albumData.Path;
         }
@@ -92,6 +94,15 @@ namespace Dopamine.Services.Entities
             set
             {
                 SetProperty<long?>(ref this.dateFileCreated, value);
+            }
+        }
+
+        public long? DateFileModified
+        {
+            get { return this.dateFileModified; }
+            set
+            {
+                SetProperty<long?>(ref this.dateFileModified, value);
             }
         }
 

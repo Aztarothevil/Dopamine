@@ -353,7 +353,7 @@
   </Namespace>
   <Namespace Name="Covers">
     <Setting Name="DownloadMissingAlbumCovers">
-      <Value>True</Value>
+      <Value>False</Value>
     </Setting>
   </Namespace>
   <Namespace Name="Selections">

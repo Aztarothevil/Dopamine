@@ -81,14 +81,14 @@
                                 </ToolTip>
                             </Border.ToolTip>-->
                             <DockPanel Margin="0,0,10,0">
-                                <!--<Border DockPanel.Dock="Left" MinWidth="20" Height="40">
+                                <Border DockPanel.Dock="Left" MinWidth="20" Height="40">
                                     <TextBlock 
                                         Text="{Binding FormattedTrackNumber}" 
                                         HorizontalAlignment="Center" 
                                         VerticalAlignment="Center"
                                         Foreground="{DynamicResource Brush_SecondaryText}"
                                         FontSize="13"/>
-                                </Border>-->
+                                </Border>
                                 <StackPanel VerticalAlignment="Center" Height="40">
                                     <DockPanel Height="20">
                                         <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">

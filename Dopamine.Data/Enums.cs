@@ -59,8 +59,10 @@
         Alphabetical = 1,
         ByDateCreated = 2,
         ReverseByDateCreated = 3,
-        ByAlbumArtist = 4,
-        ReverseAlphabetical = 5,
-        None = 6
+        ByDateModified = 4,
+        ReverseByDateModified = 5,
+        ByAlbumArtist = 6,
+        ReverseAlphabetical = 7,
+        None = 8
     }
 }

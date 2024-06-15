@@ -653,11 +653,11 @@ namespace Dopamine.Services.Indexing
             await this.AddArtworkInBackgroundAsync(1);
 
             // Next, add artwork from the Internet, if the user has chosen to do so.
-            if (SettingsClient.Get<bool>("Covers", "DownloadMissingAlbumCovers"))
-            {
-                // Add artwork from the Internet.
-                await this.AddArtworkInBackgroundAsync(2);
-            }
+            //if (SettingsClient.Get<bool>("Covers", "DownloadMissingAlbumCovers"))
+            //{
+            //    // Add artwork from the Internet.
+            //    await this.AddArtworkInBackgroundAsync(2);
+            //}
 
             // We don't need to scan for artwork anymore
             await this.trackRepository.DisableNeedsAlbumArtworkIndexingForAllTracksAsync();
@@ -721,19 +721,19 @@ namespace Dopamine.Services.Indexing
                                         await this.trackRepository.DisableNeedsAlbumArtworkIndexingAsync(albumDataToIndex.AlbumKey);
                                     }
                                 }
-                                else if (passNumber.Equals(2))
-                                {
-                                    // During the 2nd pass, look for artwork on the Internet and set NeedsAlbumArtworkIndexing = 0.
-                                    // We don't want future passes to index for this AlbumKey anymore.
-                                    albumArtwork.ArtworkID = await this.GetArtworkFromInternet(
-                                        albumDataToIndex.AlbumTitle,
-                                        DataUtils.SplitAndTrimColumnMultiValue(albumDataToIndex.AlbumArtists).ToList(),
-                                        albumDataToIndex.TrackTitle,
-                                        DataUtils.SplitAndTrimColumnMultiValue(albumDataToIndex.Artists).ToList()
-                                        );
+                                //else if (passNumber.Equals(2))
+                                //{
+                                //    // During the 2nd pass, look for artwork on the Internet and set NeedsAlbumArtworkIndexing = 0.
+                                //    // We don't want future passes to index for this AlbumKey anymore.
+                                //    albumArtwork.ArtworkID = await this.GetArtworkFromInternet(
+                                //        albumDataToIndex.AlbumTitle,
+                                //        DataUtils.SplitAndTrimColumnMultiValue(albumDataToIndex.AlbumArtists).ToList(),
+                                //        albumDataToIndex.TrackTitle,
+                                //        DataUtils.SplitAndTrimColumnMultiValue(albumDataToIndex.Artists).ToList()
+                                //        );
 
-                                    await this.trackRepository.DisableNeedsAlbumArtworkIndexingAsync(albumDataToIndex.AlbumKey);
-                                }
+                                //    await this.trackRepository.DisableNeedsAlbumArtworkIndexingAsync(albumDataToIndex.AlbumKey);
+                                //}
 
                                 // If artwork was found, keep track of the albumID
                                 if (!string.IsNullOrEmpty(albumArtwork.ArtworkID))
