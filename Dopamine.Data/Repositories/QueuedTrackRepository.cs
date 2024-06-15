@@ -73,6 +73,33 @@ namespace Dopamine.Data.Repositories
             });
         }
 
+        public async Task AddQueuedTrackAsync(QueuedTrack track)
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    using (var conn = this.factory.GetConnection())
+                    {
+                        try
+                        {
+                            conn.Execute("BEGIN TRANSACTION;");
+                            conn.Insert(track); // Then, insert new queued tracks.
+                            conn.Execute("COMMIT;");
+                        }
+                        catch (Exception ex)
+                        {
+                            LogClient.Error("Could not save queued tracks. Exception: {0}", ex.Message);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogClient.Error("Could not connect to the database. Exception: {0}", ex.Message);
+                }
+            });
+        }
+
         public async Task<QueuedTrack> GetPlayingTrackAsync()
         {
             QueuedTrack track = null;

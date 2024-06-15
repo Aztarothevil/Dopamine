@@ -138,7 +138,7 @@ namespace Dopamine.ViewModels.Common.Base
             // Dependency injection
             //this.container = container;
             this.collectionService = container.Resolve<ICollectionService>();
-            //this.playbackService = container.Resolve<IPlaybackService>();
+            this.playbackService = container.Resolve<IPlaybackService>();
             //this.dialogService = container.Resolve<IDialogService>();
             this.searchService = container.Resolve<ISearchService>();
             //this.playlistService = container.Resolve<IPlaylistService>();
@@ -151,22 +151,22 @@ namespace Dopamine.ViewModels.Common.Base
             //this.ShuffleSelectedAlbumsCommand = new DelegateCommand(async () => await this.playbackService.EnqueueSongsAsync(this.SelectedAlbums, null, true, false));
             //this.AddAlbumsToPlaylistCommand = new DelegateCommand<string>(async (playlistName) => await this.AddAlbumsToPlaylistAsync(this.SelectedAlbums, playlistName));
             //this.EditAlbumCommand = new DelegateCommand(() => this.EditSelectedAlbum(), () => !this.IsIndexing);
-            //this.AddAlbumsToNowPlayingCommand = new DelegateCommand(async () => await this.AddAlbumsToNowPlayingAsync(this.SelectedAlbums));
+            this.AddAlbumsToNowPlayingCommand = new DelegateCommand(async () => await this.AddAlbumsToNowPlayingAsync(this.SelectedAlbums));
             //this.DelaySelectedAlbumsCommand = new DelegateCommand(() => this.delaySelectedAlbums = true);
 
             // Events
             //this.indexingService.AlbumArtworkAdded += async (_, e) => await this.RefreshAlbumArtworkAsync(e.AlbumKeys);
 
-            //this.SelectedAlbumsCommand = new DelegateCommand<object>(async (parameter) =>
-            //{
-            //    if (this.delaySelectedAlbums)
-            //    {
-            //        await Task.Delay(Constants.DelaySelectedAlbumsDelay);
-            //    }
+            this.SelectedAlbumsCommand = new DelegateCommand<object>(async (parameter) =>
+            {
+                if (this.delaySelectedAlbums)
+                {
+                    await Task.Delay(Constants.DelaySelectedAlbumsDelay);
+                }
 
-            //    this.delaySelectedAlbums = false;
-            //    await this.SelectedAlbumsHandlerAsync(parameter);
-            //});
+                this.delaySelectedAlbums = false;
+                await this.SelectedAlbumsHandlerAsync(parameter);
+            });
 
             //this.SetCoverSizeCommand = new DelegateCommand<string>(async (coverSize) =>
             //{
@@ -267,9 +267,15 @@ namespace Dopamine.ViewModels.Common.Base
                 case MusicOrder.ReverseByDateCreated:
                     this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Created");
                     break;
+                case MusicOrder.ByDateModified:
+                    this.musicOrderText = ResourceUtils.GetString("Language_By_Date_Modified");
+                    break;
+                case MusicOrder.ReverseByDateModified:
+                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Modified");
+                    break;
                 default:
                     // Cannot happen, but just in case.
-                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Created");
+                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Modified");
                     break;
             }
 
@@ -555,16 +561,16 @@ namespace Dopamine.ViewModels.Common.Base
             switch (this.musicOrder)
             {
                 case MusicOrder.None:
-                    this.MusicOrder = MusicOrder.ByDateCreated;
+                    this.MusicOrder = MusicOrder.ByDateModified;
                     break;
-                case MusicOrder.ByDateCreated:
-                    this.MusicOrder = MusicOrder.ReverseByDateCreated;
+                case MusicOrder.ByDateModified:
+                    this.MusicOrder = MusicOrder.ReverseByDateModified;
                     break;
-                case MusicOrder.ReverseByDateCreated:
-                    this.MusicOrder = MusicOrder.ByDateCreated;
+                case MusicOrder.ReverseByDateModified:
+                    this.MusicOrder = MusicOrder.ByDateModified;
                     break;
                 default:
-                    this.MusicOrder = MusicOrder.ByDateCreated;
+                    this.MusicOrder = MusicOrder.ByDateModified;
                     break;
             }
         }

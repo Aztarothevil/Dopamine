@@ -63,6 +63,7 @@ namespace Dopamine.Data.Repositories
                         t.Artists as Artists,
                         t.Year AS Year, 
                         t.DateFileCreated AS DateFileCreated,
+                        t.DateFileModified AS DateFileModified,
                         t.DateAdded AS DateAdded,
                         t.Path FROM Track t
                         INNER JOIN FolderTrack ft ON ft.TrackID = t.TrackID
@@ -646,7 +647,7 @@ namespace Dopamine.Data.Repositories
                             }
                             else
                             {
-                                filterQuery = " Order by t.DateFileCreated desc";
+                                filterQuery = " Order by t.DateFileModified desc";
                             }
 
                             string query = this.SelectAllSongAlbumDataQuery() + filterQuery;

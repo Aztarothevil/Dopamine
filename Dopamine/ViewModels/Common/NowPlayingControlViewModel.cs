@@ -33,6 +33,7 @@ namespace Dopamine.ViewModels.Common
 
             // Commands
             this.RemoveSelectedTracksCommand = new DelegateCommand(async () => await RemoveSelectedTracksFromNowPlayingAsync());
+            this.ClearNowPlayingListCommand = new DelegateCommand(async () => await ClearNowPlayingListAsync());
         }
 
         protected async Task GetTracksAsync()
@@ -155,6 +156,39 @@ namespace Dopamine.ViewModels.Common
         {
             // Remove Tracks from PlaybackService (this dequeues the Tracks)
             DequeueResult dequeueResult = await this.playbackService.DequeueAsync(this.SelectedTracks);
+
+            if (!dequeueResult.IsSuccess)
+            {
+                this.dialogService.ShowNotification(
+                     0xe711,
+                     16,
+                     ResourceUtils.GetString("Language_Error"),
+                     ResourceUtils.GetString("Language_Error_Removing_From_Now_Playing"),
+                     ResourceUtils.GetString("Language_Ok"),
+                     true,
+                     ResourceUtils.GetString("Language_Log_File"));
+            }
+
+            if (this.Tracks == null)
+            {
+                return;
+            }
+
+            // Remove the ViewModels from Tracks (this updates the UI)
+            foreach (TrackViewModel track in dequeueResult.DequeuedTracks)
+            {
+                if (this.Tracks.Contains(track))
+                {
+                    this.Tracks.Remove(track);
+                }
+            }
+
+            this.TracksCount = this.Tracks.Count;
+        }
+        private async Task ClearNowPlayingListAsync()
+        {
+            // Remove Tracks from PlaybackService (this dequeues the Tracks)
+            DequeueResult dequeueResult = await this.playbackService.DequeueAllAsync();
 
             if (!dequeueResult.IsSuccess)
             {

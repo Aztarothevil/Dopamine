@@ -440,6 +440,91 @@ namespace Dopamine.Services.Playback
             return dequeueResult;
         }
 
+        public async Task<DequeueResult> DequeueAllAsync()
+        {
+            bool isSuccess = true;
+            bool isPlayingTrackDequeued = false;
+            IList<TrackViewModel> dequeuedTracks = new List<TrackViewModel>();
+            TrackViewModel nextAvailableTrack = null;
+
+            await Task.Run(() =>
+            {
+                lock (this.queueLock)
+                {
+                    try
+                    {
+                        // First, get the tracks to dequeue and which are in the queue (normally it's all of them. But we're just making sure.)
+                        IList<TrackViewModel> tracksToDequeue = this.queue.ToList();
+
+                        // Then, remove from playbackOrder
+                        foreach (TrackViewModel trackToDequeue in tracksToDequeue)
+                        {
+                            try
+                            {
+                                nextAvailableTrack = null;
+
+                                try
+                                {
+                                    nextAvailableTrack = this.queue[this.playbackOrder[this.FindPlaybackOrderIndex(trackToDequeue) + 1]];
+                                }
+                                catch (Exception)
+                                {
+                                    // Intended suppression
+                                }
+
+                                this.playbackOrder.Remove(this.FindPlaybackOrderIndex(trackToDequeue));
+                            }
+                            catch (Exception ex)
+                            {
+                                LogClient.Error($"Error while removing track with path='{trackToDequeue.Path}' from the playbackOrder. Exception: {ex.Message}");
+                                throw;
+                            }
+
+                        }
+
+                        // Finally, remove from queue
+                        foreach (TrackViewModel trackToDequeue in tracksToDequeue)
+                        {
+                            try
+                            {
+                                this.queue.Remove(trackToDequeue);
+                                isPlayingTrackDequeued = isPlayingTrackDequeued || trackToDequeue.Equals(this.currentTrack);
+                                dequeuedTracks.Add(trackToDequeue);
+                            }
+                            catch (Exception ex)
+                            {
+                                LogClient.Error($"Error while removing track with path='{trackToDequeue.Path}' from the queue. Exception: {ex.Message}");
+                                throw;
+                            }
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogClient.Error($"Error while removing tracks from the queue. Queue will be cleared. Exception: {ex.Message}");
+                        isSuccess = false;
+                    }
+                }
+            });
+
+            if (!isSuccess)
+            {
+                LogClient.Warning($"Removing tracks from queue failed. Clearing queue.");
+                await this.ClearQueueAsync();
+                dequeuedTracks = new List<TrackViewModel>(this.queue.ToList());
+            }
+
+            var dequeueResult = new DequeueResult
+            {
+                IsSuccess = isSuccess,
+                DequeuedTracks = dequeuedTracks,
+                NextAvailableTrack = nextAvailableTrack,
+                IsPlayingTrackDequeued = isPlayingTrackDequeued
+            };
+
+            return dequeueResult;
+        }
+
         public void SetCurrentTrack(string path)
         {
             this.currentTrack = this.queue.Where(x=> x.SafePath.Equals(path.ToSafePath())).FirstOrDefault();

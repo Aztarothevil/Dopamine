@@ -94,6 +94,7 @@ namespace Dopamine.ViewModels.FullPlayer.Collection
             this.ShuffleSelectedPlaylistCommand = new DelegateCommand(async () => await this.ShuffleSelectedPlaylistAsync());
             this.NewPlaylistCommand = new DelegateCommand(async () => await this.ConfirmCreateNewPlaylistAsync());
             this.RemoveSelectedTracksCommand = new DelegateCommand(async () => await this.DeleteTracksFromPlaylistsAsync());
+            this.ClearNowPlayingListCommand = new DelegateCommand(async () => await this.ClearNowPlayingListAsync());
 
             this.DeleteSelectedPlaylistCommand = new DelegateCommand(async () =>
             {

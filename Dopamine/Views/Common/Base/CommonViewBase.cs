@@ -14,7 +14,7 @@ namespace Dopamine.Views.Common.Base
     {
         protected IEventAggregator eventAggregator;
         protected IPlaybackService playbackService;
-    
+
         public DelegateCommand ViewInExplorerCommand { get; set; }
         public DelegateCommand JumpToPlayingTrackCommand { get; set; }
        

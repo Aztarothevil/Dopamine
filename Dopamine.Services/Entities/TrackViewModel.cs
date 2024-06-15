@@ -51,8 +51,6 @@ namespace Dopamine.Services.Entities
 
         public string SortSkipCount => this.Track.SkipCount.HasValueLargerThan(0) ? this.Track.SkipCount.Value.ToString("0000") : string.Empty;
 
-        public long SortTrackNumber => this.Track.TrackNumber.HasValue ? this.Track.TrackNumber.Value : 0;
-
         public string SortDiscNumber => this.Track.DiscNumber.HasValueLargerThan(0) ? this.Track.DiscNumber.Value.ToString("0000") : string.Empty;
 
         public long SortDateAdded => this.Track.DateAdded;
@@ -91,7 +89,7 @@ namespace Dopamine.Services.Entities
 
         public string Genre => !string.IsNullOrEmpty(this.Track.Genres) ? DataUtils.GetCommaSeparatedColumnMultiValue(this.Track.Genres) : ResourceUtils.GetString("Language_Unknown_Genre");
 
-        public string FormattedTrackNumber => this.Track.TrackNumber.HasValueLargerThan(0) ? Track.TrackNumber.Value.ToString("00") : "--";
+        public string FormattedTrackNumber => this.Track.SortTrackNumber.HasValueLargerThan(0) ? Track.SortTrackNumber.Value.ToString("00") : "--";
 
         public string TrackNumber => this.Track.TrackNumber.HasValueLargerThan(0) ? this.Track.TrackNumber.ToString() : string.Empty;
 
@@ -139,6 +137,11 @@ namespace Dopamine.Services.Entities
                     return "0:00";
                 }
             }
+        }
+        public long SortTrackNumber
+        {
+            get { return (long)this.Track.SortTrackNumber; }
+            set { this.Track.SortTrackNumber = value; }
         }
 
         public int Rating

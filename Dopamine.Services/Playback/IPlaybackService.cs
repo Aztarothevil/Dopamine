@@ -119,6 +119,8 @@ namespace Dopamine.Services.Playback
 
         Task<DequeueResult> DequeueAsync(IList<TrackViewModel> tracks);
 
+        Task<DequeueResult> DequeueAllAsync();
+
         Task SaveQueuedTracksAsync();
 
         Task SavePlaybackCountersAsync();

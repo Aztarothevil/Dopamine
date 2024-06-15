@@ -160,6 +160,7 @@ namespace Dopamine.ViewModels.FullPlayer.Collection
             this.SelectedMusicCommand = new DelegateCommand<object>(async (parameter) => await this.SelectedMusicHandlerAsync(parameter));
             this.AddMusicToNowPlayingCommand = new DelegateCommand(async () => await this.AddMusicToNowPlayingAsync(this.SelectedMusic));
             this.ShuffleSelectedMusicCommand = new DelegateCommand(async () => await this.playbackService.EnqueueArtistsAsync(this.SelectedMusic, true, false));
+            this.ClearNowPlayingListCommand = new DelegateCommand(async () => await this.ClearNowPlayingListAsync());
 
             this.SemanticJumpCommand = new DelegateCommand<string>((header) =>
             {
@@ -174,14 +175,14 @@ namespace Dopamine.ViewModels.FullPlayer.Collection
                 {
                     this.EnableRating = (bool)e.Entry.Value;
                     this.SetTrackOrder("ArtistsTrackOrder");
-                    await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
+                    //await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
                 }
 
                 if (SettingsClient.IsSettingChanged(e, "Behaviour", "EnableLove"))
                 {
                     this.EnableLove = (bool)e.Entry.Value;
                     this.SetTrackOrder("ArtistsTrackOrder");
-                    await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
+                    //await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
                 }
             };
 
@@ -305,7 +306,7 @@ namespace Dopamine.ViewModels.FullPlayer.Collection
             this.MusicOrder = MusicOrder.Alphabetical;
             await this.GetFolderAlbumAsync(this.SelectedMusic, this.MusicType, this.MusicOrder);
             this.SetTrackOrder("ArtistsTrackOrder");
-            await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
+            //await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
             this.SongsCount = this.Songs.Count;
         }
 
@@ -440,7 +441,7 @@ namespace Dopamine.ViewModels.FullPlayer.Collection
         {
             await this.GetMusicAsync(this.MusicType);
             await this.GetFolderAlbumAsync(this.SelectedMusic, this.MusicType, this.MusicOrder);
-            await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
+            //await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
             this.SongsCount = this.Songs.Count;
         }
 
@@ -472,7 +473,7 @@ namespace Dopamine.ViewModels.FullPlayer.Collection
             await base.SelectedAlbumsHandlerAsync(parameter);
 
             this.SetTrackOrder("ArtistsTrackOrder");
-            await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
+            //await this.GetFolderAsync(this.SelectedMusic, this.TrackOrder);
         }
 
         protected override void RefreshLanguage()

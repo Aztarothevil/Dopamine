@@ -37,6 +37,8 @@ namespace Dopamine.Data.Entities
 
         public long? TrackNumber { get; set; }
 
+        public long? SortTrackNumber { get; set; }
+
         public long? TrackCount { get; set; }
 
         public long? DiscNumber { get; set; }

@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Dopamine.Services.Utils
@@ -15,6 +16,9 @@ namespace Dopamine.Services.Utils
         static int contador = 0;
         static double position = 0;
         static double lastPosition = 0;
+        static double lastPositionLyric = 0;
+        static double lastDuration = 0;
+        static double lastDurationLyrc = 0;
 
         public static bool IsFullyVisible(FrameworkElement child, FrameworkElement scrollViewer)
         {
@@ -25,7 +29,7 @@ namespace Dopamine.Services.Utils
             return ownerRectangle.Contains(childRectangle.TopLeft) & ownerRectangle.Contains(childRectangle.BottomRight);
         }
 
-        public static void ScrollToListBoxItem(ListBox box, object itemObject, bool scrollOnlyIfNotInView)
+        public static void ScrollToTextListItem(ListBox box, object itemObject, bool scrollOnlyIfNotInView)
         {
             LyricsLineViewModel item = (LyricsLineViewModel)itemObject;
             ScrollViewer scrollViewer = (ScrollViewer)VisualTreeUtils.GetDescendantByType(box, typeof(ScrollViewer));
@@ -33,11 +37,11 @@ namespace Dopamine.Services.Utils
             // ----------------------------------------------------------------------
             if (scrollOnlyIfNotInView && (item.Index == 0 || item.Index < 10))
             {
+                //System.Console.WriteLine("lastPosition: " + lastPosition + "  -  Duration: " + item.Duration + "  -  Position: " + position + "  -  Contador: " + contador);
                 FrameworkElement listBoxItem = (FrameworkElement)box.ItemContainerGenerator.ContainerFromItem(itemObject);
 
                 if (scrollViewer != null && listBoxItem != null)
                 {
-                    //scrollViewer.ScrollToVerticalOffset(0);
 
                     if (scrollViewer.VerticalOffset != 0)
                     {
@@ -46,12 +50,10 @@ namespace Dopamine.Services.Utils
                         box.UpdateLayout();
                         box.ScrollIntoView(itemObject);
                     }
-
-                    //if (IsFullyVisible(listBoxItem, scrollViewer))
-                    //{
-                    //    return;
-                    //}
                 }
+                lastPosition = 0;
+                position = 0;
+                contador = 0;
                 return;
             }
 
@@ -66,15 +68,31 @@ namespace Dopamine.Services.Utils
 
             if (currentIndex != item.Index)
             {
+                lastPositionLyric = ((item.Index - 10) * 28) + 28;
+                lastDurationLyrc = item.Duration;
+
+                if ((currentIndex < item.Index - 1 || currentIndex > item.Index + 1) && item.Index > 11)
+                {
+                    lastPosition = lastPositionLyric;
+                    position = lastPositionLyric;
+                    scrollViewer.ScrollToVerticalOffset(position);
+                }
+
                 currentIndex = item.Index;
                 contador = 0;
-                position = ((item.Index - 10) * 28);
-                lastPosition = position + 28;
             }
+
+            if (lastPosition == position)
+            {
+                lastPosition = lastPositionLyric;
+                lastDuration = lastDurationLyrc;
+                contador = 0;
+            }
+
 
             contador++;
 
-            int modulo = (int)((item.Duration * 75) / 9200);
+            int modulo = (int)((lastDuration * 40) / 9200);
 
             if (contador % modulo == 0)
             {
@@ -85,16 +103,59 @@ namespace Dopamine.Services.Utils
                 }
             }
 
-            //System.Console.WriteLine(lastPosition + "  -  " + item.Duration + "  -  " + position + "  -  " + modulo);
+            //System.Console.WriteLine("lastPosition: " + lastPosition + "  -  Duration: " + item.Duration + "  -  Position: " + position + "  -  Modulo: " + modulo + "  -  Contador: " + contador);
+        }
 
+        public static void ScrollToListBoxItem(ListBox box, object itemObject)
+        {
+            ScrollViewer scrollViewer = (ScrollViewer)VisualTreeUtils.GetDescendantByType(box, typeof(ScrollViewer));
 
-            //box.ScrollIntoView(box.Items[item.Index+25]);
-            //box.UpdateLayout(); // This seems required to get correct positioning.
+            int index = ((Dopamine.Services.Entities.SongViewModel)itemObject).Index;
+            int columns = (int)(scrollViewer.ActualWidth / 132);
+            int rows = (int)(scrollViewer.ActualHeight / 168);
+            int currentRow = ((index - 1) / columns) + 1;
+            int position = (currentRow-1) * 178;
+            int diference = 0;
+            if ((scrollViewer.VerticalOffset - position) >= 10)
+            {
+                scrollViewer.ScrollToVerticalOffset(position);
+            }
+            else if ((scrollViewer.VerticalOffset - position) <= (rows * -178))
+            {
+                diference = (int)(scrollViewer.ActualHeight) - ((rows-1) * 178);
+                int remove = 0;
+                if (diference < 180)
+                {
+                    remove = diference + ((180 - diference) * 2);
+                }
+                else
+                {
+                    remove = diference - ((diference - 180) * 2);
+                }
 
-            // Scroll to the desired Item
-            // --------------------------
-            //box.UpdateLayout(); // This seems required to get correct positioning.
-            //box.ScrollIntoView(itemObject);
+                scrollViewer.ScrollToVerticalOffset(position - ((rows * 178) - remove));
+            }
+
+            //System.Console.WriteLine("Fila: " + currentRow + "  - Columnas: " + columns + "  - Filas " + rows + "  -  Indice: " + index + "  -  Current Position: " + position + " - VerticalOffset: " + scrollViewer.VerticalOffset + " - Diference: " + diference);                
+        }
+
+        public static void ScrollToListBoxTrack(ListBox box, object itemObject)
+        {
+            ScrollViewer scrollViewer = (ScrollViewer)VisualTreeUtils.GetDescendantByType(box, typeof(ScrollViewer));
+
+            int index = (int)((Dopamine.Services.Entities.TrackViewModel)itemObject).SortTrackNumber;
+            int rows = (int)(scrollViewer.ActualHeight / 48);
+            int position = (index + 1);
+            if (position < scrollViewer.VerticalOffset - (int)(rows / 2))
+            {
+                scrollViewer.ScrollToVerticalOffset(position - (int)(rows / 2));
+            }
+            else if ((position - scrollViewer.VerticalOffset) > rows)
+            {
+                scrollViewer.ScrollToVerticalOffset(position - (int)(rows / 2));
+            }
+
+            //System.Console.WriteLine("Index: " + index + "  - Position: " + position + "  - VerticalOffset: " + scrollViewer.VerticalOffset + " - Total: " + rows);
         }
 
         public static void ScrollToDataGridItem(DataGrid grid, object itemObject, bool scrollOnlyIfNotInView)
@@ -159,7 +220,7 @@ namespace Dopamine.Services.Utils
 
             try
             {
-                ScrollToListBoxItem(box, itemObject, true);
+                ScrollToListBoxTrack(box, itemObject);
             }
             catch (Exception)
             {
@@ -200,9 +261,9 @@ namespace Dopamine.Services.Utils
 
             try
             {
-                ScrollToListBoxItem(box, itemObject, true);
+                ScrollToListBoxItem(box, itemObject);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -277,7 +338,7 @@ namespace Dopamine.Services.Utils
 
             try
             {
-                ScrollToListBoxItem(box, itemObject, true);
+                ScrollToTextListItem(box, itemObject, true);
             }
             catch (Exception)
             {
