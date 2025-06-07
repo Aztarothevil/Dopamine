@@ -386,6 +386,9 @@
 	<Text Key="By_Date_Created">Por fecha de creación</Text>
 	<Text Key="By_Date_Modified">Por fecha de modificación</Text>
 	<Text Key="By_Reverse_Date_Modified">Por fecha de modificación desc</Text>
+	<Text Key="By_Rating">Por rating</Text>
+	<Text Key="Click_To_Order">Click para ordenar canciones </Text>
+	<Text Key="Ordered_By">Ordenado </Text>
 	<Text Key="Plays">Reproducciones</Text>
 	<Text Key="Skips">Omisiones</Text>
 	<Text Key="Play_Selected">Reproducción Seleccionada</Text>

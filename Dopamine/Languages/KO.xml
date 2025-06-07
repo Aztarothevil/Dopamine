@@ -387,6 +387,9 @@
 	<Text Key="By_Date_Created">생성된 날짜</Text>
 	<Text Key="By_Date_Modified">By date modified</Text>
 	<Text Key="By_Reverse_Date_Modified">By date modified desc</Text>
+	<Text Key="By_Rating">By rating</Text>
+	<Text Key="Click_To_Order">Click to order songs </Text>
+	<Text Key="Ordered_By">Ordered </Text>
 	<Text Key="Plays">재생횟수</Text>
 	<Text Key="Skips">건너뛴 횟수</Text>
 	<Text Key="Play_Selected">선택한 항목 재생</Text>

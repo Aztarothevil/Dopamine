@@ -46,6 +46,7 @@ namespace Dopamine.ViewModels.Common.Base
         private long songsCount;
         private MusicOrder musicOrder;
         private string musicOrderText;
+        private string currentMusicOrderText;
         private double coverSize;
         private double albumWidth;
         private double albumHeight;
@@ -76,6 +77,7 @@ namespace Dopamine.ViewModels.Common.Base
         public bool IsLargeCoverSizeSelected => this.selectedCoverSize == CoverSizeType.Large;
 
         public string MusicOrderText => this.musicOrderText;
+        public string CurrentMusicOrderText => this.currentMusicOrderText;
 
         public double CoverSize
         {
@@ -256,30 +258,43 @@ namespace Dopamine.ViewModels.Common.Base
 
         protected void UpdateMusicOrderText(MusicOrder musicOrder)
         {
+            var clickText = ResourceUtils.GetString("Language_Click_To_Order");
+            var oderText = ResourceUtils.GetString("Language_Ordered_By");
             switch (musicOrder)
             {
                 case MusicOrder.Alphabetical:
-                    this.musicOrderText = ResourceUtils.GetString("Language_Toggle_Track_Order_ByDate");
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_Toggle_Track_Order_ByDate").ToLower();
+                    this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_Toggle_Track_Order_ByDate").ToLower();
                     break;
                 case MusicOrder.ByDateCreated:
-                    this.musicOrderText = ResourceUtils.GetString("Language_By_Date_Created");
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Date_Created").ToLower();
+                    this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Date_Created").ToLower();
                     break;
                 case MusicOrder.ReverseByDateCreated:
-                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Created");
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Reverse_Date_Created").ToLower();
+                    this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Reverse_Date_Created").ToLower();
                     break;
                 case MusicOrder.ByDateModified:
-                    this.musicOrderText = ResourceUtils.GetString("Language_By_Date_Modified");
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Rating").ToLower();
+                    this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Date_Modified").ToLower();
                     break;
                 case MusicOrder.ReverseByDateModified:
-                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Modified");
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Date_Modified").ToLower();
+                    this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Reverse_Date_Modified").ToLower();
+                    break;
+                case MusicOrder.ByRating:
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Reverse_Date_Modified").ToLower();
+                    this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Rating").ToLower();
                     break;
                 default:
                     // Cannot happen, but just in case.
-                    this.musicOrderText = ResourceUtils.GetString("Language_By_Reverse_Date_Modified");
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Date_Modified").ToLower();
+                    this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Reverse_Date_Modified").ToLower();
                     break;
             }
 
             RaisePropertyChanged(nameof(this.musicOrderText));
+            RaisePropertyChanged(nameof(this.currentMusicOrderText));
         }
 
         protected async Task GetFolderAlbumAsync(IList<string> folders, MusicType musicType, MusicOrder musicOrder)
@@ -564,6 +579,9 @@ namespace Dopamine.ViewModels.Common.Base
                     this.MusicOrder = MusicOrder.ByDateModified;
                     break;
                 case MusicOrder.ByDateModified:
+                    this.MusicOrder = MusicOrder.ByRating;
+                    break;
+                case MusicOrder.ByRating:
                     this.MusicOrder = MusicOrder.ReverseByDateModified;
                     break;
                 case MusicOrder.ReverseByDateModified:

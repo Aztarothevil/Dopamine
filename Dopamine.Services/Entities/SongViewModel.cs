@@ -34,6 +34,7 @@ namespace Dopamine.Services.Entities
             this.DateFileModified = albumData.DateFileModified;
             this.songTitle = albumData.TrackTitle;
             this.path = albumData.Path;
+            this.Rating = albumData.Rating ?? 0;
         }
 
         private string GetAlbumArtist(AlbumData albumData)
@@ -237,6 +238,14 @@ namespace Dopamine.Services.Entities
         {
             get { return this.index; }
             set { SetProperty<int>(ref this.index, value); }
+        }
+
+        private int rating;
+
+        public int Rating
+        {
+            get { return this.rating; }
+            set { SetProperty<int>(ref this.rating, value); }
         }
     }
 }

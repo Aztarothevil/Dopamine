@@ -74,7 +74,7 @@ namespace Dopamine.Data.Metadata
             this.value = ConvertToValue(values);
             this.OnPropertiesChanged();
         }
-   
+
         private void OnPropertiesChanged()
         {
             RaisePropertyChanged(nameof(this.Value));

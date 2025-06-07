@@ -22,6 +22,8 @@
 
         public long? DateAdded { get; set; }
 
+        public int? Rating { get; set; }
+
         public static AlbumData CreateDefault()
         {
             return new AlbumData()
@@ -35,7 +37,8 @@
                 Year = 0,
                 DateFileCreated = 0,
                 DateFileModified = 0,
-                DateAdded = 0
+                DateAdded = 0,
+                Rating = 0
             };
         }
     }

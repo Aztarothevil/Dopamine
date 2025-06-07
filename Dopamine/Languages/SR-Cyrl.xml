@@ -386,6 +386,9 @@
 	<Text Key="By_Date_Created">По датуму креирања</Text>
 	<Text Key="By_Date_Modified">By date modified</Text>
 	<Text Key="By_Reverse_Date_Modified">By date modified desc</Text>
+	<Text Key="By_Rating">By rating</Text>
+	<Text Key="Click_To_Order">Click to order songs </Text>
+	<Text Key="Ordered_By">Ordered </Text>
 	<Text Key="Plays">Број репродукција</Text>
 	<Text Key="Skips">Број прескакања</Text>
 	<Text Key="Play_Selected">Репродукуј изабрану</Text>

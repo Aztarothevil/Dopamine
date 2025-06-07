@@ -149,17 +149,17 @@
         <Grid Grid.Row="1" Visibility="{Binding LyricsViewModel.ShowSource, TargetNullValue=Hidden, FallbackValue=Hidden, Converter={StaticResource BooleanToVisibilityConverter}}">
             <!-- Source: audio file -->
             <StackPanel Margin="20,0,0,0" Orientation="Horizontal" Visibility="{Binding LyricsViewModel.SourceType, Converter={StaticResource LyricSourceVisibilityConverter}, ConverterParameter={x:Static lyrics:SourceTypeEnum.Audio}}">
-                <TextBlock VerticalAlignment="Center" FontSize="17" Foreground="{DynamicResource Brush_MusicSecondaryText}" Style="{StaticResource SegoeAssets}" Text="&#xE73E;"/>
+                <TextBlock VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource Brush_MusicSecondaryText}" Style="{StaticResource Material}" Text="audio_file"/>
                 <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="{DynamicResource Brush_MusicSecondaryText}" Text="{DynamicResource Language_Audio_File}"/>
             </StackPanel>
             <!-- Source: LRC file -->
             <StackPanel Margin="20,0,0,0" Orientation="Horizontal" Visibility="{Binding LyricsViewModel.SourceType, Converter={StaticResource LyricSourceVisibilityConverter}, ConverterParameter={x:Static lyrics:SourceTypeEnum.Lrc}}">
-                <TextBlock VerticalAlignment="Center" FontSize="17" Foreground="{DynamicResource Brush_MusicSecondaryText}" Style="{StaticResource SegoeAssets}" Text="&#xE73E;"/>
+                <TextBlock VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource Brush_MusicSecondaryText}" Style="{StaticResource Material}" Text="lyrics"/>
                 <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="{DynamicResource Brush_MusicSecondaryText}" Text="{DynamicResource Language_Lyrics_File}"/>
             </StackPanel>
             <!-- Source: online -->
             <StackPanel Margin="20,0,0,0" Orientation="Horizontal" Visibility="{Binding LyricsViewModel.SourceType, Converter={StaticResource LyricSourceVisibilityConverter}, ConverterParameter={x:Static lyrics:SourceTypeEnum.Online}}">
-                <TextBlock VerticalAlignment="Center" FontSize="17" Foreground="{DynamicResource Brush_MusicSecondaryText}" Style="{StaticResource SegoeAssets}" Text="&#xE753;"/>
+                <TextBlock VerticalAlignment="Center" FontSize="17" Foreground="{DynamicResource Brush_MusicSecondaryText}" Style="{StaticResource Material}" Text="cloud_off"/>
                 <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="{DynamicResource Brush_MusicSecondaryText}" Text="{Binding LyricsViewModel.Lyrics.Source}"/>
             </StackPanel>
         </Grid>

@@ -427,6 +427,9 @@ namespace Dopamine.Services.Collection
                     case MusicOrder.ReverseAlphabetical:
                         orderedSongs = songs.OrderByDescending((s) => !string.IsNullOrEmpty(FormatUtils.GetSortableString(s.SongTitle)) ? FormatUtils.GetSortableString(s.SongTitle) : FormatUtils.GetSortableString(s.FileName)).ToList();
                         break;
+                    case MusicOrder.ByRating:
+                        orderedSongs = songs.OrderByDescending((s) => s.Rating).ToList();
+                        break;
                     case MusicOrder.None:
                         orderedSongs = songs.ToList();
                         break;

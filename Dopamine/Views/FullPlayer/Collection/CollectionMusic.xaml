@@ -120,10 +120,8 @@
                             Margin="10,0,0,0"
                             Foreground="{DynamicResource Brush_SecondaryText}"
                             Command="{Binding ToggleMusicOrderCommand}" ToolTip="{DynamicResource Language_Toggle_Track_Order}"/>
-                        <Button x:Name="AlbumsButton" Content="{DynamicResource Language_Songs}" FontSize="13" Margin="10,0,0,0"
-                            Style="{StaticResource TransparentButton}"
-                            Foreground="{DynamicResource Brush_PrimaryText}"
-                            Click="AlbumsButton_Click" ToolTip="{DynamicResource Language_Select_None}"/>
+                        <TextBlock Text="{Binding CurrentMusicOrderText}" FontSize="13"  Margin="10,0,0,0"
+                            Foreground="{DynamicResource Brush_PrimaryText}" />
                     </DockPanel>
 
                     <Grid Grid.Row="1" Grid.Column="2" Background="Transparent">

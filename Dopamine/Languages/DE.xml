@@ -386,6 +386,9 @@
 	<Text Key="By_Date_Created">Nach Erstelldatum</Text>
 	<Text Key="By_Date_Modified">By date modified</Text>
 	<Text Key="By_Reverse_Date_Modified">By date modified desc</Text>
+	<Text Key="By_Rating">By rating</Text>
+	<Text Key="Click_To_Order">Click to order songs </Text>
+	<Text Key="Ordered_By">Ordered </Text>
 	<Text Key="Plays">Spielt</Text>
 	<Text Key="Skips">Überspringt</Text>
 	<Text Key="Play_Selected">Ausgewähltes abspielen</Text>

@@ -63,6 +63,7 @@
         ReverseByDateModified = 5,
         ByAlbumArtist = 6,
         ReverseAlphabetical = 7,
-        None = 8
+        ByRating = 8,
+        None = 9
     }
 }

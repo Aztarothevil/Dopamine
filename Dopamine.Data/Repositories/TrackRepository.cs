@@ -65,6 +65,7 @@ namespace Dopamine.Data.Repositories
                         t.DateFileCreated AS DateFileCreated,
                         t.DateFileModified AS DateFileModified,
                         t.DateAdded AS DateAdded,
+                        t.Rating AS Rating,
                         t.Path FROM Track t
                         INNER JOIN FolderTrack ft ON ft.TrackID = t.TrackID
                         INNER JOIN Folder f ON ft.FolderID = f.FolderID
