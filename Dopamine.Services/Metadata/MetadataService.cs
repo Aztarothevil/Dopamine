@@ -84,13 +84,14 @@ namespace Dopamine.Services.Metadata
                     await this.updater.UpdateFileMetadataAsync(new FileMetadata[] { fmd }.ToList());
                 }
                 //// Only for FLAC's
-                //if (Path.GetExtension(path).ToLower().Equals(FileFormats.FLAC))
-                //{
-                //    // Initialize with a file path
-                //    var theTrack = new ATL.Track(path);
-                //    theTrack.Popularity = rating;
-                //    theTrack.Save();
-                //}
+                if (Path.GetExtension(path).ToLower().Equals(FileFormats.FLAC))
+                {
+                    // Initialize with a file path
+                    var theTrack = new ATL.Track(path);
+                    theTrack.Popularity = rating;
+                    theTrack.Year = 1987;
+                    theTrack.Save();
+                }
             }
 
             this.RatingChanged(new RatingChangedEventArgs(path.ToSafePath(), rating));
