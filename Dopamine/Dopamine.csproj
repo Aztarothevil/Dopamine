@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Controls\LoveButton.cs" />
     <Compile Include="Controls\PopupEx.cs" />
+    <Compile Include="Controls\RatingButtonInfo.cs" />
     <Compile Include="Controls\RatingButton.cs" />
     <Compile Include="Controls\ScalingTextBlock.cs" />
     <Compile Include="Controls\SearchBox.cs" />
@@ -1108,6 +1109,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\LoveButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\RatingButtonInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

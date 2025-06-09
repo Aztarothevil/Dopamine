@@ -146,6 +146,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ATL\ATL.csproj">
+      <Project>{6dfcc916-da1f-4573-a2b6-c8bc71b84d7f}</Project>
+      <Name>ATL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dopamine.Core\Dopamine.Core.csproj">
       <Project>{7faac843-6aa9-4b5b-8678-937137a61e47}</Project>
       <Name>Dopamine.Core</Name>

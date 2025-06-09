@@ -10,6 +10,7 @@
         <ResourceDictionary Source="/Dopamine;component/Themes/ListCheckBox.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Themes/LoveButton.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Themes/RatingButton.xaml" />
+        <ResourceDictionary Source="/Dopamine;component/Themes/RatingButtonInfo.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Themes/SearchBox.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Themes/SplitViewRadioButton.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Themes/SyncRing.xaml" />

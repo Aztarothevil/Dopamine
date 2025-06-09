@@ -155,5 +155,6 @@ namespace Dopamine.Services.Playback
         event Action<bool> LoadingTrack;
         event EventHandler PlayingTrackChanged;
         event EventHandler QueueChanged;
+        event EventHandler PlayingNextTrackExecuted;
     }
 }

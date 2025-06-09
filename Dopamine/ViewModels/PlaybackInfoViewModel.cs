@@ -15,6 +15,7 @@ namespace Dopamine.ViewModels
         private string bitrate;
         private string size;
         private string duration;
+        private int rating;
 
         public string Title
         {
@@ -80,6 +81,12 @@ namespace Dopamine.ViewModels
         {
             get { return this.duration; }
             set { SetProperty<string>(ref this.duration, value); }
+        }
+
+        public int Rating
+        {
+            get { return this.rating; }
+            set { SetProperty<int>(ref this.rating, value); }
         }
     }
 }

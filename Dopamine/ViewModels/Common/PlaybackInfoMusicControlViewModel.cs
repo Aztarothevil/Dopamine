@@ -118,7 +118,9 @@ namespace Dopamine.ViewModels.Common
                         Location = "       Path:  " + track.Path,
                         Type = "       Type:  " + track.Track.MimeType.Replace("taglib/","").ToUpper(),
                         Duration = "Duration:  " + track.Duration,
-                        Size = "        Size:  " + track.Track.FileSize/1000000 + " MB"
+                        Size = "        Size:  " + track.Track.FileSize/1000000 + " MB",
+                        Rating =  track.Rating
+
                     };
                     appearanceService.UpdateMusicColor(int.Parse(track.Bitrate.Replace(" kbps","")));
                 }

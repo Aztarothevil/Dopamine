@@ -10,7 +10,6 @@ using Dopamine.Data.Entities;
 using Dopamine.Data.Metadata;
 using Dopamine.Data.Repositories;
 using Dopamine.Services.Blacklist;
-using Dopamine.Services.Collection;
 using Dopamine.Services.Entities;
 using Dopamine.Services.Equalizer;
 using Dopamine.Services.Extensions;
@@ -276,8 +275,14 @@ namespace Dopamine.Services.Playback
             get { return this.player; }
         }
 
-        public PlaybackService(IFileService fileService, II18nService i18nService, ITrackRepository trackRepository, IBlacklistService blacklistService,
-            IEqualizerService equalizerService, IQueuedTrackRepository queuedTrackRepository, IContainerProvider container, IPlaylistService playlistService)
+        public PlaybackService(IFileService fileService
+                             , II18nService i18nService
+                             , ITrackRepository trackRepository
+                             , IBlacklistService blacklistService
+                             , IEqualizerService equalizerService
+                             , IQueuedTrackRepository queuedTrackRepository
+                             , IContainerProvider container
+                             , IPlaylistService playlistService)
         {
             this.fileService = fileService;
             this.i18nService = i18nService;
@@ -335,6 +340,7 @@ namespace Dopamine.Services.Playback
         public event EventHandler PlayingTrackChanged = delegate { };
         public event EventHandler QueueChanged = delegate { };
         public event EventHandler PlaybackSkipped = delegate { };
+        public event EventHandler PlayingNextTrackExecuted = delegate { };
 
         private AudioDevice CreateDefaultAudioDevice()
         {
@@ -1212,7 +1218,7 @@ namespace Dopamine.Services.Playback
             this.player.PlaybackFinished += this.PlaybackFinishedHandler;
         }
 
-        private async Task<bool> TryPlayAsync(TrackViewModel track, bool isSilent = false)
+        private async Task<bool> TryPlayAsync(TrackViewModel track, TrackViewModel previousTrack = null, bool isSilent = false)
         {
             if (track == null)
             {
@@ -1234,6 +1240,11 @@ namespace Dopamine.Services.Playback
             {
                 // If a Track was playing, make sure it is now stopped.
                 this.StopPlayback();
+
+                if (previousTrack != null)
+                {
+                    this.PlayingNextTrackExecuted(previousTrack, new EventArgs());
+                }
 
                 // Check that the file exists
                 if (!System.IO.File.Exists(track.Path))
@@ -1320,7 +1331,7 @@ namespace Dopamine.Services.Playback
                 return true;
             }
 
-            return await this.TryPlayAsync(previousTrack);
+            return await this.TryPlayAsync(previousTrack, this.CurrentTrack);
         }
 
         private async Task<bool> TryPlayNextAsync(bool userHasRequestedNextTrack)
@@ -1375,7 +1386,7 @@ namespace Dopamine.Services.Playback
                 }
             }
 
-            return await this.TryPlayAsync(nextTrack);
+            return await this.TryPlayAsync(nextTrack, this.CurrentTrack);
         }
 
         private void ProgressTimeoutHandler(object sender, ElapsedEventArgs e)
@@ -1510,7 +1521,7 @@ namespace Dopamine.Services.Playback
 
         private async Task StartTrackPausedAsync(TrackViewModel track, int progressSeconds)
         {
-            if (await this.TryPlayAsync(track, true))
+            if (await this.TryPlayAsync(track, null, true))
             {
                 await this.PauseAsync(true);
                 this.player.Skip(progressSeconds);
