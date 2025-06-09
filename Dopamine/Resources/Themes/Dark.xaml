@@ -28,10 +28,16 @@
     <Color x:Key="Color_DarkGrey9">#666666</Color>
     <Color x:Key="Color_MusicSoftWhite">#E2E2E2</Color>
     <Color x:Key="Color_MusicDarkGrey8">#5E5E5E</Color>
+
+    <Color x:Key="Color_SoftBlack">#111111</Color>
+    <Color x:Key="Color_LightGrey5">#DFDFDF</Color>
+    <Color x:Key="Color_LightGrey8">#838383</Color>
     
     <!-- Brushes -->
     <SolidColorBrush x:Key="Brush_PrimaryText" Color="{DynamicResource Color_SoftWhite}"/>
+    <SolidColorBrush x:Key="Brush_PrimaryTextSelected" Color="{DynamicResource Color_SoftBlack}"/>
     <SolidColorBrush x:Key="Brush_SecondaryText" Color="{DynamicResource Color_DarkGrey8}"/>
+    <SolidColorBrush x:Key="Brush_SecondaryTextSelected" Color="{DynamicResource Color_LightGrey8}"/>
     <SolidColorBrush x:Key="Brush_WindowHeaderBackground" Color="{StaticResource Color_DarkGrey1}"/>
     <SolidColorBrush x:Key="Brush_PaneBackground" Color="{DynamicResource Color_DarkGrey2}"/>
     <SolidColorBrush x:Key="Brush_MainWindowBackground" Color="{DynamicResource Color_DarkGrey3}"/>
@@ -41,6 +47,7 @@
     <SolidColorBrush x:Key="Brush_ListBoxBackground" Color="{DynamicResource Color_DarkGrey5}"/>
     <SolidColorBrush x:Key="Brush_TextBoxBackground" Color="{DynamicResource Color_DarkGrey5}"/>
     <SolidColorBrush x:Key="Brush_AlbumTileInfoBackground" Color="{DynamicResource Color_DarkGrey5}"/>
+    <SolidColorBrush x:Key="Brush_AlbumTileInfoBackgroundSelected" Color="{DynamicResource Color_LightGrey5}"/>
     <SolidColorBrush x:Key="Brush_CoverTileBackground" Color="{DynamicResource Color_DarkGrey4}"/>
     <SolidColorBrush x:Key="Brush_CoverTileIcon" Color="{DynamicResource Color_DarkGrey8}"/>
     <SolidColorBrush x:Key="Brush_SliderBackground" Color="{StaticResource Color_DarkGrey6}"/>

@@ -68,8 +68,8 @@
     <!-- ListBoxItem -->
     <Style x:Key="ListBoxSongsItem" TargetType="{x:Type ListBoxItem}">
         <Setter Property="ContextMenu" Value="{StaticResource ListBoxAlbumsContextMenu}"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Foreground" Value="{DynamicResource Brush_PrimaryText}" />
+        <!--<Setter Property="FocusVisualStyle" Value="{x:Null}" />-->
+        <!--<Setter Property="Foreground" Value="{DynamicResource Brush_PrimaryText}" />-->
         <Setter Property="Margin" Value="{x:Static base:Constants.AlbumTileMargin}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -77,63 +77,63 @@
                     <Grid>
                         <Border x:Name="MouseHoverHelper" Background="{DynamicResource Brush_ItemHovered}" Opacity="0"/>
                         <Border x:Name="SelectionPanel" Background="{TemplateBinding Background}">
-                            <!--<StackPanel Margin="{x:Static base:Constants.AlbumTileMargin}">-->
-                            <StackPanel>
-                                <Grid>
-                                    <!-- Tile -->
-                                    <pc:Tile Panel.ZIndex="0"
+                        <!--<StackPanel Margin="{x:Static base:Constants.AlbumTileMargin}">-->
+                        <StackPanel>
+                            <Grid Opacity="0.5" x:Name="AlbumArtSelected">
+                                <!-- Tile -->
+                                <pc:Tile Panel.ZIndex="0"
                                      Width="{Binding Path=DataContext.CoverSize,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                                      Height="{Binding Path=DataContext.CoverSize,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"        
                                      IconSizePercent="{x:Static base:Constants.HeadPhoneSmallSize}"
                                      Background="{DynamicResource Brush_CoverTileBackground}">
-                                        <pc:Tile.Content>
-                                            <Viewbox>
-                                                <Path Data="{DynamicResource HeadPhone}" Fill="{DynamicResource Brush_CoverTileIcon}"/>
-                                            </Viewbox>
-                                        </pc:Tile.Content>
-                                    </pc:Tile>
-                                    <!-- Cover -->
-                                    <pc:SourceChangedImage Panel.ZIndex="1" 
+                                    <pc:Tile.Content>
+                                        <Viewbox>
+                                            <Path Data="{DynamicResource HeadPhone}" Fill="{DynamicResource Brush_CoverTileIcon}"/>
+                                        </Viewbox>
+                                    </pc:Tile.Content>
+                                </pc:Tile>
+                                <!-- Cover -->
+                                <pc:SourceChangedImage Panel.ZIndex="1"
                                        Width="{Binding Path=DataContext.CoverSize,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
                                        Height="{Binding Path=DataContext.CoverSize,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                                        RenderOptions.BitmapScalingMode="HighQuality">
-                                            <pc:SourceChangedImage.Source>
-                                                <MultiBinding Converter="{StaticResource PathToImageConverter}">
-                                                    <Binding Path="ArtworkPath" IsAsync="True"/>
-                                                    <Binding Path="DataContext.UpscaledCoverSize" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
-                                                </MultiBinding>
-                                            </pc:SourceChangedImage.Source>
-                                            <pc:SourceChangedImage.Triggers>
-                                                <EventTrigger RoutedEvent="pc:SourceChangedImage.SourceChanged">
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="{x:Static base:Constants.SourceChangedImageChangedDuration}" />
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </EventTrigger>
-                                            </pc:SourceChangedImage.Triggers>  
-                                    </pc:SourceChangedImage>
+                                    <pc:SourceChangedImage.Source>
+                                        <MultiBinding Converter="{StaticResource PathToImageConverter}">
+                                            <Binding Path="ArtworkPath" IsAsync="True"/>
+                                            <Binding Path="DataContext.UpscaledCoverSize" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type UserControl}}"/>
+                                        </MultiBinding>
+                                    </pc:SourceChangedImage.Source>
+                                    <pc:SourceChangedImage.Triggers>
+                                        <EventTrigger RoutedEvent="pc:SourceChangedImage.SourceChanged">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="{x:Static base:Constants.SourceChangedImageChangedDuration}" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </pc:SourceChangedImage.Triggers>
+                                </pc:SourceChangedImage>
+                            </Grid>
+                            <StackPanel x:Name="SelectedAlbumTile" Background="{DynamicResource Brush_AlbumTileInfoBackground}" Height="{x:Static base:Constants.AlbumTileAlbumInfoHeight}">
+                                <Grid Margin="6">
+                                    <StackPanel>
+                                        <TextBlock x:Name="SelectionLabelTitle" Text="{Binding MainHeader}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush_PrimaryText}"/>
+                                        <TextBlock x:Name="SelectionLabelArtist" Text="{Binding SubHeader}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush_SecondaryText}"/>
+                                    </StackPanel>
                                 </Grid>
-                                <StackPanel Background="{DynamicResource Brush_AlbumTileInfoBackground}" Height="{x:Static base:Constants.AlbumTileAlbumInfoHeight}">
-                                    <Grid Margin="6">
-                                        <StackPanel>
-                                            <TextBlock x:Name="SelectionLabelTitle" Text="{Binding MainHeader}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush_PrimaryText}"/>
-                                            <TextBlock x:Name="SelectionLabelArtist" Text="{Binding SubHeader}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Brush_SecondaryText}"/>
-                                        </StackPanel>
-                                    </Grid>
-                                    <StackPanel.ToolTip>
-                                        <ToolTip>
-                                            <StackPanel VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding AlbumArtist}" FontWeight="Bold"/>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding AlbumTitle}"/>
-                                                    <TextBlock Margin="5,0,0,0" Text="{Binding ToolTipYear}"/>
-                                                </StackPanel>
+                                <StackPanel.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding AlbumArtist}" FontWeight="Bold"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding AlbumTitle}"/>
+                                                <TextBlock Margin="5,0,0,0" Text="{Binding ToolTipYear}"/>
                                             </StackPanel>
-                                        </ToolTip>
-                                    </StackPanel.ToolTip>
-                                </StackPanel>
-                                <!--<Border x:Name="SelectionBorder" HorizontalAlignment="Stretch" Height="{x:Static base:Constants.AlbumSelectionBorderSize}"/>-->
+                                        </StackPanel>
+                                    </ToolTip>
+                                </StackPanel.ToolTip>
+                            </StackPanel>
+                            <!--<Border x:Name="SelectionBorder" HorizontalAlignment="Stretch" Height="{x:Static base:Constants.AlbumSelectionBorderSize}"/>-->
                             </StackPanel>
                         </Border>
                     </Grid>
@@ -141,6 +141,12 @@
                         <DataTrigger Binding="{Binding IsPlaying}" Value="true">
                             <Setter Property="BorderBrush" TargetName="SelectionPanel" Value="{DynamicResource Brush_Accent}"/>
                             <Setter Property="BorderThickness" TargetName="SelectionPanel" Value="2"/>
+                            <Setter Property="Padding" TargetName="SelectionPanel" Value="0,0,0,0"/>
+                            <Setter Property="Margin" TargetName="SelectionPanel" Value="0,0,-4,-2"/>
+                            <Setter Property="Background" TargetName="SelectedAlbumTile" Value="{DynamicResource Brush_AlbumTileInfoBackgroundSelected}"/>
+                            <Setter Property="Foreground" TargetName="SelectionLabelTitle" Value="{DynamicResource Brush_PrimaryTextSelected}"/>
+                            <Setter Property="Foreground" TargetName="SelectionLabelArtist" Value="{DynamicResource Brush_PrimaryTextSelected}"/>
+                            <Setter Property="Opacity" TargetName="AlbumArtSelected" Value="1"/>
                         </DataTrigger>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
