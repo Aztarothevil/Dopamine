@@ -141,7 +141,7 @@
                         <DropShadowEffect BlurRadius="20" Opacity="{DynamicResource Opacity_CoverArtShadow}" ShadowDepth="0" Color="{DynamicResource Color_Black}"/>
                     </Border.Effect>
                 </Border>
-                <commonviews:PlaybackInfoMusicControl Height="180" HorizontalAlignment="Stretch" Margin="10,0,0,0" ShowAlbumInfo="False" TitleFontSize="22" TitleFontWeight="Light"/>
+                <commonviews:PlaybackInfoMusicControl Height="190" HorizontalAlignment="Stretch" Margin="10,0,0,0" ShowAlbumInfo="False" TitleFontSize="22" TitleFontWeight="Light"/>
             </StackPanel>
         </DockPanel>
 

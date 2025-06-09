@@ -3,6 +3,7 @@ using Digimezzo.Foundation.Core.Settings;
 using Digimezzo.Foundation.Core.Utils;
 using Dopamine.Core.Base;
 using Dopamine.Core.Extensions;
+using Dopamine.Core.Utils;
 using Dopamine.Data;
 using Dopamine.Data.Entities;
 using Dopamine.Data.Metadata;
@@ -17,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Dopamine.Services.Metadata
 {
@@ -34,14 +36,16 @@ namespace Dopamine.Services.Metadata
         public event Action<RatingChangedEventArgs> RatingChanged = delegate { };
         public event Action<LoveChangedEventArgs> LoveChanged = delegate { };
 
-        public MetadataService(IPlaybackService playbackService, ICacheService cacheService, ITrackRepository trackRepository,
-            IAlbumArtworkRepository albumArtworkRepository)
+        public MetadataService(IPlaybackService playbackService
+                             , ICacheService cacheService
+                             , ITrackRepository trackRepository
+                             , IAlbumArtworkRepository albumArtworkRepository)
         {
             this.playbackService = playbackService;
             this.cacheService = cacheService;
             this.trackRepository = trackRepository;
             this.albumArtworkRepository = albumArtworkRepository;
-
+            this.playbackService.PlayingNextTrackExecuted += (o, e) => this.UpdatePreviousTrackRatingAsync((TrackViewModel)o);
             this.updater = new FileMetadataUpdater(this.playbackService, this.trackRepository);
         }
 
@@ -69,6 +73,14 @@ namespace Dopamine.Services.Metadata
             return fileMetadata;
         }
 
+        public async void UpdatePreviousTrackRatingAsync(TrackViewModel track)
+        {
+            await Task.Run(async () =>
+            {
+                await this.UpdateTrackRatingAsync(track.Path, track.Rating);
+            });
+        }
+
         public async Task UpdateTrackRatingAsync(string path, int rating)
         {
             await this.trackRepository.UpdateRatingAsync(path, rating);
@@ -80,16 +92,33 @@ namespace Dopamine.Services.Metadata
                 if (Path.GetExtension(path).ToLower().Equals(FileFormats.MP3))
                 {
                     FileMetadata fmd = await this.GetFileMetadataAsync(path);
-                    fmd.Rating = new MetadataRatingValue() { Value = rating };
-                    await this.updater.UpdateFileMetadataAsync(new FileMetadata[] { fmd }.ToList());
+
+                    if (fmd.Rating.Value != rating)
+                    {
+                        fmd.Rating = new MetadataRatingValue() { Value = rating };
+                        await this.updater.UpdateFileMetadataAsync(new FileMetadata[] { fmd }.ToList());
+                    }
                 }
-                // Only for FLAC's
+                //// Only for FLAC's
                 if (Path.GetExtension(path).ToLower().Equals(FileFormats.FLAC))
                 {
                     // Initialize with a file path
                     var theTrack = new ATL.Track(path);
-                    theTrack.Popularity = rating;
-                    theTrack.Save();
+
+                    if (theTrack != null & theTrack.AdditionalFields.ContainsKey("RATING WMP"))
+                    {
+                        int ratingFile = int.Parse(theTrack.AdditionalFields["RATING WMP"]);
+                        if (rating != ratingFile)
+                        {
+                            theTrack.AdditionalFields["RATING WMP"] = rating.ToString();
+                            theTrack.Save();
+                        }
+                    }
+                    else
+                    {
+                        theTrack.AdditionalFields["RATING WMP"] = rating.ToString();
+                        theTrack.Save();
+                    }
                 }
             }
 

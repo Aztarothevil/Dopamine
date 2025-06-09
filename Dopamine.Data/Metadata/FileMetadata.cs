@@ -296,6 +296,19 @@ namespace Dopamine.Data.Metadata
                     }
                 }
 
+                if (System.IO.Path.GetExtension(this.file.Name.ToLower()) == FileFormats.FLAC)
+                {
+                    var theTrack = new ATL.Track(this.file.Name.ToLower());
+                    if (theTrack != null & theTrack.AdditionalFields.ContainsKey("RATING WMP"))
+                    {
+                        int rating = int.Parse(theTrack.AdditionalFields["RATING WMP"]);
+                        if (rating > 0)
+                        {
+                            this.rating = new MetadataRatingValue(rating);
+                        }
+                    }
+                }
+
                 if (this.rating == null)
                 {
                     this.rating = new MetadataRatingValue();

@@ -10,7 +10,7 @@
              xmlns:prismMvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
              mc:Ignorable="d"
              prismMvvm:ViewModelLocator.AutoWireViewModel="True">
-
+    
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type pv:PlaybackInfoViewModel}">
             <StackPanel Visibility="{Binding Title,Converter={StaticResource StringEmptyToInvisibleConverter}}">
@@ -21,6 +21,10 @@
                 <TextBlock Text="{Binding Bitrate}"     TextTrimming="CharacterEllipsis" FontSize="{Binding ArtistFontSize,ElementName=ThisControl}" TextAlignment="{Binding TextAlignment,ElementName=ThisControl}" FontWeight="{Binding ArtistFontWeight,ElementName=ThisControl}" Foreground="{DynamicResource Brush_MusicSecondaryText}"/>
                 <TextBlock Text="{Binding Size}"        TextTrimming="CharacterEllipsis" FontSize="{Binding ArtistFontSize,ElementName=ThisControl}" TextAlignment="{Binding TextAlignment,ElementName=ThisControl}" FontWeight="{Binding ArtistFontWeight,ElementName=ThisControl}" Foreground="{DynamicResource Brush_MusicSecondaryText}"/>
                 <TextBlock Text="{Binding Location}"    TextTrimming="CharacterEllipsis" FontSize="{Binding ArtistFontSize,ElementName=ThisControl}" TextAlignment="{Binding TextAlignment,ElementName=ThisControl}" FontWeight="{Binding ArtistFontWeight,ElementName=ThisControl}" Foreground="{DynamicResource Brush_MusicSecondaryText}"/>
+                <DockPanel Height="20"  Margin="0,0,0,0">
+                    <TextBlock Text="    Rating:  "  VerticalAlignment="Bottom"  TextTrimming="CharacterEllipsis" FontSize="{Binding ArtistFontSize,ElementName=ThisControl}" TextAlignment="{Binding TextAlignment,ElementName=ThisControl}" FontWeight="{Binding ArtistFontWeight,ElementName=ThisControl}" Foreground="{DynamicResource Brush_MusicSecondaryText}"/>
+                    <pc:RatingButtonInfo VerticalAlignment="Center" Rating="{Binding Rating}" FontWeight="{Binding ArtistFontWeight,ElementName=ThisControl}" Foreground="{DynamicResource Brush_MusicSecondaryText}" />
+                </DockPanel>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
