@@ -62,6 +62,20 @@ namespace Dopamine.ViewModels.Common
             // Defaults
             this.SlideDirection = SlideDirection.DownToUp;
             this.RefreshPlaybackInfoAsync(this.playbackService.CurrentTrack, false);
+            this.metadataService.RatingChanged += MetadataService_RatingChangedAsync;
+        }
+
+        private async void MetadataService_RatingChangedAsync(RatingChangedEventArgs e)
+        {
+            if (this.track == null) return;
+
+            await Task.Run(() =>
+            {
+                if (this.track.SafePath.Equals(e.SafePath))
+                {
+                    this.RefreshPlaybackInfoAsync(this.track, true);
+                }
+            });
         }
 
         private void RefreshTimer_Elapsed(object sender, ElapsedEventArgs e)
