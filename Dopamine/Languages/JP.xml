@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">アートワーク プレイヤー</Text>
 	<Text Key="Micro_Player">マイクロ プレイヤー</Text>
 	<Text Key="Nano_Player">ナノ プレイヤー</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">位置を固定</Text>
 	<Text Key="Always_On_Top">常に最前面に表示</Text>
 	<Text Key="Always_Show_Playback_Info">アーティストとタイトルを常に表示</Text>

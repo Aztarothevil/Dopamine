@@ -242,7 +242,6 @@
     </Compile>
     <Compile Include="Services\Shell\ShellService.cs" />
     <Compile Include="SharedAssemblyInfo.cs" />
-    <Compile Include="Controls\SpectrumAnalyzer.cs" />
     <Compile Include="Utils\BindingProxy.cs" />
     <Compile Include="Utils\OpenFileUtils.cs" />
     <Compile Include="Utils\SaveFileUtils.cs" />
@@ -273,6 +272,7 @@
     <Compile Include="ViewModels\Common\FileInformationViewModel.cs" />
     <Compile Include="ViewModels\Common\HorizontalVolumeControlsViewModel.cs" />
     <Compile Include="ViewModels\Common\IndexingStatusViewModel.cs" />
+    <Compile Include="ViewModels\Common\LyricsControlMediumViewModel.cs" />
     <Compile Include="ViewModels\Common\LyricsControlViewModel.cs" />
     <Compile Include="ViewModels\Common\LyricsViewModel.cs" />
     <Compile Include="ViewModels\Common\NothingPlayingControlViewModel.cs" />
@@ -288,7 +288,6 @@
     <Compile Include="ViewModels\Common\ProgressControlsWithTimeViewModel.cs" />
     <Compile Include="ViewModels\Common\SearchControlViewModel.cs" />
     <Compile Include="ViewModels\Common\ShuffleAllControlViewModel.cs" />
-    <Compile Include="ViewModels\Common\SpectrumAnalyzerControlViewModel.cs" />
     <Compile Include="ViewModels\CoverArtViewModel.cs" />
     <Compile Include="ViewModels\FullPlayer\Collection\CollectionMenuViewModel.cs" />
     <Compile Include="ViewModels\FullPlayer\Collection\CollectionMusicViewModel.cs" />
@@ -315,6 +314,7 @@
     <Compile Include="ViewModels\FullPlayer\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModels\InitializeViewModel.cs" />
     <Compile Include="ViewModels\MiniPlayer\CoverPlayerViewModel.cs" />
+    <Compile Include="ViewModels\MiniPlayer\MediumPlayerViewModel.cs" />
     <Compile Include="ViewModels\MiniPlayer\MicroPlayerViewModel.cs" />
     <Compile Include="ViewModels\MiniPlayer\MiniPlayerPlaylistViewModel.cs" />
     <Compile Include="ViewModels\MiniPlayer\NanoPlayerViewModel.cs" />
@@ -386,6 +386,9 @@
     <Compile Include="Views\Common\IndexingStatus.xaml.cs">
       <DependentUpon>IndexingStatus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Common\LyricsControlMedium.xaml.cs">
+      <DependentUpon>LyricsControlMedium.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Common\LyricsControl.xaml.cs">
       <DependentUpon>LyricsControl.xaml</DependentUpon>
     </Compile>
@@ -439,9 +442,6 @@
     </Compile>
     <Compile Include="Views\Common\TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Common\SpectrumAnalyzerControl.xaml.cs">
-      <DependentUpon>SpectrumAnalyzerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Common\UpdateStatus.xaml.cs">
       <DependentUpon>UpdateStatus.xaml</DependentUpon>
@@ -526,6 +526,9 @@
     </Compile>
     <Compile Include="Views\MiniPlayer\CoverPlayer.xaml.cs">
       <DependentUpon>CoverPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MiniPlayer\MediumPlayer.xaml.cs">
+      <DependentUpon>MediumPlayer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MiniPlayer\MicroPlayer.xaml.cs">
       <DependentUpon>MicroPlayer.xaml</DependentUpon>
@@ -1040,10 +1043,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\Styles\SpectrumAnalyzer.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Resources\Styles\StackPanelConditionEnabled.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1216,6 +1215,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Common\LyricsControlMedium.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Common\LyricsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1285,10 +1288,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Common\TimeControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Common\SpectrumAnalyzerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1403,6 +1402,10 @@
     <Page Include="Views\MiniPlayer\CoverPlayer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MiniPlayer\MediumPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MiniPlayer\MicroPlayer.xaml">
       <Generator>MSBuild:Compile</Generator>

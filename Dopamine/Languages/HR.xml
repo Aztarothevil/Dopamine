@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Svirač s naslovnicom</Text>
 	<Text Key="Micro_Player">Mikro svirač</Text>
 	<Text Key="Nano_Player">Nano svirač</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Zaključaj položaj</Text>
 	<Text Key="Always_On_Top">Uvijek na vrhu</Text>
 	<Text Key="Always_Show_Playback_Info">Uvijek prikaži izvođača i naslov</Text>

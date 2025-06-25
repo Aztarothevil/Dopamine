@@ -26,6 +26,7 @@ namespace Dopamine.Services.Shell
         private string coverPlayerPage;
         private string microplayerPage;
         private string nanoPlayerPage;
+        private string mediumPlayerPage;
 
         public event WindowStateChangedEventHandler WindowStateChanged = delegate { };
         public event WindowStateChangeRequestedEventHandler WindowStateChangeRequested = delegate { };
@@ -57,7 +58,7 @@ namespace Dopamine.Services.Shell
         public WindowState WindowState { get; set; }
 
         public ShellService(IRegionManager regionManager, IWindowsIntegrationService windowsIntegrationService, IEventAggregator eventAggregator,
-            string fullPlayerPage, string coverPlayerPage, string microplayerPage, string nanoPlayerPage)
+            string fullPlayerPage, string coverPlayerPage, string microplayerPage, string nanoPlayerPage, string mediumPlayerPage)
         {
             this.regionManager = regionManager;
             this.windowsIntegrationService = windowsIntegrationService;
@@ -67,6 +68,7 @@ namespace Dopamine.Services.Shell
             this.coverPlayerPage = coverPlayerPage;
             this.microplayerPage = microplayerPage;
             this.nanoPlayerPage = nanoPlayerPage;
+            this.mediumPlayerPage = mediumPlayerPage;
 
             //this.ShowNowPlayingCommand = new DelegateCommand(() =>
             //{
@@ -156,6 +158,7 @@ namespace Dopamine.Services.Shell
             }
             else
             {
+                this.SetPlayer(false, MiniPlayerType.CoverPlayer);
                 // Show the Mini Player, with the player type which is saved in the settings
                 this.SetPlayer(true, (MiniPlayerType)SettingsClient.Get<int>("General", "MiniPlayerType"));
             }
@@ -193,6 +196,10 @@ namespace Dopamine.Services.Shell
                     case MiniPlayerType.NanoPlayer:
                         this.SetMiniPlayer(MiniPlayerType.NanoPlayer, this.activeMiniPlayerPlaylist == ActiveMiniPlayerPlaylist.NanoPlayer);
                         screenName = this.nanoPlayerPage;
+                        break;
+                    case MiniPlayerType.MediumPlayer:
+                        this.SetMiniPlayer(MiniPlayerType.MediumPlayer, this.activeMiniPlayerPlaylist == ActiveMiniPlayerPlaylist.CoverPlayer);
+                        screenName = this.mediumPlayerPage;
                         break;
                     default:
                         break;
@@ -291,6 +298,10 @@ namespace Dopamine.Services.Shell
                 case MiniPlayerType.NanoPlayer:
                     width = Constants.NanoPlayerWidth;
                     height = Constants.NanoPlayerHeight;
+                    break;
+                case MiniPlayerType.MediumPlayer:
+                    width = Constants.MediumPlayerWidth;
+                    height = Constants.MediumPlayerHeight;
                     break;
                 default:
                     // Can't happen

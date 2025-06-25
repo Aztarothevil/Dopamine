@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Плеър с обложка</Text>
 	<Text Key="Micro_Player">Микро плеър</Text>
 	<Text Key="Nano_Player">Нано плеър</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Заключен</Text>
 	<Text Key="Always_On_Top">Винаги отгоре</Text>
 	<Text Key="Always_Show_Playback_Info">Винаги да се показва за изпълнителя и песента</Text>

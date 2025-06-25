@@ -34,7 +34,6 @@
         <ResourceDictionary Source="/Dopamine;component/Resources/Styles/MetroListBox.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Resources/Styles/MetroTextBox.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Resources/Styles/MenuPivot.xaml" />
-        <ResourceDictionary Source="/Dopamine;component/Resources/Styles/SpectrumAnalyzer.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Resources/Styles/Texts.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Resources/Styles/Tooltip.xaml" />
         <ResourceDictionary Source="/Dopamine;component/Resources/Styles/WindowButton.xaml" />

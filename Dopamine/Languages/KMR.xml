@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Lêdera bergê</Text>
 	<Text Key="Micro_Player">Lêdera mikro</Text>
 	<Text Key="Nano_Player">Lêdera nano</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Cihê serrast bike</Text>
 	<Text Key="Always_On_Top">Her dem li jor bihêle</Text>
 	<Text Key="Always_Show_Playback_Info">Hunermend û sernav her tim nîşan bidin</Text>

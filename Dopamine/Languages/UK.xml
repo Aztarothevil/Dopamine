@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Великий плеєр</Text>
 	<Text Key="Micro_Player">Мікро плеєр</Text>
 	<Text Key="Nano_Player">Нано плеєр</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Зафіксувати розташування</Text>
 	<Text Key="Always_On_Top">Над усіма вікнами</Text>
 	<Text Key="Always_Show_Playback_Info">Завжди виводити назву та виконавця</Text>

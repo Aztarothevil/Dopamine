@@ -13,7 +13,7 @@
       <Value>false</Value>
     </Setting>
     <Setting Name="MiniPlayerType">
-      <Value>1</Value>
+      <Value>4</Value>
     </Setting>
     <Setting Name="ShowOobe">
       <Value>True</Value>

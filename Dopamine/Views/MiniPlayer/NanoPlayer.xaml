@@ -49,6 +49,7 @@
             <MenuItem Header="{DynamicResource Language_Cover_Player}" InputGestureText="" Command="{x:Static cp:ApplicationCommands.ChangePlayerTypeCommand}" CommandParameter="1" IsCheckable="True" IsChecked="{Binding IsCoverPlayerChecked,Mode=OneWay}"/>
             <MenuItem Header="{DynamicResource Language_Micro_Player}" InputGestureText="" Command="{x:Static cp:ApplicationCommands.ChangePlayerTypeCommand}" CommandParameter="2" IsCheckable="True" IsChecked="{Binding IsMicroPlayerChecked,Mode=OneWay}"/>
             <MenuItem Header="{DynamicResource Language_Nano_Player}" InputGestureText="" Command="{x:Static cp:ApplicationCommands.ChangePlayerTypeCommand}" CommandParameter="3" IsCheckable="True" IsChecked="{Binding IsNanoPlayerChecked,Mode=OneWay}"/>
+            <MenuItem Header="{DynamicResource Language_Medium_Player}" InputGestureText="" Command="{x:Static cp:ApplicationCommands.ChangePlayerTypeCommand}" CommandParameter="4" IsCheckable="True" IsChecked="{Binding IsMediumPlayerChecked,Mode=OneWay}"/>            
             <Separator/>
             <MenuItem Header="{DynamicResource Language_Add_To_Playlist}" DisplayMemberPath="Name">
                 <MenuItem.ItemContainerStyle>

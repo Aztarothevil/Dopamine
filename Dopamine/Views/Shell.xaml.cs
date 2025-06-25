@@ -73,8 +73,8 @@ namespace Dopamine.Views
             this.lifetimeService = lifetimeService;
             this.eventAggregator = eventAggregator;
 
-            this.shellService = container.Resolve<Func<string, string, string, string, IShellService>>()(typeof(FullPlayer.FullPlayer).FullName, typeof(CoverPlayer).FullName,
-                typeof(MicroPlayer).FullName, typeof(NanoPlayer).FullName);
+            this.shellService = container.Resolve<Func<string, string, string, string, string, IShellService>>()(typeof(FullPlayer.FullPlayer).FullName, typeof(CoverPlayer).FullName,
+                typeof(MicroPlayer).FullName, typeof(NanoPlayer).FullName, typeof(MediumPlayer).FullName);
 
             this.InitializeServices();
             this.InitializeWindows();

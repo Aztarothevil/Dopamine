@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Cover player</Text>
 	<Text Key="Micro_Player">Micro player</Text>
 	<Text Key="Nano_Player">Nano player</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Σταθεροποίηση θέσης</Text>
 	<Text Key="Always_On_Top">Πάντα στο προσκήνιο</Text>
 	<Text Key="Always_Show_Playback_Info">Πάντα εμφάνιση καλλιτέχνη και τίτλου</Text>

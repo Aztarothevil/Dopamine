@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Borító lejátszó</Text>
 	<Text Key="Micro_Player">Mikró lejátszó</Text>
 	<Text Key="Nano_Player">Nanó lejátszó</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Pozíció rögzítése</Text>
 	<Text Key="Always_On_Top">Mindig látható</Text>
 	<Text Key="Always_Show_Playback_Info">Mindig mutassa az előadót és a címet</Text>

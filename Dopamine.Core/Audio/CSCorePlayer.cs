@@ -1,13 +1,11 @@
 ﻿using CSCore;
 using CSCore.CoreAudioAPI;
-using CSCore.DSP;
 using CSCore.Ffmpeg;
 using CSCore.MediaFoundation;
 using CSCore.SoundOut;
 using CSCore.Streams;
 using CSCore.Streams.Effects;
 using Dopamine.Core.Base;
-using Dopamine.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -531,112 +529,6 @@ namespace Dopamine.Core.Audio
             {
                 this.isPlaying = value;
                 NotifyPropertyChanged("IsPlaying");
-            }
-        }
-
-        public ISpectrumPlayer GetWrapperSpectrumPlayer(SpectrumChannel channel)
-        {
-            return new WrapperSpectrumPlayer(instance, channel, inputStreamList);
-        }
-
-        public class WrapperSpectrumPlayer : ISpectrumPlayer
-        {
-            public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
-            public CSCorePlayer player;
-            private readonly FftProvider fftProvider;
-            private readonly ISoundOut soundOut;
-
-            public bool IsPlaying => this.player.isPlaying;
-
-            public WrapperSpectrumPlayer(CSCorePlayer player, SpectrumChannel channel,
-                ICollection<EventHandler<SingleBlockReadEventArgs>> inputStreamList)
-            {
-                this.player = player;
-                this.player.PropertyChanged += (_, __) => PropertyChanged(_, __);
-                this.soundOut = player.soundOut;
-
-                fftProvider = new FftProvider(2, FftSize.Fft1024);
-
-                if (channel != SpectrumChannel.Stereo)
-                {
-                    if (channel == SpectrumChannel.Left)
-                    {
-                        if (this.player.notificationSource != null) this.player.notificationSource.SingleBlockRead += InputStream_LeftSample;
-                        inputStreamList.Add(InputStream_LeftSample);
-                    }
-                    if (channel == SpectrumChannel.Right)
-                    {
-                        if (this.player.notificationSource != null) this.player.notificationSource.SingleBlockRead += InputStream_RightSample;
-                        inputStreamList.Add(InputStream_RightSample);
-                    }
-                }
-                else
-                {
-                    if (this.player.notificationSource != null) this.player.notificationSource.SingleBlockRead += InputStream_Sample;
-                    inputStreamList.Add(InputStream_Sample);
-                }
-            }
-
-            private void InputStream_Sample(object sender, SingleBlockReadEventArgs e)
-            {
-                try
-                {
-                    this.fftProvider.Add(e.Left, e.Right);
-                }
-                catch (Exception)
-                {
-                }
-            }
-
-            private void InputStream_LeftSample(object sender, SingleBlockReadEventArgs e)
-            {
-                try
-                {
-                    this.fftProvider.Add(e.Left, 0f);
-                }
-                catch (Exception)
-                {
-                }
-            }
-
-            private void InputStream_RightSample(object sender, SingleBlockReadEventArgs e)
-            {
-                try
-                {
-                    this.fftProvider.Add(0f, e.Right);
-                }
-                catch (Exception)
-                {
-                }
-            }
-
-            public bool GetFFTData(ref float[] fftDataBuffer)
-            {
-                return this.fftProvider.GetFftData(fftDataBuffer);
-            }
-
-            public int GetFFTFrequencyIndex(int frequency)
-            {
-                try
-                {
-                    double maxFrequency = 0;
-
-                    if (soundOut != null && this.soundOut.WaveSource != null)
-                    {
-                        maxFrequency = this.soundOut.WaveSource.WaveFormat.SampleRate / 2.0;
-                    }
-                    else
-                    {
-                        maxFrequency = 22050;
-                    }
-                    // Assume a default 44.1 kHz sample rate.
-                    return Convert.ToInt32((frequency / maxFrequency) * ((int)this.fftProvider.FftSize / 2));
-                }
-                catch (Exception)
-                {
-                    return 0;
-                }
             }
         }
 

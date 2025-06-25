@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Skivomslagspelare</Text>
 	<Text Key="Micro_Player">Microspelare</Text>
 	<Text Key="Nano_Player">Nanospelare</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Lås position</Text>
 	<Text Key="Always_On_Top">Alltid överst</Text>
 	<Text Key="Always_Show_Playback_Info">Visa alltid artist och titel</Text>

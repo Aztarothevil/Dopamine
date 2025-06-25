@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Malý přehrávač</Text>
 	<Text Key="Micro_Player">Mikro přehrávač</Text>
 	<Text Key="Nano_Player">Nano přehrávač</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Zamknout pozici</Text>
 	<Text Key="Always_On_Top">Vždy nahoře</Text>
 	<Text Key="Always_Show_Playback_Info">Vždy ukazovat aktuální nahoře</Text>

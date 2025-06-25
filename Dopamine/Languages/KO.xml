@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">커버 플레이어</Text>
 	<Text Key="Micro_Player">마이크로 플레이어</Text>
 	<Text Key="Nano_Player">나노 플레이어</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">위치 고정</Text>
 	<Text Key="Always_On_Top">항상 위에 표시</Text>
 	<Text Key="Always_Show_Playback_Info">항상 아티스트와 제목 보이기</Text>

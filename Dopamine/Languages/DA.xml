@@ -167,6 +167,7 @@
   <Text Key="Cover_Player">Cover-afspiller</Text>
   <Text Key="Micro_Player">Mikro-afspiller</Text>
   <Text Key="Nano_Player">Nano-afspiller</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
   <Text Key="Lock_Position">Lås position</Text>
   <Text Key="Always_On_Top">Altid øverst</Text>
   <Text Key="Always_Show_Playback_Info">Vis altid kunstner og titel</Text>

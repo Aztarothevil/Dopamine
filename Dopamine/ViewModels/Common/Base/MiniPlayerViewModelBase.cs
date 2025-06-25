@@ -12,8 +12,11 @@ namespace Dopamine.ViewModels.Common.Base
         private bool isCoverPlayerChecked;
         private bool isMicroPlayerChecked;
         private bool isNanoPlayerChecked;
+        private bool isMediumPlayerChecked;
         private bool isMiniPlayerAlwaysOnTop;
         private bool isMiniPlayerPositionLocked;
+        private bool isMediumPlayerAlwaysOnTop;
+        private bool isMediumPlayerPositionLocked;
 
         public DelegateCommand<string> ChangePlayerTypeCommand { get; set; }
         public DelegateCommand ToggleMiniPlayerPositionLockedCommand { get; set; }
@@ -55,6 +58,24 @@ namespace Dopamine.ViewModels.Common.Base
             set { SetProperty<bool>(ref this.isMiniPlayerPositionLocked, value); }
         }
 
+        public bool IsMediumPlayerChecked
+        {
+            get { return this.isMediumPlayerChecked; }
+            set { SetProperty<bool>(ref this.isMediumPlayerChecked, value); }
+        }
+
+        public bool IsMediumPlayerAlwaysOnTop
+        {
+            get { return this.isMediumPlayerAlwaysOnTop; }
+            set { SetProperty<bool>(ref this.isMediumPlayerAlwaysOnTop, value); }
+        }
+
+        public bool IsMediumPlayerPositionLocked
+        {
+            get { return this.isMediumPlayerPositionLocked; }
+            set { SetProperty<bool>(ref this.isMediumPlayerPositionLocked, value); }
+        }
+
         public MiniPlayerViewModelBase(IContainerProvider container) : base(container)
         {
             // Commands
@@ -84,6 +105,7 @@ namespace Dopamine.ViewModels.Common.Base
             this.IsCoverPlayerChecked = false;
             this.IsMicroPlayerChecked = false;
             this.IsNanoPlayerChecked = false;
+            this.IsMediumPlayerChecked = false;
 
             switch (miniPlayerType)
             {
@@ -95,6 +117,9 @@ namespace Dopamine.ViewModels.Common.Base
                     break;
                 case MiniPlayerType.NanoPlayer:
                     this.IsNanoPlayerChecked = true;
+                    break;
+                case MiniPlayerType.MediumPlayer:
+                    this.IsMediumPlayerChecked = true;
                     break;
                 default:
                     break;

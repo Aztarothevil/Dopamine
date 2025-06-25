@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Trình phát Ảnh bìa album</Text>
 	<Text Key="Micro_Player">Trình phát Micro</Text>
 	<Text Key="Nano_Player">Trình phát Nano</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Khóa vị trí</Text>
 	<Text Key="Always_On_Top">Luôn trên tất cả</Text>
 	<Text Key="Always_Show_Playback_Info">Luôn hiển thị nghệ sĩ và tựa đề</Text>

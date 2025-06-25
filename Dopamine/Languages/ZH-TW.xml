@@ -167,6 +167,7 @@
   <Text Key="Cover_Player">封面播放器</Text>
   <Text Key="Micro_Player">小型播放器</Text>
   <Text Key="Nano_Player">微型播放器</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
   <Text Key="Lock_Position">鎖定位置</Text>
   <Text Key="Always_On_Top">總是置頂</Text>
   <Text Key="Always_Show_Playback_Info">永遠顯示演出者和標題</Text>

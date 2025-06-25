@@ -41,7 +41,6 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
         private bool checkBoxEnableExternalControlChecked;
         private bool checkBoxEnableSystemNotificationChecked;
         private bool checkBoxLoopWhenShuffleChecked;
-        private bool checkBoxShowSpectrumAnalyzerChecked;
         private bool checkBoxPreventSleepWhilePlaying;
         private ObservableCollection<NameValue> spectrumStyles;
         private NameValue selectedSpectrumStyle;
@@ -61,16 +60,6 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
         public bool SupportsWindowsMediaFoundation => MediaFoundationHelper.HasMediaFoundationSupport();
 
         public bool IsWindows10 => Constants.IsWindows10;
-
-        public bool CheckBoxShowSpectrumAnalyzerChecked
-        {
-            get { return this.checkBoxShowSpectrumAnalyzerChecked; }
-            set
-            {
-                SettingsClient.Set<bool>("Playback", "ShowSpectrumAnalyzer", value, true);
-                SetProperty<bool>(ref this.checkBoxShowSpectrumAnalyzerChecked, value);
-            }
-        }
 
         public ObservableCollection<NameValue> Latencies
         {
@@ -446,7 +435,6 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
         {
             await Task.Run(() =>
             {
-                this.checkBoxShowSpectrumAnalyzerChecked = SettingsClient.Get<bool>("Playback", "ShowSpectrumAnalyzer");
                 this.checkBoxUseAllAvailableChannelsChecked = SettingsClient.Get<bool>("Playback", "WasapiUseAllAvailableChannels");
                 this.checkBoxWasapiExclusiveModeChecked = SettingsClient.Get<bool>("Playback", "WasapiExclusiveMode");
                 this.checkBoxShowNotificationWhenPlayingChecked = this.notificationService.ShowNotificationWhenPlaying;

@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Kapak oynatıcı</Text>
 	<Text Key="Micro_Player">Mikro oynatıcı</Text>
 	<Text Key="Nano_Player">Nano oynatıcı</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Konumu kilitle</Text>
 	<Text Key="Always_On_Top">Her zaman üstte</Text>
 	<Text Key="Always_Show_Playback_Info">Sanatçı ve başlığı her zaman göster</Text>

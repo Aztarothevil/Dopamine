@@ -139,18 +139,25 @@ namespace Dopamine.Views.Common.Base
         
         protected override void PlaybackService_PlaybackSuccess(object sender, PlaybackSuccessEventArgs e)
         {
-            if (_listBox.DataContext != null)
+            try
             {
-                var songs = ((Dopamine.ViewModels.Common.Base.SongsViewModelBase)_listBox.DataContext).Songs;
-                var currentSong = ((Dopamine.Services.Playback.PlaybackService)sender).CurrentTrack;
-                foreach (var song in songs)
+                if (_listBox.DataContext != null)
                 {
-                    song.IsPlaying = song.Path == currentSong.Path;
+                    var songs = ((Dopamine.ViewModels.Common.Base.SongsViewModelBase)_listBox.DataContext).Songs;
+                    var currentSong = ((Dopamine.Services.Playback.PlaybackService)sender).CurrentTrack;
+                    foreach (var song in songs)
+                    {
+                        song.IsPlaying = song.Path == currentSong.Path;
+                    }
+                }
+                else
+                {
+
                 }
             }
-            else
+            catch (Exception ex)
             {
-
+                LogClient.Error("Could not set is playing flag. Exception: {0}", ex.Message);
             }
         }
 

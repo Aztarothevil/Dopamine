@@ -65,6 +65,10 @@ namespace Dopamine.Core.Base
         public static readonly double NanoPlayerWidth = 460;
         public static readonly double NanoPlayerHeight = 48;
 
+        // Medium Player
+        public static readonly double MediumPlayerWidth = 800;
+        public static readonly double MediumPlayerHeight = 1280;
+
         // Cover Player playlist
         public static readonly double CoverPlayerHorizontalPlaylistWidth = 460;
         public static readonly double CoverPlayerVerticalPlaylistHeight = 444;

@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Reprodutor compacto</Text>
 	<Text Key="Micro_Player">Micro-reprodutor</Text>
 	<Text Key="Nano_Player">Nano reprodutor</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Bloquear posição</Text>
 	<Text Key="Always_On_Top">Sempre na frente</Text>
 	<Text Key="Always_Show_Playback_Info">Mostrar sempre artista e álbum</Text>

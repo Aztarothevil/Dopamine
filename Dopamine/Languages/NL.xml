@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Cover speler</Text>
 	<Text Key="Micro_Player">Micro speler</Text>
 	<Text Key="Nano_Player">Nano speler</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Positie vastzetten</Text>
 	<Text Key="Always_On_Top">Altijd op voorgrond</Text>
 	<Text Key="Always_Show_Playback_Info">Artiest en titel altijd weergeven</Text>

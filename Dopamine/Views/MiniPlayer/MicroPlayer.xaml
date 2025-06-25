@@ -11,7 +11,6 @@
                               xmlns:prismMvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
                               mc:Ignorable="d"
                               d:DesignHeight="300" d:DesignWidth="300"
-                              Loaded="CommonMiniPlayerView_Loaded"
                               prismMvvm:ViewModelLocator.AutoWireViewModel="True"
                               Background="{DynamicResource Brush_WindowHeaderBackground}">
 
@@ -49,6 +48,7 @@
             <MenuItem Header="{DynamicResource Language_Cover_Player}" InputGestureText="" Command="{x:Static cp:ApplicationCommands.ChangePlayerTypeCommand}" CommandParameter="1" IsCheckable="True" IsChecked="{Binding IsCoverPlayerChecked,Mode=OneWay}"/>
             <MenuItem Header="{DynamicResource Language_Micro_Player}" InputGestureText="" Command="{x:Static cp:ApplicationCommands.ChangePlayerTypeCommand}" CommandParameter="2" IsCheckable="True" IsChecked="{Binding IsMicroPlayerChecked,Mode=OneWay}"/>
             <MenuItem Header="{DynamicResource Language_Nano_Player}" InputGestureText="" Command="{x:Static cp:ApplicationCommands.ChangePlayerTypeCommand}" CommandParameter="3" IsCheckable="True" IsChecked="{Binding IsNanoPlayerChecked,Mode=OneWay}"/>
+            <MenuItem Header="{DynamicResource Language_Medium_Player}" InputGestureText="" Command="{x:Static cp:ApplicationCommands.ChangePlayerTypeCommand}" CommandParameter="4" IsCheckable="True" IsChecked="{Binding IsMediumPlayerChecked,Mode=OneWay}"/>
             <Separator/>
             <MenuItem Header="{DynamicResource Language_Add_To_Playlist}" DisplayMemberPath="Name">
                 <MenuItem.ItemContainerStyle>
@@ -93,7 +93,6 @@
             <DockPanel x:Name="ControlsPanel">
                 <commonviews:PlaybackInfoControl DockPanel.Dock="Top" Height="50" Width="286" Margin="20,10,0,0" TitleFontSize="22" TitleFontWeight="Light" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Grid>
-                    <commonviews:SpectrumAnalyzerControl x:Name="SpectrumAnalyzer" Panel.ZIndex="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                     <commonviews:MicroPlayerControls Panel.ZIndex="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
             </DockPanel>

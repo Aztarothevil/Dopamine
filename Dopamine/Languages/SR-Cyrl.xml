@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Плејер са сликом</Text>
 	<Text Key="Micro_Player">Микро плејер</Text>
 	<Text Key="Nano_Player">Нано плејер</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Закључај позицију</Text>
 	<Text Key="Always_On_Top">Увек на врху</Text>
 	<Text Key="Always_Show_Playback_Info">Увек прикажи извођача и назив</Text>

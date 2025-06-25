@@ -44,8 +44,6 @@ namespace Dopamine.Core.Audio
 
         void ApplyFilter(double[] filterValues);
 
-        ISpectrumPlayer GetWrapperSpectrumPlayer(SpectrumChannel channel);
-
         void SwitchAudioDevice(AudioDevice audioDevice);
 
         IList<AudioDevice> GetAllAudioDevices();

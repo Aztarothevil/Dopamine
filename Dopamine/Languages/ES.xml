@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Reproductor 'Carátula'</Text>
 	<Text Key="Micro_Player">Reproductor 'Micro'</Text>
 	<Text Key="Nano_Player">Reproductor 'Nano'</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Bloquear posición</Text>
 	<Text Key="Always_On_Top">Siempre visible</Text>
 	<Text Key="Always_Show_Playback_Info">Mostrar siempre artista y título</Text>

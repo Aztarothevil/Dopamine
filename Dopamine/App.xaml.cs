@@ -316,6 +316,7 @@ namespace Dopamine
                 containerRegistry.Register<object, CoverPlayer>(typeof(CoverPlayer).FullName);
                 containerRegistry.Register<object, MicroPlayer>(typeof(MicroPlayer).FullName);
                 containerRegistry.Register<object, NanoPlayer>(typeof(NanoPlayer).FullName);
+                containerRegistry.Register<object, MediumPlayer>(typeof(MediumPlayer).FullName);
                 //containerRegistry.Register<object, NowPlaying>(typeof(NowPlaying).FullName);
                 containerRegistry.Register<object, WindowControls>(typeof(WindowControls).FullName);
 

@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Плеер-обложка</Text>
 	<Text Key="Micro_Player">Микро-плеер</Text>
 	<Text Key="Nano_Player">Нано-плеер</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Закрепить позицию</Text>
 	<Text Key="Always_On_Top">Всегда поверх всех окон</Text>
 	<Text Key="Always_Show_Playback_Info">Всегда показывать исполнителя и название</Text>

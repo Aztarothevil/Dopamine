@@ -8,7 +8,7 @@ namespace Dopamine.Views.Common
 {
     public partial class NowPlayingControl : TracksViewBase
     {
-        public NowPlayingControl()
+        public NowPlayingControl() : base()
         {
             InitializeComponent();
 

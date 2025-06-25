@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Kansi soitin</Text>
 	<Text Key="Micro_Player">Mikro soitin</Text>
 	<Text Key="Nano_Player">Nano soitin</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Lukitse sijainta</Text>
 	<Text Key="Always_On_Top">Aina päällimmäisenä</Text>
 	<Text Key="Always_Show_Playback_Info">Näytä aina esittäjä ja kappale</Text>

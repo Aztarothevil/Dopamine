@@ -167,6 +167,7 @@
   <Text Key="Cover_Player">封面模式</Text>
   <Text Key="Micro_Player">简洁模式</Text>
   <Text Key="Nano_Player">极简模式</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
   <Text Key="Lock_Position">锁定位置</Text>
   <Text Key="Always_On_Top">总是置顶</Text>
   <Text Key="Always_Show_Playback_Info">总是显示标题与艺术家</Text>

@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Lecteur pochette</Text>
 	<Text Key="Micro_Player">Micro-lecteur</Text>
 	<Text Key="Nano_Player">Nano-lecteur</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Fixer la position</Text>
 	<Text Key="Always_On_Top">Toujours au premier plan</Text>
 	<Text Key="Always_Show_Playback_Info">Toujours afficher l'artiste et le titre</Text>

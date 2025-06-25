@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Plejer sa slikom</Text>
 	<Text Key="Micro_Player">Mikro plejer</Text>
 	<Text Key="Nano_Player">Nano plejer</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Zaključaj poziciju</Text>
 	<Text Key="Always_On_Top">Uvek na vrhu</Text>
 	<Text Key="Always_Show_Playback_Info">Uvek prikaži izvođača i naziv</Text>

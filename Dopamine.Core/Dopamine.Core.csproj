@@ -103,7 +103,6 @@
     <Compile Include="Audio\EqualizerPreset.cs" />
     <Compile Include="Audio\IPlayer.cs" />
     <Compile Include="Audio\IPlayerFactory.cs" />
-    <Compile Include="Audio\ISpectrumPlayer.cs" />
     <Compile Include="Audio\AudioDevice.cs" />
     <Compile Include="Audio\NVorbisSource.cs" />
     <Compile Include="Audio\PlaybackInterruptedEventArgs.cs" />
@@ -117,7 +116,6 @@
     <Compile Include="Base\UpdateInformation.cs" />
     <Compile Include="Enums\PageEnums.cs" />
     <Compile Include="Enums\PlayerEnums.cs" />
-    <Compile Include="Enums\SpectrumEnums.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\IDropInfoExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />

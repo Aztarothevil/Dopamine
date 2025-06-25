@@ -167,6 +167,7 @@
 	<Text Key="Cover_Player">Pemutar kover</Text>
 	<Text Key="Micro_Player">Pemutar mikro</Text>
 	<Text Key="Nano_Player">Pemutar nano</Text>
+	<Text Key="Medium_Player">Medium Player</Text>
 	<Text Key="Lock_Position">Kunci posisi</Text>
 	<Text Key="Always_On_Top">Selalu di atas</Text>
 	<Text Key="Always_Show_Playback_Info">Selalu tampilkan artis dan judul</Text>
