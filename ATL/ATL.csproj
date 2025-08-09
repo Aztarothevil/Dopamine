@@ -11,7 +11,7 @@
     <PackageTags>audio metadata tag mp3 mp4 aac id3v2 ogg vorbis opus flac playlist cue</PackageTags>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Zeugma440/atldotnet</PackageProjectUrl>
-    <Authors>Zeugma440</Authors>
+    <Authors>Aztarothevil</Authors>
     <Product>Audio Tools Library (ATL) for .NET</Product>
     <FileVersion>4.36.0.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
