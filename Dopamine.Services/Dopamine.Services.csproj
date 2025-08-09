@@ -132,8 +132,6 @@
     <Compile Include="Dialog\NotificationDialog.xaml.cs">
       <DependentUpon>NotificationDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Discord\IRichPresenceService.cs" />
-    <Compile Include="Discord\RichPresenceService.cs" />
     <Compile Include="Entities\AlbumViewModel.cs" />
     <Compile Include="Entities\ArtistViewModel.cs" />
     <Compile Include="Entities\FolderViewModel.cs" />

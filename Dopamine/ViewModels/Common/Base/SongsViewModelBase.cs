@@ -267,11 +267,11 @@ namespace Dopamine.ViewModels.Common.Base
                     this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_Toggle_Track_Order_ByDate").ToLower();
                     break;
                 case MusicOrder.ByDateCreated:
-                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Date_Created").ToLower();
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Reverse_Date_Modified").ToLower();
                     this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Date_Created").ToLower();
                     break;
                 case MusicOrder.ReverseByDateCreated:
-                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Reverse_Date_Created").ToLower();
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Reverse_Date_Modified").ToLower();
                     this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Reverse_Date_Created").ToLower();
                     break;
                 case MusicOrder.ByDateModified:
@@ -283,7 +283,7 @@ namespace Dopamine.ViewModels.Common.Base
                     this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Reverse_Date_Modified").ToLower();
                     break;
                 case MusicOrder.ByRating:
-                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Reverse_Date_Modified").ToLower();
+                    this.musicOrderText = clickText + ResourceUtils.GetString("Language_By_Date_Created").ToLower();
                     this.currentMusicOrderText = oderText + ResourceUtils.GetString("Language_By_Rating").ToLower();
                     break;
                 default:
@@ -582,6 +582,12 @@ namespace Dopamine.ViewModels.Common.Base
                     this.MusicOrder = MusicOrder.ByRating;
                     break;
                 case MusicOrder.ByRating:
+                    this.MusicOrder = MusicOrder.ByDateCreated;
+                    break;
+                case MusicOrder.ByDateCreated:
+                    this.MusicOrder = MusicOrder.ReverseByDateCreated;
+                    break;
+                case MusicOrder.ReverseByDateCreated:
                     this.MusicOrder = MusicOrder.ReverseByDateModified;
                     break;
                 case MusicOrder.ReverseByDateModified:

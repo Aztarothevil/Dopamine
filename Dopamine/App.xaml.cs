@@ -15,7 +15,6 @@ using Dopamine.Services.Cache;
 using Dopamine.Services.Collection;
 using Dopamine.Services.Command;
 using Dopamine.Services.Dialog;
-using Dopamine.Services.Discord;
 using Dopamine.Services.Equalizer;
 using Dopamine.Services.ExternalControl;
 using Dopamine.Services.File;
@@ -253,7 +252,7 @@ namespace Dopamine
                 containerRegistry.RegisterSingleton<IShellService, ShellService>();
                 containerRegistry.RegisterSingleton<ILifetimeService, LifetimeService>();
                 containerRegistry.RegisterSingleton<IInfoDownloadService, InfoDownloadService>();
-                containerRegistry.RegisterSingleton<IRichPresenceService, RichPresenceService>();
+                //containerRegistry.RegisterSingleton<IRichPresenceService, RichPresenceService>();
                 containerRegistry.RegisterSingleton<IBlacklistService, BlacklistService>();
 
                 INotificationService notificationService;
@@ -302,7 +301,6 @@ namespace Dopamine
                     SettingsClient.Get<bool>("Appearance", "FollowAlbumCoverColor")
                 );
                 Container.Resolve<IExternalControlService>();
-                Container.Resolve<IRichPresenceService>();
             }
 
             void RegisterViews()
