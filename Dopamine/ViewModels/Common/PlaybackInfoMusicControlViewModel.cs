@@ -20,7 +20,7 @@ namespace Dopamine.ViewModels.Common
         private PlaybackInfoViewModel playbackInfoViewModel;
         private IPlaybackService playbackService;
         private IMetadataService metadataService;
-        private IScrobblingService scrobblingService;
+        //private IScrobblingService scrobblingService;
         private SlideDirection slideDirection;
         private IAppearanceService appearanceService;
         private TrackViewModel previousTrack;
@@ -40,11 +40,11 @@ namespace Dopamine.ViewModels.Common
             set { SetProperty<SlideDirection>(ref this.slideDirection, value); }
         }
 
-        public PlaybackInfoMusicControlViewModel(IPlaybackService playbackService, IMetadataService metadataService, IScrobblingService scrobblingService, IAppearanceService appearanceService)
+        public PlaybackInfoMusicControlViewModel(IPlaybackService playbackService, IMetadataService metadataService, IAppearanceService appearanceService)
         {
             this.playbackService = playbackService;
             this.metadataService = metadataService;
-            this.scrobblingService = scrobblingService;
+            //this.scrobblingService = scrobblingService;
             this.appearanceService = appearanceService;
 
             this.refreshTimer.Interval = this.refreshTimerIntervalMilliseconds;

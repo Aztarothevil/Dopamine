@@ -28,7 +28,7 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
         private IEventAggregator eventAggregator;
         private ObservableCollection<SearchProvider> searchProviders;
         private SearchProvider selectedSearchProvider;
-        private IScrobblingService scrobblingService;
+        //private IScrobblingService scrobblingService;
         private bool isLastFmSignInInProgress;
         private bool checkBoxDownloadArtistInformationChecked;
         private bool checkBoxDownloadLyricsChecked;
@@ -169,19 +169,19 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
             }
         }
 
-        public bool IsLastFmSignedIn
-        {
-            get { return this.scrobblingService.SignInState == SignInState.SignedIn; }
-        }
+        //public bool IsLastFmSignedIn
+        //{
+        //    get { return this.scrobblingService.SignInState == SignInState.SignedIn; }
+        //}
 
-        public string LastFmUsername
-        {
-            get { return this.scrobblingService.Username; }
-            set
-            {
-                this.scrobblingService.Username = value;
-            }
-        }
+        //public string LastFmUsername
+        //{
+        //    get { return this.scrobblingService.Username; }
+        //    set
+        //    {
+        //        this.scrobblingService.Username = value;
+        //    }
+        //}
 
         public bool IsLastFmSigningIn
         {
@@ -192,37 +192,37 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
             }
         }
 
-        public bool IsLastFmSignInError
-        {
-            get { return this.scrobblingService.SignInState == SignInState.Error; }
-        }
+        //public bool IsLastFmSignInError
+        //{
+        //    get { return this.scrobblingService.SignInState == SignInState.Error; }
+        //}
 
-        public SettingsOnlineViewModel(IContainerProvider container, IProviderService providerService, IDialogService dialogService, IScrobblingService scrobblingService, IEventAggregator eventAggregator)
+        public SettingsOnlineViewModel(IContainerProvider container, IProviderService providerService, IDialogService dialogService, IEventAggregator eventAggregator)
         {
             this.container = container;
             this.providerService = providerService;
             this.dialogService = dialogService;
-            this.scrobblingService = scrobblingService;
+            //this.scrobblingService = scrobblingService;
             this.eventAggregator = eventAggregator;
 
-            this.scrobblingService.SignInStateChanged += (_) =>
-            {
-                this.IsLastFmSigningIn = false;
-                RaisePropertyChanged(nameof(this.IsLastFmSignedIn));
-                RaisePropertyChanged(nameof(this.LastFmUsername));
-                RaisePropertyChanged(nameof(this.IsLastFmSignInError));
-            };
+            //this.scrobblingService.SignInStateChanged += (_) =>
+            //{
+            //    this.IsLastFmSigningIn = false;
+            //    RaisePropertyChanged(nameof(this.IsLastFmSignedIn));
+            //    RaisePropertyChanged(nameof(this.LastFmUsername));
+            //    RaisePropertyChanged(nameof(this.IsLastFmSignInError));
+            //};
 
             this.AddCommand = new DelegateCommand(() => this.AddSearchProvider());
             this.EditCommand = new DelegateCommand(() => { this.EditSearchProvider(); }, () => { return this.SelectedSearchProvider != null; });
             this.RemoveCommand = new DelegateCommand(() => { this.RemoveSearchProvider(); }, () => { return this.SelectedSearchProvider != null; });
-            this.LastfmSignInCommand = new DelegateCommand(async () =>
-            {
-                this.IsLastFmSigningIn = true;
-                await this.scrobblingService.SignIn();
+            //this.LastfmSignInCommand = new DelegateCommand(async () =>
+            //{
+            //    this.IsLastFmSigningIn = true;
+            //    await this.scrobblingService.SignIn();
 
-            });
-            this.LastfmSignOutCommand = new DelegateCommand(() => this.scrobblingService.SignOut());
+            //});
+            //this.LastfmSignOutCommand = new DelegateCommand(() => this.scrobblingService.SignOut());
             this.CreateLastFmAccountCommand = new DelegateCommand(() =>
             {
                 try

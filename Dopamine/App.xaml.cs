@@ -48,7 +48,7 @@ using Dopamine.Views.FullPlayer.Settings;
 using Dopamine.Views.MiniPlayer;
 using Prism.DryIoc;
 using Prism.Ioc;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 using System;
 using System.Linq;
 using System.ServiceModel;
@@ -244,7 +244,7 @@ namespace Dopamine
                 containerRegistry.RegisterSingleton<IMetadataService, MetadataService>();
                 containerRegistry.RegisterSingleton<IEqualizerService, EqualizerService>();
                 containerRegistry.RegisterSingleton<IProviderService, ProviderService>();
-                containerRegistry.RegisterSingleton<IScrobblingService, ScrobblingService>();
+                //containerRegistry.RegisterSingleton<IScrobblingService, ScrobblingService>();
                 containerRegistry.RegisterSingleton<IPlaylistService, PlaylistService>();
                 containerRegistry.RegisterSingleton<IExternalControlService, ExternalControlService>();
                 containerRegistry.RegisterSingleton<IWindowsIntegrationService, WindowsIntegrationService>();

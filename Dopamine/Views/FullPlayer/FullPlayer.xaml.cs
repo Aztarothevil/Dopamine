@@ -1,5 +1,4 @@
 ﻿using Digimezzo.Foundation.WPF.Controls;
-using Prism.Regions;
 using System;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;

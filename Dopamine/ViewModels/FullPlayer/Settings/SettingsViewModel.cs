@@ -5,7 +5,7 @@ using Dopamine.Core.Prism;
 using Dopamine.Views.FullPlayer.Settings;
 using Prism.Events;
 using Prism.Mvvm;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 
 namespace Dopamine.ViewModels.FullPlayer.Settings
 {

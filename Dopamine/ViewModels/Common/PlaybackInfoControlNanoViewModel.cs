@@ -8,11 +8,9 @@ namespace Dopamine.ViewModels.Common
     {
         public PlaybackInfoControlNanoViewModel(
             IPlaybackService playbackService, 
-            IMetadataService metadataService,
-            IScrobblingService scrobblingService) : base(
+            IMetadataService metadataService) : base(
             playbackService, 
-            metadataService,
-            scrobblingService
+            metadataService
             )
         {
         }

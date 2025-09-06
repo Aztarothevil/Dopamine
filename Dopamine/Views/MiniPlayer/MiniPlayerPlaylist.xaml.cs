@@ -7,7 +7,7 @@ using Dopamine.Core.Prism;
 using Dopamine.Services.Playback;
 using Dopamine.Views.Common;
 using Prism.Events;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 using System;
 using System.Threading.Tasks;
 using System.Windows;

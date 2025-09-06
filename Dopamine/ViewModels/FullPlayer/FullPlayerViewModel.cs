@@ -9,7 +9,7 @@ using Dopamine.Views.FullPlayer;
 using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
-using Prism.Regions;
+using Prism.Navigation.Regions;
 using System;
 
 namespace Dopamine.ViewModels.FullPlayer

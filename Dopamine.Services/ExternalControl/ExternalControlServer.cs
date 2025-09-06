@@ -1,4 +1,5 @@
-﻿using CSCore.DSP;
+﻿using CoreWCF;
+using CSCore.DSP;
 using CSCore.Streams;
 using Dopamine.Core.Audio;
 using Dopamine.Core.Extensions;
@@ -9,7 +10,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 using System.Reflection;
-using System.ServiceModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
@@ -47,7 +47,7 @@ namespace Dopamine.Services.ExternalControl
             this.fftProviderDataTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(2) };
             this.fftProviderDataTimer.Tick += FftProviderDataTimerElapsed;
 
-            fftDataMemoryMappedFile = MemoryMappedFile.CreateOrOpen("DopamineFftDataMemory", FftDataLength, MemoryMappedFileAccess.ReadWrite, MemoryMappedFileOptions.DelayAllocatePages, null, HandleInheritability.None);
+            fftDataMemoryMappedFile = MemoryMappedFile.CreateOrOpen("DopamineFftDataMemory", FftDataLength, MemoryMappedFileAccess.ReadWrite, MemoryMappedFileOptions.DelayAllocatePages, HandleInheritability.None);
             fftDataMemoryMappedFileStream = fftDataMemoryMappedFile.CreateViewStream(0, FftDataLength, MemoryMappedFileAccess.ReadWrite);
             fftDataMemoryMappedFileStreamWriter = new BinaryWriter(fftDataMemoryMappedFileStream);
             fftDataMemoryMappedFileMutex = new Mutex(true, "DopamineFftDataMemoryMutex");

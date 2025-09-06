@@ -18,7 +18,7 @@ namespace Dopamine.ViewModels.Common
         private PlaybackInfoViewModel playbackInfoViewModel;
         private IPlaybackService playbackService;
         private IMetadataService metadataService;
-        private IScrobblingService scrobblingService;
+        //private IScrobblingService scrobblingService;
         private SlideDirection slideDirection;
         private TrackViewModel previousTrack;
         private TrackViewModel track;
@@ -62,7 +62,7 @@ namespace Dopamine.ViewModels.Common
                     this.metadataService.UpdateTrackLoveAsync(this.track.Path, value);
 
                     // Send Love/Unlove to the scrobbling service
-                    this.scrobblingService.SendTrackLoveAsync(this.track, value);
+                    //this.scrobblingService.SendTrackLoveAsync(this.track, value);
                 }
             }
         }
@@ -91,11 +91,11 @@ namespace Dopamine.ViewModels.Common
             set { SetProperty<bool>(ref this.enableLove, value); }
         }
 
-        public PlaybackInfoControlViewModel(IPlaybackService playbackService, IMetadataService metadataService, IScrobblingService scrobblingService)
+        public PlaybackInfoControlViewModel(IPlaybackService playbackService, IMetadataService metadataService)
         {
             this.playbackService = playbackService;
             this.metadataService = metadataService;
-            this.scrobblingService = scrobblingService;
+            //this.scrobblingService = scrobblingService;
 
             this.refreshTimer.Interval = this.refreshTimerIntervalMilliseconds;
             this.refreshTimer.Elapsed += RefreshTimer_Elapsed;

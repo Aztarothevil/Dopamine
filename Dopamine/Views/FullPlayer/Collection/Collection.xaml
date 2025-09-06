@@ -4,7 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:prism="http://www.codeplex.com/prism"
+             xmlns:prism="clr-namespace:Prism.Navigation.Regions;assembly=Prism"
              xmlns:commonviews="clr-namespace:Dopamine.Views.Common"
              xmlns:cp="clr-namespace:Dopamine.Core.Prism;assembly=Dopamine.Core"
              xmlns:controls="clr-namespace:Dopamine.Controls"
@@ -26,7 +26,7 @@
         <Grid Grid.Row="1" Panel.ZIndex="1" DockPanel.Dock="Bottom">
             <Border Panel.ZIndex="0" Background="{DynamicResource Brush_WindowHeaderBackground}" 
                     HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="70"/>
-            <commonviews:CollectionPlaybackControls Panel.ZIndex="2" Foreground="{DynamicResource Brush_PrimaryText}"/>
+            <!--<commonviews:CollectionPlaybackControls Panel.ZIndex="2" Foreground="{DynamicResource Brush_PrimaryText}"/>-->
         </Grid>
     </Grid>
 </UserControl>

@@ -1,6 +1,5 @@
 ﻿using Digimezzo.Foundation.WPF.Controls;
 using Dopamine.Views.Common.Base;
-using Prism.Regions;
 using System;
 using System.Windows.Controls;
 using System.Windows.Input;

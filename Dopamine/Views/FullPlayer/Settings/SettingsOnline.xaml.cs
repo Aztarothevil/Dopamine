@@ -1,25 +1,25 @@
-﻿using Dopamine.Services.Scrobbling;
-using CommonServiceLocator;
-using System.Windows.Controls;
+﻿//using Dopamine.Services.Scrobbling;
+//using CommonServiceLocator;
+//using System.Windows.Controls;
 
-namespace Dopamine.Views.FullPlayer.Settings
-{
-    public partial class SettingsOnline : UserControl
-    {
-        private IScrobblingService scrobblingService;
+//namespace Dopamine.Views.FullPlayer.Settings
+//{
+//    public partial class SettingsOnline : UserControl
+//    {
+//        private IScrobblingService scrobblingService;
 
-        public SettingsOnline()
-        {
-            InitializeComponent();
+//        public SettingsOnline()
+//        {
+//            InitializeComponent();
 
-            this.scrobblingService = ServiceLocator.Current.GetInstance<IScrobblingService>();
-            this.scrobblingService.SignInStateChanged += (_) => this.PasswordBox.Password = scrobblingService.Password;
-            this.PasswordBox.Password = scrobblingService.Password;
-        }
+//            this.scrobblingService = ServiceLocator.Current.GetInstance<IScrobblingService>();
+//            this.scrobblingService.SignInStateChanged += (_) => this.PasswordBox.Password = scrobblingService.Password;
+//            this.PasswordBox.Password = scrobblingService.Password;
+//        }
 
-        private void PasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
-        {
-            scrobblingService.Password = this.PasswordBox.Password;
-        }
-    }
-}
+//        private void PasswordBox_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
+//        {
+//            scrobblingService.Password = this.PasswordBox.Password;
+//        }
+//    }
+//}

@@ -1,5 +1,4 @@
-﻿using Dopamine.Core.Api.Lastfm;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,15 +37,15 @@ namespace Dopamine.Services.InfoDownload
                 return null;
             }
 
-            foreach (string artist in artists)
-            {
-                LastFmAlbum lfmAlbum = await LastfmApi.AlbumGetInfo(artist, title, false, "EN");
+            //foreach (string artist in artists)
+            //{
+            //    LastFmAlbum lfmAlbum = await LastfmApi.AlbumGetInfo(artist, title, false, "EN");
 
-                if (!string.IsNullOrEmpty(lfmAlbum.LargestImage()))
-                {
-                    return lfmAlbum.LargestImage();
-                }
-            }
+            //    if (!string.IsNullOrEmpty(lfmAlbum.LargestImage()))
+            //    {
+            //        return lfmAlbum.LargestImage();
+            //    }
+            //}
 
             return null;
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Digimezzo.Foundation.Core.Utils;
 
 namespace Dopamine.Core.Base
 {
@@ -11,7 +10,7 @@ namespace Dopamine.Core.Base
         public static string DoubleColumnValueDelimiter = $"{ColumnValueDelimiter}{ColumnValueDelimiter}";
 
         // Environment
-        public static bool IsWindows10 = EnvironmentUtils.IsWindows10();
+        public static bool IsWindows10 = Environment.OSVersion.Version.Major == 10;
 
         // Links
         public static string HomeLink = "https://www.digimezzo.com";
