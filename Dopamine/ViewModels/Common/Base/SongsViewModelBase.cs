@@ -1,4 +1,5 @@
-﻿using Digimezzo.Foundation.Core.Logging;
+﻿using CSCore.Codecs.FLAC;
+using Digimezzo.Foundation.Core.Logging;
 using Digimezzo.Foundation.Core.Utils;
 using Dopamine.Core.Base;
 using Dopamine.Core.Extensions;
@@ -67,6 +68,8 @@ namespace Dopamine.ViewModels.Common.Base
         public DelegateCommand DelaySelectedAlbumsCommand { get; set; }
 
         public DelegateCommand ShuffleSelectedAlbumsCommand { get; set; }
+
+        public DelegateCommand RemoveSelectedSongFromDiskCommand { get; set; }
 
         public double UpscaledCoverSize => this.CoverSize * Constants.CoverUpscaleFactor;
 
@@ -155,7 +158,8 @@ namespace Dopamine.ViewModels.Common.Base
             //this.EditAlbumCommand = new DelegateCommand(() => this.EditSelectedAlbum(), () => !this.IsIndexing);
             this.AddAlbumsToNowPlayingCommand = new DelegateCommand(async () => await this.AddAlbumsToNowPlayingAsync(this.SelectedAlbums));
             //this.DelaySelectedAlbumsCommand = new DelegateCommand(() => this.delaySelectedAlbums = true);
-
+            this.RemoveSelectedSongFromDiskCommand = new DelegateCommand(async () => await this.RemoveSongFromDiskAsync(this.SelectedAlbums.FirstOrDefault()), () => !this.IsIndexing);
+            
             // Events
             //this.indexingService.AlbumArtworkAdded += async (_, e) => await this.RefreshAlbumArtworkAsync(e.AlbumKeys);
 
@@ -177,6 +181,8 @@ namespace Dopamine.ViewModels.Common.Base
             //        await this.SetCoversizeAsync((CoverSizeType)selectedCoverSize);
             //    }
             //});
+
+            this.dialogService = container.Resolve<IDialogService>();
         }
 
         public async Task LoadAlbumArtworkAsync(int delayMilliSeconds)
@@ -484,13 +490,38 @@ namespace Dopamine.ViewModels.Common.Base
             }
         }
 
-        protected async Task AddAlbumsToNowPlayingAsync(IList<SongViewModel> albumViewModel)
+        protected async Task AddAlbumsToNowPlayingAsync(IList<SongViewModel> SongsViewModel)
         {
-            EnqueueResult result = await this.playbackService.AddMusicToQueueAsync(albumViewModel);
+            EnqueueResult result = await this.playbackService.AddMusicToQueueAsync(SongsViewModel);
 
             if (!result.IsSuccess)
             {
                 this.dialogService.ShowNotification(0xe711, 16, ResourceUtils.GetString("Language_Error"), ResourceUtils.GetString("Language_Error_Adding_Albums_To_Now_Playing"), ResourceUtils.GetString("Language_Ok"), true, ResourceUtils.GetString("Language_Log_File"));
+            }
+        }
+
+        protected async Task RemoveSongFromDiskAsync(SongViewModel SongViewModel)
+        {
+            string title = ResourceUtils.GetString("Language_Remove_From_Disk");
+            string body = ResourceUtils.GetString("Language_Are_You_Sure_To_Remove_Song_From_Disk");
+
+            if (SongViewModel != null)
+            {
+                body = ResourceUtils.GetString("Language_Are_You_Sure_To_Remove_Songs_From_Disk");
+            }
+
+            if (this.dialogService.ShowConfirmation(0xe11b, 16, title, body, ResourceUtils.GetString("Language_Yes"), ResourceUtils.GetString("Language_No")))
+            {
+                RemoveTracksResult result = await this.collectionService.RemoveSongFromDiskAsync(SongViewModel);
+
+                if (result == RemoveTracksResult.Error)
+                {
+                    this.dialogService.ShowNotification(0xe711, 16, ResourceUtils.GetString("Language_Error"), ResourceUtils.GetString("Language_Error_Removing_Songs_From_Disk"), ResourceUtils.GetString("Language_Ok"), true, ResourceUtils.GetString("Language_Log_File"));
+                }
+                else
+                {
+                    await this.playbackService.DequeueAsync(SongViewModel);
+                }
             }
         }
 

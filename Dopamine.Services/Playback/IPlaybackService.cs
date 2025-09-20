@@ -103,6 +103,8 @@ namespace Dopamine.Services.Playback
 
         Task StopIfPlayingAsync(TrackViewModel track);
 
+        Task StopIfPlayingAsync(string path);
+
         Task<EnqueueResult> AddToQueueAsync(IList<TrackViewModel> tracks);
 
         Task<EnqueueResult> AddArtistsToQueueAsync(IList<string> artists);
@@ -118,6 +120,8 @@ namespace Dopamine.Services.Playback
         Task<EnqueueResult> AddToQueueNextAsync(IList<TrackViewModel> tracks);
 
         Task<DequeueResult> DequeueAsync(IList<TrackViewModel> tracks);
+
+        Task<DequeueResult> DequeueAsync(SongViewModel track);
 
         Task<DequeueResult> DequeueAllAsync();
 

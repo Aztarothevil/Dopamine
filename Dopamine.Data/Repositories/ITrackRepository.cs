@@ -26,6 +26,8 @@ namespace Dopamine.Data.Repositories
 
         Task<RemoveTracksResult> RemoveTracksAsync(IList<Track> tracks);
 
+        Task<RemoveTracksResult> RemoveSongsAsync(IList<string> pathsToRemove);
+
         Task<bool> UpdateTrackAsync(Track track);
 
         Task<bool> UpdateTrackFileInformationAsync(string path);

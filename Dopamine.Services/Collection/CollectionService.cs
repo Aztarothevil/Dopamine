@@ -83,6 +83,36 @@ namespace Dopamine.Services.Collection
             return RemoveTracksResult.Error;
         }
 
+        public async Task<RemoveTracksResult> RemoveSongFromDiskAsync(SongViewModel selectedSong)
+        {
+            var sendToRecycleBinResult = RemoveTracksResult.Success;
+            var result = await this.trackRepository.RemoveSongsAsync(new List<string>() { selectedSong.Path });
+
+            if (result == RemoveTracksResult.Success)
+            {
+                // When the track is playing, the corresponding file is handled by IPlayer.
+                // To delete the file properly, PlaybackService must release this handle.
+                await this.playbackService.StopIfPlayingAsync(selectedSong.Path);
+
+                try
+                {
+                    // Delete file from disk
+                    FileUtils.SendToRecycleBinSilent(selectedSong.Path);
+                }
+                catch (Exception ex)
+                {
+                    LogClient.Error($"Error while removing track '{selectedSong.SongTitle}' from disk. Exception: {ex.Message}");
+                    sendToRecycleBinResult = RemoveTracksResult.Error;
+                }
+
+                this.CollectionChanged(this, new EventArgs());
+            }
+
+            if (sendToRecycleBinResult == RemoveTracksResult.Success && result == RemoveTracksResult.Success)
+                return RemoveTracksResult.Success;
+            return RemoveTracksResult.Error;
+        }
+
         private async Task<IList<ArtistViewModel>> GetUniqueArtistsAsync(IList<string> artists)
         {
             IList<ArtistViewModel> uniqueArtists = new List<ArtistViewModel>();

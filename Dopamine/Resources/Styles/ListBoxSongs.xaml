@@ -42,6 +42,7 @@
         </MenuItem>
         <Separator/>-->
         <MenuItem Header="{DynamicResource Language_Add_To_Now_Playing}" InputGestureText="" Command="{Binding DataContext.AddAlbumsToNowPlayingCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+        <MenuItem Header="{DynamicResource Language_Remove_From_Disk}" InputGestureText="" Command="{Binding DataContext.RemoveSelectedSongFromDiskCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
         <!--<MenuItem Header="{DynamicResource Language_Add_To_Playlist}" DisplayMemberPath="Name">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="MenuItem">

@@ -407,6 +407,21 @@ namespace Dopamine.Services.Playback
             }
         }
 
+        public async Task StopIfPlayingAsync(string path)
+        {
+            if (path.Equals(this.CurrentTrack.Path))
+            {
+                if (this.Queue.Count == 1)
+                {
+                    this.Stop();
+                }
+                else
+                {
+                    await this.PlayNextAsync();
+                }
+            }
+        }
+
         public async Task UpdateQueueOrderAsync(IList<TrackViewModel> tracks)
         {
             if (await this.queueManager.UpdateQueueOrderAsync(tracks, this.shuffle))
@@ -924,6 +939,30 @@ namespace Dopamine.Services.Playback
 
             return result;
         }
+
+        public async Task<DequeueResult> DequeueAsync(SongViewModel track)
+        {
+            DequeueResult dequeueResult = await this.queueManager.DequeueAsync(track);
+
+            if (dequeueResult.IsSuccess & dequeueResult.IsPlayingTrackDequeued)
+            {
+                if (dequeueResult.NextAvailableTrack != null)
+                {
+                    await this.TryPlayAsync(dequeueResult.NextAvailableTrack);
+                }
+                else
+                {
+                    this.Stop();
+                }
+            }
+
+            this.QueueChanged(this, new EventArgs());
+
+            this.ResetSaveQueuedTracksTimer(); // Save queued tracks to the database
+
+            return dequeueResult;
+        }
+
 
         public async Task<DequeueResult> DequeueAsync(IList<TrackViewModel> tracks)
         {

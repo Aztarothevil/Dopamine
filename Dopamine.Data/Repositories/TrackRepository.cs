@@ -376,6 +376,51 @@ namespace Dopamine.Data.Repositories
             return result;
         }
 
+        public async Task<RemoveTracksResult> RemoveSongsAsync(IList<string> pathsToRemove)
+        {
+            RemoveTracksResult result = RemoveTracksResult.Success;
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    try
+                    {
+                        using (var conn = this.factory.GetConnection())
+                        {
+                            conn.Execute("BEGIN TRANSACTION");
+
+                            foreach (string path in pathsToRemove)
+                            {
+                                // Add to table RemovedTrack, only if not already present.
+                                conn.Execute("INSERT INTO RemovedTrack(DateRemoved, Path, SafePath) SELECT ?,?,? WHERE NOT EXISTS (SELECT 1 FROM RemovedTrack WHERE SafePath=?)", DateTime.Now.Ticks, path, path.ToSafePath(), path.ToSafePath());
+
+                                // Remove from QueuedTrack
+                                conn.Execute("DELETE FROM QueuedTrack WHERE SafePath=?", path.ToSafePath());
+
+                                // Remove from Track
+                                conn.Execute("DELETE FROM Track WHERE SafePath=?", path.ToSafePath());
+                            }
+
+                            conn.Execute("COMMIT");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogClient.Error("Could remove tracks from the database. Exception: {0}", ex.Message);
+                        result = RemoveTracksResult.Error;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogClient.Error("Could not connect to the database. Exception: {0}", ex.Message);
+                    result = RemoveTracksResult.Error;
+                }
+            });
+
+            return result;
+        }
+
         public async Task ClearRemovedTrackAsync()
         {
             await Task.Run(() =>
