@@ -3,7 +3,6 @@ using Digimezzo.Foundation.Core.Utils;
 using Dopamine.Services.Cache;
 using Dopamine.Services.Dialog;
 using Dopamine.Services.Entities;
-using Dopamine.Services.InfoDownload;
 using Dopamine.Services.Metadata;
 using Dopamine.Utils;
 using Dopamine.ViewModels.Common.Base;
@@ -19,7 +18,6 @@ namespace Dopamine.ViewModels.Common
         private IMetadataService metadataService;
         private IDialogService dialogService;
         private ICacheService cacheService;
-        private IInfoDownloadService infoDownloadService;
         private bool updateFileArtwork;
 
         public AlbumViewModel AlbumViewModel
@@ -28,7 +26,6 @@ namespace Dopamine.ViewModels.Common
             set
             {
                 SetProperty(ref this.albumViewModel, value);
-                this.DownloadArtworkCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -45,13 +42,12 @@ namespace Dopamine.ViewModels.Common
         public DelegateCommand RemoveArtworkCommand { get; set; }
 
         public EditAlbumViewModel(AlbumViewModel albumViewModel, IMetadataService metadataService,
-            IDialogService dialogService, ICacheService cacheService, IInfoDownloadService infoDownloadService) : base(cacheService, infoDownloadService)
+            IDialogService dialogService, ICacheService cacheService) : base(cacheService)
         {
             this.albumViewModel = albumViewModel;
             this.metadataService = metadataService;
             this.dialogService = dialogService;
             this.cacheService = cacheService;
-            this.infoDownloadService = infoDownloadService;
 
             this.LoadedCommand = new DelegateCommand(async () => await this.GetAlbumArtworkAsync());
 
@@ -65,19 +61,6 @@ namespace Dopamine.ViewModels.Common
 
 
             this.RemoveArtworkCommand = new DelegateCommand(() => this.UpdateArtwork(null));
-            this.DownloadArtworkCommand = new DelegateCommand(async () => await this.DownloadArtworkAsync(), () => this.CanDownloadArtwork());
-        }
-
-        private async Task DownloadArtworkAsync()
-        {
-            try
-            {
-                await this.DownloadArtworkAsync(this.albumViewModel.AlbumTitle, this.albumViewModel.AlbumArtists);
-            }
-            catch (Exception ex)
-            {
-                LogClient.Error("Could not download artwork. Exception: {0}", ex.Message);
-            }
         }
 
         private bool CanDownloadArtwork()

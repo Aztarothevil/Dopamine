@@ -93,6 +93,7 @@ namespace Dopamine.Data
                              "PlayCount	            INTEGER," +
                              "SkipCount	            INTEGER," +
                              "DateLastPlayed        INTEGER," +
+                             "SortTrackNumber        INTEGER," +
                              "PRIMARY KEY(TrackID));");
 
                 conn.Execute("CREATE INDEX TrackPathIndex ON Track(Path);");

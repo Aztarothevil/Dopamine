@@ -6,7 +6,6 @@ using Dopamine.Services.Appearance;
 using Dopamine.Services.Entities;
 using Dopamine.Services.Metadata;
 using Dopamine.Services.Playback;
-using Dopamine.Services.Scrobbling;
 using Prism.Mvvm;
 using System;
 using System.Drawing;
@@ -20,7 +19,6 @@ namespace Dopamine.ViewModels.Common
         private PlaybackInfoViewModel playbackInfoViewModel;
         private IPlaybackService playbackService;
         private IMetadataService metadataService;
-        private IScrobblingService scrobblingService;
         private SlideDirection slideDirection;
         private IAppearanceService appearanceService;
         private TrackViewModel previousTrack;
@@ -40,11 +38,10 @@ namespace Dopamine.ViewModels.Common
             set { SetProperty<SlideDirection>(ref this.slideDirection, value); }
         }
 
-        public PlaybackInfoMusicControlViewModel(IPlaybackService playbackService, IMetadataService metadataService, IScrobblingService scrobblingService, IAppearanceService appearanceService)
+        public PlaybackInfoMusicControlViewModel(IPlaybackService playbackService, IMetadataService metadataService, IAppearanceService appearanceService)
         {
             this.playbackService = playbackService;
             this.metadataService = metadataService;
-            this.scrobblingService = scrobblingService;
             this.appearanceService = appearanceService;
 
             this.refreshTimer.Interval = this.refreshTimerIntervalMilliseconds;

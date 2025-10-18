@@ -9,7 +9,6 @@ using Dopamine.Data.Entities;
 using Dopamine.Data.Metadata;
 using Dopamine.Data.Repositories;
 using Dopamine.Services.Cache;
-using Dopamine.Services.InfoDownload;
 using Dopamine.Services.Utils;
 using SQLite;
 using System;
@@ -24,7 +23,6 @@ namespace Dopamine.Services.Indexing
     {
         // Services
         private ICacheService cacheService;
-        private IInfoDownloadService infoDownloadService;
 
         // Repositories
         private ITrackRepository trackRepository;
@@ -60,11 +58,10 @@ namespace Dopamine.Services.Indexing
             get { return this.isIndexing; }
         }
 
-        public IndexingService(ISQLiteConnectionFactory factory, ICacheService cacheService, IInfoDownloadService infoDownloadService,
+        public IndexingService(ISQLiteConnectionFactory factory, ICacheService cacheService,
             ITrackRepository trackRepository, IFolderRepository folderRepository, IAlbumArtworkRepository albumArtworkRepository)
         {
             this.cacheService = cacheService;
-            this.infoDownloadService = infoDownloadService;
             this.trackRepository = trackRepository;
             this.folderRepository = folderRepository;
             this.albumArtworkRepository = albumArtworkRepository;
@@ -108,6 +105,7 @@ namespace Dopamine.Services.Indexing
             {
                 return;
             }
+            this.isIndexing = true;
 
             LogClient.Info("+++ STARTED CHECKING COLLECTION +++");
 
@@ -165,12 +163,12 @@ namespace Dopamine.Services.Indexing
 
         private async Task IndexCollectionAsync()
         {
-            if (this.IsIndexing)
-            {
-                return;
-            }
+            //if (this.IsIndexing)
+            //{
+            //    return;
+            //}
 
-            this.isIndexing = true;
+            //this.isIndexing = true;
 
             this.IndexingStarted(this, new EventArgs());
 
@@ -639,12 +637,6 @@ namespace Dopamine.Services.Indexing
         {
             Track track = await this.trackRepository.GetLastModifiedTrackForAlbumKeyAsync(albumKey);
             return await this.cacheService.CacheArtworkAsync(IndexerUtils.GetArtwork(albumKey, new FileMetadata(track.Path)));
-        }
-
-        private async Task<string> GetArtworkFromInternet(string albumTitle, IList<string> albumArtists, string trackTitle, IList<string> artists)
-        {
-            string artworkUriString = await this.infoDownloadService.GetAlbumImageAsync(albumTitle, albumArtists, trackTitle, artists);
-            return await this.cacheService.CacheArtworkAsync(artworkUriString);
         }
 
         private async void AddArtworkInBackgroundAsync()

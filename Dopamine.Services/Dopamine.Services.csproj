@@ -133,7 +133,6 @@
       <DependentUpon>NotificationDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Entities\AlbumViewModel.cs" />
-    <Compile Include="Entities\ArtistViewModel.cs" />
     <Compile Include="Entities\FolderViewModel.cs" />
     <Compile Include="Entities\GenreViewModel.cs" />
     <Compile Include="Entities\PlaylistViewModel.cs" />
@@ -173,8 +172,6 @@
     <Compile Include="Entities\ISemanticZoomable.cs" />
     <Compile Include="Entities\ISemanticZoomSelector.cs" />
     <Compile Include="Entities\ISemanticZoomViewModel.cs" />
-    <Compile Include="InfoDownload\IInfoDownloadService.cs" />
-    <Compile Include="InfoDownload\InfoDownloadService.cs" />
     <Compile Include="JumpList\IJumpListService.cs" />
     <Compile Include="JumpList\JumpListService.cs" />
     <Compile Include="Lifetime\ILifetimeService.cs" />
@@ -222,9 +219,6 @@
     <Compile Include="Provider\IProviderService.cs" />
     <Compile Include="Provider\ProviderService.cs" />
     <Compile Include="Provider\SearchProvider.cs" />
-    <Compile Include="Scrobbling\Enums.cs" />
-    <Compile Include="Scrobbling\IScrobblingService.cs" />
-    <Compile Include="Scrobbling\ScrobblingService.cs" />
     <Compile Include="Search\ISearchService.cs" />
     <Compile Include="Search\SearchService.cs" />
     <Compile Include="Shell\EventArgs.cs" />

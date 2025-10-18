@@ -6,7 +6,6 @@ using Digimezzo.Foundation.Core.Utils;
 using Dopamine.Core.Base;
 using Dopamine.Services.Dialog;
 using Dopamine.Services.Provider;
-using Dopamine.Services.Scrobbling;
 using Dopamine.Views.FullPlayer.Settings;
 using Prism.Commands;
 using Prism.Events;
@@ -28,8 +27,6 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
         private IEventAggregator eventAggregator;
         private ObservableCollection<SearchProvider> searchProviders;
         private SearchProvider selectedSearchProvider;
-        private IScrobblingService scrobblingService;
-        private bool isLastFmSignInInProgress;
         private bool checkBoxDownloadArtistInformationChecked;
         private bool checkBoxDownloadLyricsChecked;
         private bool checkBoxChartLyricsChecked;
@@ -44,9 +41,6 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
         public DelegateCommand AddCommand { get; set; }
         public DelegateCommand EditCommand { get; set; }
         public DelegateCommand RemoveCommand { get; set; }
-        public DelegateCommand LastfmSignInCommand { get; set; }
-        public DelegateCommand LastfmSignOutCommand { get; set; }
-        public DelegateCommand CreateLastFmAccountCommand { get; set; }
 
         public ObservableCollection<NameValue> Timeouts
         {
@@ -139,16 +133,6 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
             }
         }
 
-        public bool CheckBoxDownloadArtistInformationChecked
-        {
-            get { return this.checkBoxDownloadArtistInformationChecked; }
-            set
-            {
-                SettingsClient.Set<bool>("Lastfm", "DownloadArtistInformation", value);
-                SetProperty<bool>(ref this.checkBoxDownloadArtistInformationChecked, value);
-            }
-        }
-
         public bool CheckBoxEnableDiscordRichPresence
         {
             get { return this.checkBoxEnableDiscordRichPresence; }
@@ -169,71 +153,16 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
             }
         }
 
-        public bool IsLastFmSignedIn
-        {
-            get { return this.scrobblingService.SignInState == SignInState.SignedIn; }
-        }
-
-        public string LastFmUsername
-        {
-            get { return this.scrobblingService.Username; }
-            set
-            {
-                this.scrobblingService.Username = value;
-            }
-        }
-
-        public bool IsLastFmSigningIn
-        {
-            get { return this.isLastFmSignInInProgress; }
-            set
-            {
-                SetProperty<bool>(ref this.isLastFmSignInInProgress, value);
-            }
-        }
-
-        public bool IsLastFmSignInError
-        {
-            get { return this.scrobblingService.SignInState == SignInState.Error; }
-        }
-
-        public SettingsOnlineViewModel(IContainerProvider container, IProviderService providerService, IDialogService dialogService, IScrobblingService scrobblingService, IEventAggregator eventAggregator)
+        public SettingsOnlineViewModel(IContainerProvider container, IProviderService providerService, IDialogService dialogService, IEventAggregator eventAggregator)
         {
             this.container = container;
             this.providerService = providerService;
             this.dialogService = dialogService;
-            this.scrobblingService = scrobblingService;
             this.eventAggregator = eventAggregator;
-
-            this.scrobblingService.SignInStateChanged += (_) =>
-            {
-                this.IsLastFmSigningIn = false;
-                RaisePropertyChanged(nameof(this.IsLastFmSignedIn));
-                RaisePropertyChanged(nameof(this.LastFmUsername));
-                RaisePropertyChanged(nameof(this.IsLastFmSignInError));
-            };
 
             this.AddCommand = new DelegateCommand(() => this.AddSearchProvider());
             this.EditCommand = new DelegateCommand(() => { this.EditSearchProvider(); }, () => { return this.SelectedSearchProvider != null; });
             this.RemoveCommand = new DelegateCommand(() => { this.RemoveSearchProvider(); }, () => { return this.SelectedSearchProvider != null; });
-            this.LastfmSignInCommand = new DelegateCommand(async () =>
-            {
-                this.IsLastFmSigningIn = true;
-                await this.scrobblingService.SignIn();
-
-            });
-            this.LastfmSignOutCommand = new DelegateCommand(() => this.scrobblingService.SignOut());
-            this.CreateLastFmAccountCommand = new DelegateCommand(() =>
-            {
-                try
-                {
-                    Actions.TryOpenLink(Constants.LastFmJoinLink);
-                }
-                catch (Exception ex)
-                {
-                    LogClient.Error("Could not open the Last.fm web page. Exception: {0}", ex.Message);
-                }
-            });
 
             this.GetSearchProvidersAsync();
 

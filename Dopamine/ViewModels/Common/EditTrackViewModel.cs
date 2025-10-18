@@ -5,7 +5,6 @@ using Dopamine.Core.Enums;
 using Dopamine.Data.Metadata;
 using Dopamine.Services.Cache;
 using Dopamine.Services.Dialog;
-using Dopamine.Services.InfoDownload;
 using Dopamine.Services.Metadata;
 using Dopamine.Utils;
 using Dopamine.ViewModels.Common.Base;
@@ -24,7 +23,6 @@ namespace Dopamine.ViewModels.Common
         private IList<string> paths;
         private IMetadataService metadataService;
         private IDialogService dialogService;
-        private IInfoDownloadService infoDownloadService;
 
         private string multipleValuesText;
         private bool hasMultipleArtwork;
@@ -107,7 +105,6 @@ namespace Dopamine.ViewModels.Common
             set
             {
                 SetProperty<MetadataValue>(ref this.artists, value);
-                this.DownloadArtworkCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -123,7 +120,6 @@ namespace Dopamine.ViewModels.Common
             set
             {
                 SetProperty<MetadataValue>(ref this.album, value);
-                this.DownloadArtworkCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -133,7 +129,6 @@ namespace Dopamine.ViewModels.Common
             set
             {
                 SetProperty<MetadataValue>(ref this.albumArtists, value);
-                this.DownloadArtworkCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -198,13 +193,12 @@ namespace Dopamine.ViewModels.Common
         }
 
         public EditTrackViewModel(IList<string> paths, IMetadataService metadataService,
-            IDialogService dialogService, ICacheService cacheService, IInfoDownloadService infoDownloadService) : base(cacheService, infoDownloadService)
+            IDialogService dialogService, ICacheService cacheService) : base(cacheService)
         {
             this.multipleValuesText = "<" + ResourceUtils.GetString("Language_Multiple_Values") + ">";
 
             this.metadataService = metadataService;
             this.dialogService = dialogService;
-            this.infoDownloadService = infoDownloadService;
 
             this.paths = paths;
 
@@ -233,23 +227,6 @@ namespace Dopamine.ViewModels.Common
             });
 
             this.RemoveArtworkCommand = new DelegateCommand(() => this.UpdateArtwork(null));
-            this.DownloadArtworkCommand = new DelegateCommand(async () => await this.DownloadArtworkAsync(), () => this.CanDownloadArtwork());
-        }
-
-        private async Task DownloadArtworkAsync()
-        {
-            try
-            {
-                await base.DownloadArtworkAsync(
-                   this.album.Value,
-                   new List<string>() { this.albumArtists.Values.FirstOrDefault() },
-                   this.Title.Value,
-                   new List<string>() { this.artists.Values.FirstOrDefault() });
-            }
-            catch (Exception ex)
-            {
-                LogClient.Error("Could not download artwork. Exception: {0}", ex.Message);
-            }
         }
 
         private void NagivateToSelectedPage()

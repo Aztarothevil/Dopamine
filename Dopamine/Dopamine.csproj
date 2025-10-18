@@ -249,11 +249,9 @@
     <Compile Include="Utils\ScrollInfoAdapter.cs" />
     <Compile Include="Utils\SlidingContentControlRegionAdapter.cs" />
     <Compile Include="Utils\UriUtils.cs" />
-    <Compile Include="ViewModels\ArtistInfoViewModel.cs" />
     <Compile Include="ViewModels\Common\CollectionFoldersSettingsViewModel.cs" />
     <Compile Include="ViewModels\Common\AppearanceLanguageViewModel.cs" />
     <Compile Include="ViewModels\Common\AppearanceThemeViewModel.cs" />
-    <Compile Include="ViewModels\Common\ArtistInfoControlViewModel.cs" />
     <Compile Include="ViewModels\Common\BackgroundCoverArtControlViewModel.cs" />
     <Compile Include="ViewModels\Common\Base\SongsViewModelBase.cs" />
     <Compile Include="ViewModels\Common\Base\CommonViewModelBase.cs" />

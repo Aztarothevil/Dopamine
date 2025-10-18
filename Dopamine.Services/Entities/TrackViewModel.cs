@@ -5,7 +5,6 @@ using Dopamine.Core.Utils;
 using Dopamine.Data;
 using Dopamine.Data.Entities;
 using Dopamine.Services.Metadata;
-using Dopamine.Services.Scrobbling;
 using Prism.Mvvm;
 using System;
 
@@ -15,15 +14,13 @@ namespace Dopamine.Services.Entities
     {
         private int scaledTrackCoverSize = Convert.ToInt32(Constants.TrackCoverSize * Constants.CoverUpscaleFactor);
         private IMetadataService metadataService;
-        private IScrobblingService scrobblingService;
         private bool isPlaying;
         private bool isPaused;
         private bool showTrackNumber;
 
-        public TrackViewModel(IMetadataService metadataService, IScrobblingService scrobblingService, Track track)
+        public TrackViewModel(IMetadataService metadataService, Track track)
         {
             this.metadataService = metadataService;
-            this.scrobblingService = scrobblingService;
             this.Track = track;
         }
 
@@ -169,9 +166,6 @@ namespace Dopamine.Services.Entities
 
                 // Update Love in the database
                 this.metadataService.UpdateTrackLoveAsync(this.Track.Path, value);
-
-                // Send Love/Unlove to the scrobbling service
-                this.scrobblingService.SendTrackLoveAsync(this, value);
             }
         }
 
@@ -223,7 +217,7 @@ namespace Dopamine.Services.Entities
 
         public TrackViewModel DeepCopy()
         {
-            return new TrackViewModel(this.metadataService, this.scrobblingService, this.Track);
+            return new TrackViewModel(this.metadataService, this.Track);
         }
 
         public void UpdateTrack(Track track)

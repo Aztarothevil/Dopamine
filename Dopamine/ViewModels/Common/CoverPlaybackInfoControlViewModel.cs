@@ -1,7 +1,6 @@
 ﻿using CommonServiceLocator;
 using Dopamine.Services.Metadata;
 using Dopamine.Services.Playback;
-using Dopamine.Services.Scrobbling;
 
 namespace Dopamine.ViewModels.Common
 {
@@ -9,8 +8,7 @@ namespace Dopamine.ViewModels.Common
     {
         public CoverPlaybackInfoControlViewModel() : base(
             ServiceLocator.Current.GetInstance<IPlaybackService>(), 
-            ServiceLocator.Current.GetInstance<IMetadataService>(),
-            ServiceLocator.Current.GetInstance<IScrobblingService>())
+            ServiceLocator.Current.GetInstance<IMetadataService>())
         {
         }
     }

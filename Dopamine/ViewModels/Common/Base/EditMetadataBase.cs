@@ -12,7 +12,6 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Collections.Generic;
-using Dopamine.Services.InfoDownload;
 
 namespace Dopamine.ViewModels.Common.Base
 {
@@ -23,9 +22,7 @@ namespace Dopamine.ViewModels.Common.Base
         private string artworkSize;
         private BitmapImage artworkThumbnail;
         private ICacheService cacheService;
-        private IInfoDownloadService infoDownloadService;
 
-        public DelegateCommand DownloadArtworkCommand { get; set; }
         public DelegateCommand ExportArtworkCommand { get; set; }
 
         public string ArtworkSize
@@ -57,11 +54,9 @@ namespace Dopamine.ViewModels.Common.Base
             set { SetProperty<MetadataArtworkValue>(ref this.artwork, value); }
         }
 
-        public EditMetadataBase(ICacheService cacheService, IInfoDownloadService infoDownloadService)
+        public EditMetadataBase(ICacheService cacheService)
         {
             this.cacheService = cacheService;
-            this.infoDownloadService = infoDownloadService;
-
             this.artwork = new MetadataArtworkValue();
 
             this.ExportArtworkCommand = new DelegateCommand(async () => await this.ExportArtworkAsync(), () => this.CanExportArtwork());
@@ -111,28 +106,6 @@ namespace Dopamine.ViewModels.Common.Base
             this.Artwork.Value = imageData; // Update existing artwork data, so IsValueChanged is triggered.
             this.VisualizeArtwork(imageData); // Visualize the artwork
             this.ExportArtworkCommand.RaiseCanExecuteChanged();
-        }
-
-        protected async Task DownloadArtworkAsync(string title, IList<string> artists, string alternateTitle = "", IList<string> alternateArtists = null)
-        {
-            this.IsBusy = true;
-
-            try
-            {
-                string artworkUriString = await this.infoDownloadService.GetAlbumImageAsync(title, artists, alternateTitle, alternateArtists);
-
-                if(!string.IsNullOrEmpty(artworkUriString))
-                {
-                    string temporaryFile = await this.cacheService.DownloadFileToTemporaryCacheAsync(artworkUriString);
-                    this.UpdateArtwork(ImageUtils.Image2ByteArray(temporaryFile, 0, 0));
-                }
-            }
-            catch (Exception ex)
-            {
-                LogClient.Error("An error occurred while downloading artwork. Exception: {0}", ex.Message);
-            }
-
-            this.IsBusy = false;
         }
     }
 }

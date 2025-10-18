@@ -86,11 +86,6 @@
     <Compile Include="..\Dopamine\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Api\Fanart\FanartApi.cs" />
-    <Compile Include="Api\Lastfm\LastFmAlbum.cs" />
-    <Compile Include="Api\Lastfm\LastFmArtist.cs" />
-    <Compile Include="Api\Lastfm\LastFmBiography.cs" />
-    <Compile Include="Api\Lastfm\LastfmApi.cs" />
     <Compile Include="Api\Lyrics\ChartLyricsApi.cs" />
     <Compile Include="Api\Lyrics\ILyricsApi.cs" />
     <Compile Include="Api\Lyrics\LololyricsApi.cs" />
@@ -113,7 +108,6 @@
     <Compile Include="Base\Enums.cs" />
     <Compile Include="Base\FileFormats.cs" />
     <Compile Include="Base\SensitiveInformation.cs" />
-    <Compile Include="Base\UpdateInformation.cs" />
     <Compile Include="Enums\PageEnums.cs" />
     <Compile Include="Enums\PlayerEnums.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
@@ -167,5 +161,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
