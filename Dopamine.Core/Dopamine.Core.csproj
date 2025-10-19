@@ -86,14 +86,10 @@
     <Compile Include="..\Dopamine\SharedAssemblyInfo.cs">
       <Link>SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Api\Lyrics\ChartLyricsApi.cs" />
     <Compile Include="Api\Lyrics\ILyricsApi.cs" />
-    <Compile Include="Api\Lyrics\LololyricsApi.cs" />
     <Compile Include="Api\Lyrics\Lyrics.cs" />
     <Compile Include="Api\Lyrics\LyricsFactory.cs" />
-    <Compile Include="Api\Lyrics\MetroLyricsApi.cs" />
     <Compile Include="Api\Lyrics\NeteaseLyricsApi.cs" />
-    <Compile Include="Api\Lyrics\XiamiLyricsApi.cs" />
     <Compile Include="Audio\CSCorePlayer.cs" />
     <Compile Include="Audio\EqualizerPreset.cs" />
     <Compile Include="Audio\IPlayer.cs" />
@@ -107,7 +103,6 @@
     <Compile Include="Base\Defaults.cs" />
     <Compile Include="Base\Enums.cs" />
     <Compile Include="Base\FileFormats.cs" />
-    <Compile Include="Base\SensitiveInformation.cs" />
     <Compile Include="Enums\PageEnums.cs" />
     <Compile Include="Enums\PlayerEnums.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />

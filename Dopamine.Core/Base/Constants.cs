@@ -15,7 +15,7 @@ namespace Dopamine.Core.Base
 
         // Links
         public static string HomeLink = "https://www.digimezzo.com";
-        public static string LastFmJoinLink = "https://www.last.fm/join";
+        //public static string LastFmJoinLink = "https://www.last.fm/join";
 
         // Default Window button sizes
         //public static double DefaultWindowButtonHeight = 29;

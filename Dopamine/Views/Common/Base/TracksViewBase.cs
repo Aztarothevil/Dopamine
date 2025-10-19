@@ -167,8 +167,12 @@ namespace Dopamine.Views.Common.Base
             {
                 // Cast sender to ListBox
                 ListBox lb = (ListBox)sender;
-
                 var songs = ((Dopamine.ViewModels.Common.Base.SongsViewModelBase)lb.DataContext).Songs;
+                if (songs is null)
+                {
+                    return;
+                }
+
                 var currentSong = this.playbackService.CurrentTrack;
                 foreach (var song in songs)
                 {

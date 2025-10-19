@@ -461,7 +461,8 @@ namespace Dopamine.Services.Collection
                         orderedSongs = songs.OrderByDescending((s) => s.Rating).ToList();
                         break;
                     case MusicOrder.None:
-                        orderedSongs = songs.ToList();
+                        //orderedSongs = songs.ToList();
+                        orderedSongs = songs.OrderBy((s) => s.DateFileCreated).ToList();
                         break;
                     default:
                         // Alphabetical

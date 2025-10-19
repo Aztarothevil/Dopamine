@@ -29,12 +29,7 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
         private SearchProvider selectedSearchProvider;
         private bool checkBoxDownloadArtistInformationChecked;
         private bool checkBoxDownloadLyricsChecked;
-        private bool checkBoxChartLyricsChecked;
-        private bool checkBoxLoloLyricsChecked;
-        private bool checkBoxMetroLyricsChecked;
-        private bool checkBoxXiamiLyricsChecked;
         private bool checkBoxNeteaseLyricsChecked;
-        private bool checkBoxEnableDiscordRichPresence;
         private ObservableCollection<NameValue> timeouts;
         private NameValue selectedTimeout;
 
@@ -59,46 +54,6 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
                 }
                 
                 SetProperty<NameValue>(ref this.selectedTimeout, value);
-            }
-        }
-
-        public bool CheckBoxChartLyricsChecked
-        {
-            get { return this.checkBoxChartLyricsChecked; }
-            set
-            {
-                this.AddRemoveLyricsDownloadProvider("chartlyrics", value);
-                SetProperty<bool>(ref this.checkBoxChartLyricsChecked, value);
-            }
-        }
-
-        public bool CheckBoxLoloLyricsChecked
-        {
-            get { return this.checkBoxLoloLyricsChecked; }
-            set
-            {
-                this.AddRemoveLyricsDownloadProvider("lololyrics", value);
-                SetProperty<bool>(ref this.checkBoxLoloLyricsChecked, value);
-            }
-        }
-
-        public bool CheckBoxMetroLyricsChecked
-        {
-            get { return this.checkBoxMetroLyricsChecked; }
-            set
-            {
-                this.AddRemoveLyricsDownloadProvider("metrolyrics", value);
-                SetProperty<bool>(ref this.checkBoxMetroLyricsChecked, value);
-            }
-        }
-
-        public bool CheckBoxXiamiLyricsChecked
-        {
-            get { return this.checkBoxXiamiLyricsChecked; }
-            set
-            {
-                this.AddRemoveLyricsDownloadProvider("xiamilyrics", value);
-                SetProperty<bool>(ref this.checkBoxXiamiLyricsChecked, value);
             }
         }
 
@@ -130,16 +85,6 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
                 SetProperty<SearchProvider>(ref this.selectedSearchProvider, value);
                 this.EditCommand.RaiseCanExecuteChanged();
                 this.RemoveCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        public bool CheckBoxEnableDiscordRichPresence
-        {
-            get { return this.checkBoxEnableDiscordRichPresence; }
-            set
-            {
-                SettingsClient.Set<bool>("Discord", "EnableDiscordRichPresence", value, true);
-                SetProperty<bool>(ref this.checkBoxEnableDiscordRichPresence, value);
             }
         }
 
@@ -255,16 +200,8 @@ namespace Dopamine.ViewModels.FullPlayer.Settings
         {
             await Task.Run(() =>
             {
-                this.checkBoxDownloadArtistInformationChecked = SettingsClient.Get<bool>("Lastfm", "DownloadArtistInformation");
-                this.checkBoxEnableDiscordRichPresence = SettingsClient.Get<bool>("Discord", "EnableDiscordRichPresence");
                 this.checkBoxDownloadLyricsChecked = SettingsClient.Get<bool>("Lyrics", "DownloadLyrics");
-
                 string lyricsProviders = SettingsClient.Get<string>("Lyrics", "Providers");
-
-                this.checkBoxChartLyricsChecked = lyricsProviders.ToLower().Contains("chartlyrics");
-                this.checkBoxLoloLyricsChecked = lyricsProviders.ToLower().Contains("lololyrics");
-                this.checkBoxMetroLyricsChecked = lyricsProviders.ToLower().Contains("metrolyrics");
-                this.checkBoxXiamiLyricsChecked = lyricsProviders.ToLower().Contains("xiamilyrics");
                 this.checkBoxNeteaseLyricsChecked = lyricsProviders.ToLower().Contains("neteaselyrics");
             });
         }

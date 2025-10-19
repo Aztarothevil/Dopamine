@@ -2,7 +2,6 @@
 using Digimezzo.Foundation.Core.Utils;
 using Dopamine.Core.Base;
 using Dopamine.Core.Extensions;
-using Dopamine.Core.Helpers;
 using Dopamine.Core.IO;
 using Dopamine.Data;
 using Dopamine.Data.Entities;
@@ -19,7 +18,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Xml.Linq;
 
 namespace Dopamine.Services.Playlist

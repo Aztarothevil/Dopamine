@@ -64,19 +64,19 @@ namespace Dopamine.ViewModels.Common.Base
             async (playlistName) => await this.AddPlayingTrackToPlaylistAsync(playlistName), (_) => this.playbackService.HasCurrentTrack);
 
             // Events
-            this.providerService.SearchProvidersChanged += (_, __) => { this.GetSearchProvidersAsync(); };
+            //this.providerService.SearchProvidersChanged += (_, __) => { this.GetSearchProvidersAsync(); };
             this.playbackService.PlaybackFailed += (_, __) => this.AddPlayingTrackToPlaylistCommand.RaiseCanExecuteChanged();
             this.playbackService.PlaybackSuccess += (_, __) => this.AddPlayingTrackToPlaylistCommand.RaiseCanExecuteChanged();
             this.playbackService.PlaybackStopped += (_, __) => this.AddPlayingTrackToPlaylistCommand.RaiseCanExecuteChanged();
             this.playbackService.PlaybackPaused += (_, __) => this.AddPlayingTrackToPlaylistCommand.RaiseCanExecuteChanged();
             this.playbackService.PlaybackResumed += (_, __) => this.AddPlayingTrackToPlaylistCommand.RaiseCanExecuteChanged();
-            this.playlistService.PlaylistFolderChanged += (_, __) => this.GetContextMenuPlaylistsAsync();
+            //this.playlistService.PlaylistFolderChanged += (_, __) => this.GetContextMenuPlaylistsAsync();
 
             // Initialize the search providers in the ContextMenu
             this.GetSearchProvidersAsync();
 
             // Initialize the playlists in the ContextMenu
-            this.GetContextMenuPlaylistsAsync();
+            //this.GetContextMenuPlaylistsAsync();
         }
 
         private async Task AddPlayingTrackToPlaylistAsync(string playlistName)
