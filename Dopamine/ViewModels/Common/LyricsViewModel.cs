@@ -178,6 +178,9 @@ namespace Dopamine.ViewModels.Common
 
         private void ParseLyrics(Lyrics lyrics)
         {
+            if (Application.Current == null)
+                return;
+
             Application.Current.Dispatcher.Invoke(() => this.lyricsLines = null);
 
             Application.Current.Dispatcher.Invoke(() =>

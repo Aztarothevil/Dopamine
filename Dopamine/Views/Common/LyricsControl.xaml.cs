@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Dopamine.Services.Utils;
 using System.Diagnostics;
+using Dopamine.Core.Extensions;
 
 namespace Dopamine.Views.Common
 {
@@ -160,11 +161,8 @@ namespace Dopamine.Views.Common
                         strippedLine = line;
                     }
 
-                    if(strippedLine != String.Empty)
-                        strippedLine = char.ToUpper(strippedLine[0]) + strippedLine.Substring(1);
-
                     string format = string.Format("[{0:00}:{1:00}.{2:000}]", minutes, seconds, milliseconds);
-                    string newLine = string.Format("{0}{1}", new DateTime(currentPlaybackTime.Ticks).ToString(format), strippedLine);
+                    string newLine = string.Format("{0}{1}", new DateTime(currentPlaybackTime.Ticks).ToString(format), strippedLine.CapitalizeFirstLetterExcludingSigns());
 
                     this.lyricsTextBox.Text = this.lyricsTextBox.Text.Remove(lineStartIndex, line.Length);
                     this.lyricsTextBox.Text = this.lyricsTextBox.Text.Insert(lineStartIndex, newLine);
@@ -261,13 +259,9 @@ namespace Dopamine.Views.Common
                     {
                         strippedLine = line;
                     }
-                    if (strippedLine != string.Empty)
-                    {
-                        strippedLine = char.ToUpper(strippedLine[0]) + strippedLine.Substring(1);
-                    }
 
                     string format = string.Format("[{0:00}:{1:00}.{2:000}]", minutes, seconds, milliseconds);
-                    string newLine = string.Format("{0}{1}", new DateTime(currentPlaybackTime.Ticks).ToString(format), strippedLine);
+                    string newLine = string.Format("{0}{1}", new DateTime(currentPlaybackTime.Ticks).ToString(format), strippedLine.CapitalizeFirstLetterExcludingSigns());
 
                     this.lyricsTextBox.Text = this.lyricsTextBox.Text.Remove(lineStartIndex, line.Length);
                     this.lyricsTextBox.Text = this.lyricsTextBox.Text.Insert(lineStartIndex, newLine);

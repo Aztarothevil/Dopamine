@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Dopamine.Core.Extensions
 {
@@ -58,6 +59,37 @@ namespace Dopamine.Core.Extensions
             }
 
             return uniqueString;
+        }
+
+        public static string CapitalizeFirstLetterExcludingSigns(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input; // Return empty or null string as is
+            }
+
+            // Find the index of the first letter
+            int firstLetterIndex = -1;
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (char.IsLetter(input[i]))
+                {
+                    firstLetterIndex = i;
+                    break;
+                }
+            }
+
+            // If no letter is found, return the original string
+            if (firstLetterIndex == -1)
+            {
+                return input;
+            }
+
+            // Capitalize the first letter found
+            char[] charArray = input.ToCharArray();
+            charArray[firstLetterIndex] = char.ToUpper(charArray[firstLetterIndex]);
+
+            return new string(charArray);
         }
     }
 }
