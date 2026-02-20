@@ -1,0 +1,36 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/FontIcons.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/LabelToLower.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/LabelToUpper.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialFlatButton.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialFloatingActionButton.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialMiniFloatingActionButton.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialRaisedButton.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialCircularProgressBar.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialComboBox.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialDateBox.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialTextBox.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MaterialToggleSwitch.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/MultiPanePanel.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/PageIndicator.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Pivot.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/ProgressRing.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Ripple.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/SlidingContentControl.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/SplitView.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/UWPSliderHorizontal.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/UWPSliderHorizontalBottom.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/UWPSliderVertical.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Windows10BorderlessWindow.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Windows10SliderHorizontal.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Windows10SliderVertical.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Windows10ToggleSwitch.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Windows8BorderlessWindow.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Windows8SliderHorizontal.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Windows8SliderVertical.xaml" />
+        <ResourceDictionary Source="/Digimezzo.Foundation.WPF;component/Themes/Windows8ToggleSwitch.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

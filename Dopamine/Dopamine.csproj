@@ -88,14 +88,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\CSCore.Ffmpeg.dll</HintPath>
     </Reference>
-    <Reference Include="Digimezzo.Foundation.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\Digimezzo.Foundation.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Digimezzo.Foundation.WPF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libraries\Digimezzo.Foundation.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="DiscordRPC, Version=1.0.175.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DiscordRichPresence.1.0.175\lib\net35\DiscordRPC.dll</HintPath>
     </Reference>
@@ -864,6 +856,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Digimezzo.Foundation.Core\Digimezzo.Foundation.Core.csproj">
+      <Project>{f376ccca-325f-4533-934d-a9c4a7cfc69b}</Project>
+      <Name>Digimezzo.Foundation.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Digimezzo.Foundation.WPF\Digimezzo.Foundation.WPF.csproj">
+      <Project>{db02d05f-5fd8-4d14-b446-354de8b4791e}</Project>
+      <Name>Digimezzo.Foundation.WPF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dopamine.Core\Dopamine.Core.csproj">
       <Project>{7FAAC843-6AA9-4B5B-8678-937137A61E47}</Project>
       <Name>Dopamine.Core</Name>
